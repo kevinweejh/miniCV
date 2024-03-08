@@ -26,11 +26,8 @@ ViewerEducation.propTypes = {
             id: PropTypes.number,
             schoolName: PropTypes.string,
             titleOfStudy: PropTypes.string,
-            yearFrom: PropTypes.number,
-            yearTo: PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.number
-            ])
+            yearFrom: PropTypes.string,
+            yearTo: PropTypes.string
         })
     ).isRequired
 };
