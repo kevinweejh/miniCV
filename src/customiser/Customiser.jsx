@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const Customiser = ({ cvData, setCvData }) => {
     const setInfo = (newInfo) => {
-        setCvData({...cvData, general: newInfo})
+        setCvData({...cvData, generalInfo: newInfo})
     }
 
     const setEducation = (newEducation) => {
