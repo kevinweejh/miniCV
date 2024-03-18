@@ -8,6 +8,12 @@ const CustomiserEducation = ({ education, setEducation }) => {
 
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
+    const [isCurrent, setIsCurrent] = useState(false);
+
+    const handleCheckboxChange = (e) => {
+        setIsCurrent(e.target.checked);
+        setEndDate(e.target.checked ? 'Present' : endDate);
+    }
 
     const handleEducationHistoryAdd = (e) => {
         e.preventDefault();
@@ -18,7 +24,7 @@ const CustomiserEducation = ({ education, setEducation }) => {
             schoolName: e.target.schoolNameInput.value,
             titleOfStudy: e.target.titleOfStudyInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? endDate.format('MMM YYYY') : ''
+            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : ''
         }
 
         let newEducationHistory = [...education, addedEducationItem];
@@ -43,9 +49,16 @@ const CustomiserEducation = ({ education, setEducation }) => {
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="yearToInput">End Date: </label>
-                                <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} />
+                                <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
                             </div>
                         </div>
+                        <label htmlFor="yearToPresent">I am currently studying here.</label>
+                        <input
+                            type="checkbox"
+                            id="currentCheckbox"
+                            checked={isCurrent}
+                            onChange={handleCheckboxChange}
+                        />
                         <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Add</button>
                     </form>
                 </div>
