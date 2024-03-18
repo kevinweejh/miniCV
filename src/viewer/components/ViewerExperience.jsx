@@ -26,11 +26,8 @@ ViewerExperience.propTypes = {
             id: PropTypes.number,
             companyName: PropTypes.string,
             positionTitle: PropTypes.string,
-            yearFrom: PropTypes.number, 
-            yearTo: PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.number
-            ]),
+            yearFrom: PropTypes.string,
+            yearTo: PropTypes.string,
             achievements: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.number,

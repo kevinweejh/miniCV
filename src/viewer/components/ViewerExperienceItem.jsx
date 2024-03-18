@@ -11,9 +11,9 @@ const ViewerExperienceItem = ({ experienceItem }) => {
                 <p className="text-right">{experienceItem.yearFrom} to {experienceItem.yearTo}</p>
             </div>
             <ul>
-                {viewerExperienceItemAchievements.map((viewerExperienceItemAchievement) => 
+                {/* {viewerExperienceItemAchievements.map((viewerExperienceItemAchievement) => 
                     <ViewerExperienceItemAchievement key={viewerExperienceItemAchievement.id} text={viewerExperienceItemAchievement.text} />
-                )}
+                )} */}
             </ul>
         </>
     )
@@ -24,11 +24,8 @@ ViewerExperienceItem.propTypes = {
         id: PropTypes.number,
         companyName: PropTypes.string,
         positionTitle: PropTypes.string,
-        yearFrom: PropTypes.number, 
-        yearTo: PropTypes.oneOfType([
-            PropTypes.string,
-            PropTypes.number
-        ]),
+        yearFrom: PropTypes.string,
+        yearTo: PropTypes.string,
         achievements: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.number,
