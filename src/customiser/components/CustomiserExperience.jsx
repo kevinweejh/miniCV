@@ -8,6 +8,13 @@ const CustomiserExperience = ({ experience, setExperience }) => {
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const [isCurrent, setIsCurrent] = useState(false);
+
+    const handleCheckboxChange = (e) => {
+        setIsCurrent(e.target.checked);
+        setEndDate(e.target.checked ? 'Present' : endDate);
+    }
+
 
     const handleExperienceHistoryAdd = (e) => {
         e.preventDefault();
@@ -17,16 +24,10 @@ const CustomiserExperience = ({ experience, setExperience }) => {
             companyName: e.target.companyNameInput.value,
             positionTitle: e.target.positionTitleInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? endDate.format('MMM YYYY') : ''
+            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : ''
         }
 
-        let newExperienceHistory;
-
-        if (experience[0].id === null) { // First educationItem being added
-            newExperienceHistory = [addedExperienceItem, ...experience.slice(1)];
-        } else {
-            newExperienceHistory = [...experience, addedExperienceItem];
-        }
+        let newExperienceHistory = [...experience, addedExperienceItem];
 
         setExperience(newExperienceHistory);
     }
@@ -48,9 +49,16 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="yearToInput">End Date: </label>
-                                <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} />
+                                <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
                             </div>
                         </div>
+                        <label htmlFor="yearToPresent">I am currently working here.</label>
+                        <input
+                            type="checkbox"
+                            id="currentCheckbox"
+                            checked={isCurrent}
+                            onChange={handleCheckboxChange}
+                        />
                         <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Add</button>
                     </form>
                 </div>
@@ -66,14 +74,14 @@ CustomiserExperience.propTypes = {
             id: PropTypes.number,
             companyName: PropTypes.string,
             positionTitle: PropTypes.string,
-            yearFrom: PropTypes.string, 
+            yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
-            achievements: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.number,
-                    text: PropTypes.string,
-                })
-            ),
+            // achievements: PropTypes.arrayOf(
+            //     PropTypes.shape({
+            //         id: PropTypes.number,
+            //         text: PropTypes.string,
+            //     })
+            // ),
         })
     ).isRequired,
     setExperience: PropTypes.func.isRequired,
