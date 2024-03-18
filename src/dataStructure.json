@@ -5,28 +5,6 @@
         "email": "",
         "mobile": ""
     }, 
-    "educationHistory": [
-        {
-            "id": null,
-            "schoolName": "",
-            "titleOfStudy": "",
-            "yearFrom": null,
-            "yearTo": null
-        }
-    ], 
-    "experienceHistory": [
-        {
-            "id": null,
-            "companyName": "",
-            "positionTitle": "",
-            "yearFrom": null, 
-            "yearTo": null,
-            "achievements": [
-                {
-                    "id": null,
-                    "text": ""
-                }
-            ]
-        }
-    ]
+    "educationHistory": [], 
+    "experienceHistory": []
 }

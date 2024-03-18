@@ -21,13 +21,7 @@ const CustomiserEducation = ({ education, setEducation }) => {
             yearTo: endDate ? endDate.format('MMM YYYY') : ''
         }
 
-        let newEducationHistory;
-
-        if (education[0].id === null) { // First educationItem being added
-            newEducationHistory = [addedEducationItem, ...education.slice(1)];
-        } else {
-            newEducationHistory = [...education, addedEducationItem];
-        }
+        let newEducationHistory = [...education, addedEducationItem];
 
         setEducation(newEducationHistory);
     }
