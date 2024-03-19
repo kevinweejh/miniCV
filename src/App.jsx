@@ -1,13 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Customiser from './customiser/Customiser';
 import Viewer from './viewer/Viewer';
 import dataStructure from "./dataStructure.json";
 
 function App() {
   const [cvData, setCvData] = useState(dataStructure);
-  const [isDialogVisible, setIsDialogVisible] = useState(true);
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
 
-  const isMobile = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 768;
+  useEffect(() => {
+    const isMobile = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 768;
+    if (isMobile) {
+      setIsDialogVisible(true);
+    }
+  }, []);
 
   const handleCloseDialog = () => {
     setIsDialogVisible(false);
@@ -15,7 +20,7 @@ function App() {
 
   return (
     <>
-      {(isMobile && isDialogVisible) && 
+      {isDialogVisible && 
         <div id="mobileDialog">
           <dialog open className="border border-gray-400 bg-white rounded-2xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-5 w-10/12 z-10 md:hidden">
             <strong className="text-lg">For Mobile Users</strong>
