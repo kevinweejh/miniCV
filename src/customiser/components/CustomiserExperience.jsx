@@ -57,11 +57,9 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                         <input type="text" id="positionTitleInput" name="positionTitleInput" placeholder="Chief Scientist"></input>
                         <div className="flex flex-row">
                             <div className="flex flex-col">
-                                <label htmlFor="yearFromInput">Start Date: </label>
                                 <DatePicker id="yearFromInput" views={['year', 'month']} name="yearFromInput" value={startDate} onChange={setStartDate} />
                             </div>
                             <div className="flex flex-col">
-                                <label htmlFor="yearToInput">End Date: </label>
                                 {isCurrent 
                                     ? <input type="text" value="Present" disabled />
                                     : <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
