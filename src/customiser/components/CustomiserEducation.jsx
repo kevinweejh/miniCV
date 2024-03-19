@@ -14,11 +14,6 @@ const CustomiserEducation = ({ education, setEducation }) => {
     const [achievementsList, setAchievementsList] = useState([]);
     const [achievementIdCounter, setAchievementIdCounter] = useState(0);
 
-    const handleCheckboxChange = (e) => {
-        setIsCurrent(e.target.checked);
-        setEndDate(e.target.checked ? 'Present' : endDate);
-    }
-
     const handleAchievementsListAdd = (newAchievement) => {
         let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
         setAchievementsList(newAchievementsList);
@@ -33,7 +28,8 @@ const CustomiserEducation = ({ education, setEducation }) => {
             schoolName: e.target.schoolNameInput.value,
             titleOfStudy: e.target.titleOfStudyInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : '',
+            yearTo: endDate ? endDate.format('MMM YYYY') : '',
+            currentlyStudying: isCurrent, 
             achievementsList: achievementsList,
         }
 
@@ -62,11 +58,14 @@ const CustomiserEducation = ({ education, setEducation }) => {
                         <div className="flex flex-row">
                             <div className="flex flex-col">
                                 <label htmlFor="yearFromInput">Start Date: </label>
-                                <DatePicker id="yearFromInput" views={['year', 'month']} name="yearFromInput" value={startDate} onChange={setStartDate} />
+                                <DatePicker id="yearFromInput" views={['year', 'month']} name="yearFromInput" value={startDate} label="Start Date" onChange={setStartDate} />
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="yearToInput">End Date: </label>
-                                <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
+                                {isCurrent 
+                                    ? <input type="text" value="Present" disabled /> 
+                                    : <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} label="End Date" onChange={setEndDate} disabled={isCurrent} />
+                                }
                             </div>
                         </div>
                         <label htmlFor="yearToPresent">I am currently studying here.</label>
@@ -74,7 +73,7 @@ const CustomiserEducation = ({ education, setEducation }) => {
                             type="checkbox"
                             id="currentCheckbox"
                             checked={isCurrent}
-                            onChange={handleCheckboxChange}
+                            onChange={ (e) => setIsCurrent(e.target.checked) }
                         />
                         <CustomiserItemAchievementsList achievementsList={achievementsList} handleAchievementsListAdd={handleAchievementsListAdd} />
                         <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Save</button>
@@ -94,6 +93,7 @@ CustomiserEducation.propTypes = {
             titleOfStudy: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
+            currentlyStudying: PropTypes.bool,
             achievements: PropTypes.arrayOf(PropTypes.string)
         })
     ).isRequired,

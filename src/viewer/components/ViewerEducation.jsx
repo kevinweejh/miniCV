@@ -28,6 +28,7 @@ ViewerEducation.propTypes = {
             titleOfStudy: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
+            currentlyStudying: PropTypes.bool,
             achievementsList: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.number,
