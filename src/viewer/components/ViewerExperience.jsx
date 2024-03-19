@@ -28,6 +28,7 @@ ViewerExperience.propTypes = {
             positionTitle: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
+            currentlyWorking: PropTypes.bool,
             achievementsList: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.number,

@@ -14,11 +14,6 @@ const CustomiserExperience = ({ experience, setExperience }) => {
     const [achievementsList, setAchievementsList] = useState([]);
     const [achievementIdCounter, setAchievementIdCounter] = useState(0);
 
-    const handleCheckboxChange = (e) => {
-        setIsCurrent(e.target.checked);
-        setEndDate(e.target.checked ? 'Present' : endDate);
-    }
-
     const handleAchievementsListAdd = (newAchievement) => {
         let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
         setAchievementsList(newAchievementsList);
@@ -33,7 +28,8 @@ const CustomiserExperience = ({ experience, setExperience }) => {
             companyName: e.target.companyNameInput.value,
             positionTitle: e.target.positionTitleInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : '',
+            yearTo: endDate ? endDate.format('MMM YYYY') : '',
+            currentlyWorking: isCurrent,
             achievementsList: achievementsList,
         }
 
@@ -66,7 +62,10 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="yearToInput">End Date: </label>
-                                <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
+                                {isCurrent 
+                                    ? <input type="text" value="Present" disabled />
+                                    : <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
+                                }
                             </div>
                         </div>
                         <label htmlFor="currentCheckbox">I am currently working here.</label>
@@ -74,7 +73,7 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                             type="checkbox"
                             id="currentCheckbox"
                             checked={isCurrent}
-                            onChange={handleCheckboxChange}
+                            onChange={ (e) => setIsCurrent(e.target.checked) }
                         />
                         <CustomiserItemAchievementsList achievementsList={achievementsList} handleAchievementsListAdd={handleAchievementsListAdd} />
                         <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Add</button>
