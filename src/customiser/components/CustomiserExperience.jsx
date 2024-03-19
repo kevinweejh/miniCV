@@ -41,6 +41,12 @@ const CustomiserExperience = ({ experience, setExperience }) => {
 
         setExperience(newExperienceHistory);
         setExperienceIdCounter(experienceIdCounter + 1);
+
+        setStartDate(null);
+        setEndDate(null);
+        setIsCurrent(false);
+        setAchievementsList([]);
+        e.target.reset();
     }
 
     return(

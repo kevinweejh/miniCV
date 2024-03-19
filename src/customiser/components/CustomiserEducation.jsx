@@ -41,6 +41,12 @@ const CustomiserEducation = ({ education, setEducation }) => {
 
         setEducation(newEducationHistory);
         setEducationIdCounter(educationIdCounter + 1);
+
+        setStartDate(null);
+        setEndDate(null);
+        setIsCurrent(false);
+        setAchievementsList([]);
+        e.target.reset();
     }
 
     return(
