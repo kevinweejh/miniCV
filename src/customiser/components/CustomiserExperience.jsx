@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 
 const CustomiserExperience = ({ experience, setExperience }) => {
 
@@ -10,11 +11,19 @@ const CustomiserExperience = ({ experience, setExperience }) => {
     const [endDate, setEndDate] = useState(null);
     const [isCurrent, setIsCurrent] = useState(false);
 
+    const [achievementsList, setAchievementsList] = useState([]);
+    const [achievementIdCounter, setAchievementIdCounter] = useState(0);
+
     const handleCheckboxChange = (e) => {
         setIsCurrent(e.target.checked);
         setEndDate(e.target.checked ? 'Present' : endDate);
     }
 
+    const handleAchievementsListAdd = (newAchievement) => {
+        let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
+        setAchievementsList(newAchievementsList);
+        setAchievementIdCounter(achievementIdCounter + 1);
+    }
 
     const handleExperienceHistoryAdd = (e) => {
         e.preventDefault();
@@ -24,7 +33,8 @@ const CustomiserExperience = ({ experience, setExperience }) => {
             companyName: e.target.companyNameInput.value,
             positionTitle: e.target.positionTitleInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : ''
+            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : '',
+            achievementsList: achievementsList,
         }
 
         let newExperienceHistory = [...experience, addedExperienceItem];
@@ -52,13 +62,14 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                                 <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
                             </div>
                         </div>
-                        <label htmlFor="yearToPresent">I am currently working here.</label>
+                        <label htmlFor="currentCheckbox">I am currently working here.</label>
                         <input
                             type="checkbox"
                             id="currentCheckbox"
                             checked={isCurrent}
                             onChange={handleCheckboxChange}
                         />
+                        <CustomiserItemAchievementsList achievementsList={achievementsList} handleAchievementsListAdd={handleAchievementsListAdd} />
                         <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Add</button>
                     </form>
                 </div>
@@ -76,12 +87,12 @@ CustomiserExperience.propTypes = {
             positionTitle: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
-            // achievements: PropTypes.arrayOf(
-            //     PropTypes.shape({
-            //         id: PropTypes.number,
-            //         text: PropTypes.string,
-            //     })
-            // ),
+            achievements: PropTypes.arrayOf(
+                PropTypes.shape({
+                    id: PropTypes.number,
+                    text: PropTypes.string,
+                })
+            ),
         })
     ).isRequired,
     setExperience: PropTypes.func.isRequired,

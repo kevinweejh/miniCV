@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 
 const CustomiserEducation = ({ education, setEducation }) => {
 
@@ -10,21 +11,30 @@ const CustomiserEducation = ({ education, setEducation }) => {
     const [endDate, setEndDate] = useState();
     const [isCurrent, setIsCurrent] = useState(false);
 
+    const [achievementsList, setAchievementsList] = useState([]);
+    const [achievementIdCounter, setAchievementIdCounter] = useState(0);
+
     const handleCheckboxChange = (e) => {
         setIsCurrent(e.target.checked);
         setEndDate(e.target.checked ? 'Present' : endDate);
     }
 
+    const handleAchievementsListAdd = (newAchievement) => {
+        let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
+        setAchievementsList(newAchievementsList);
+        setAchievementIdCounter(achievementIdCounter + 1);
+    }
+
     const handleEducationHistoryAdd = (e) => {
         e.preventDefault();
-        console.log('start date', startDate);
 
         const addedEducationItem = {
             id: entryCount,
             schoolName: e.target.schoolNameInput.value,
             titleOfStudy: e.target.titleOfStudyInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : ''
+            yearTo: endDate ? (endDate === 'Present' ? 'Present' : endDate.format('MMM YYYY')) : '',
+            achievementsList: achievementsList,
         }
 
         let newEducationHistory = [...education, addedEducationItem];
@@ -59,7 +69,8 @@ const CustomiserEducation = ({ education, setEducation }) => {
                             checked={isCurrent}
                             onChange={handleCheckboxChange}
                         />
-                        <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Add</button>
+                        <CustomiserItemAchievementsList achievementsList={achievementsList} handleAchievementsListAdd={handleAchievementsListAdd} />
+                        <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Save</button>
                     </form>
                 </div>
             </details>
@@ -75,7 +86,8 @@ CustomiserEducation.propTypes = {
             schoolName: PropTypes.string,
             titleOfStudy: PropTypes.string,
             yearFrom: PropTypes.string,
-            yearTo: PropTypes.string
+            yearTo: PropTypes.string,
+            achievements: PropTypes.arrayOf(PropTypes.string)
         })
     ).isRequired,
     setEducation: PropTypes.func.isRequired,
