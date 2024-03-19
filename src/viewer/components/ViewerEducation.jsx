@@ -27,7 +27,13 @@ ViewerEducation.propTypes = {
             schoolName: PropTypes.string,
             titleOfStudy: PropTypes.string,
             yearFrom: PropTypes.string,
-            yearTo: PropTypes.string
+            yearTo: PropTypes.string,
+            achievementsList: PropTypes.arrayOf(
+                PropTypes.shape({
+                    id: PropTypes.number,
+                    text: PropTypes.string,
+                })
+            ),
         })
     ).isRequired
 };

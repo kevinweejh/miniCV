@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import ViewerExperienceItemAchievement from './ViewerExperienceItemAchievement';
+import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 
 const ViewerExperienceItem = ({ experienceItem }) => {
-    const viewerExperienceItemAchievements = experienceItem.achievements;
     return(
         <>
             <h1 className="text-lg font-semibold">{experienceItem.companyName}</h1>
@@ -10,11 +9,7 @@ const ViewerExperienceItem = ({ experienceItem }) => {
                 <p className="text-left">{experienceItem.positionTitle}</p>
                 <p className="text-right">{experienceItem.yearFrom} to {experienceItem.yearTo}</p>
             </div>
-            <ul>
-                {/* {viewerExperienceItemAchievements.map((viewerExperienceItemAchievement) => 
-                    <ViewerExperienceItemAchievement key={viewerExperienceItemAchievement.id} text={viewerExperienceItemAchievement.text} />
-                )} */}
-            </ul>
+            <ViewerItemAchievementsList achievementsList={experienceItem.achievementsList} />
         </>
     )
 }
@@ -26,7 +21,7 @@ ViewerExperienceItem.propTypes = {
         positionTitle: PropTypes.string,
         yearFrom: PropTypes.string,
         yearTo: PropTypes.string,
-        achievements: PropTypes.arrayOf(
+        achievementsList: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.number,
                 text: PropTypes.string,

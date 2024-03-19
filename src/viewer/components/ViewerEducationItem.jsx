@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 
 const ViewerEducationItem = ({ educationItem }) => {
     return(
@@ -8,6 +9,7 @@ const ViewerEducationItem = ({ educationItem }) => {
                 <p className="text-left">{educationItem.titleOfStudy}</p>
                 <p className="text-right">{educationItem.yearFrom} to {educationItem.yearTo}</p>
             </div>
+            <ViewerItemAchievementsList achievementsList={educationItem.achievementsList} />
         </>
     )
 }
@@ -18,7 +20,13 @@ ViewerEducationItem.propTypes = {
         schoolName: PropTypes.string,
         titleOfStudy: PropTypes.string,
         yearFrom: PropTypes.string,
-        yearTo: PropTypes.string
+        yearTo: PropTypes.string,
+        achievementsList: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number,
+                text: PropTypes.string,
+            })
+        ),
     }).isRequired,
 }
 
