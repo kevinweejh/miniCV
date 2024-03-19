@@ -91,6 +91,7 @@ CustomiserExperience.propTypes = {
             positionTitle: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
+            currentlyWorking: PropTypes.bool,
             achievements: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.number,
