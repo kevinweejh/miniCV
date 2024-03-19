@@ -5,7 +5,7 @@ import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 
 const CustomiserExperience = ({ experience, setExperience }) => {
 
-    const entryCount = experience.length;
+    const [experienceIdCounter, setExperienceIdCounter] = useState(0);
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -29,7 +29,7 @@ const CustomiserExperience = ({ experience, setExperience }) => {
         e.preventDefault();
 
         const addedExperienceItem = {
-            id: entryCount,
+            id: experienceIdCounter,
             companyName: e.target.companyNameInput.value,
             positionTitle: e.target.positionTitleInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
@@ -40,6 +40,7 @@ const CustomiserExperience = ({ experience, setExperience }) => {
         let newExperienceHistory = [...experience, addedExperienceItem];
 
         setExperience(newExperienceHistory);
+        setExperienceIdCounter(experienceIdCounter + 1);
     }
 
     return(

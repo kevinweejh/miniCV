@@ -5,7 +5,7 @@ import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 
 const CustomiserEducation = ({ education, setEducation }) => {
 
-    const entryCount = education.length;
+    const [educationIdCounter, setEducationIdCounter] = useState(0);
 
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
@@ -29,7 +29,7 @@ const CustomiserEducation = ({ education, setEducation }) => {
         e.preventDefault();
 
         const addedEducationItem = {
-            id: entryCount,
+            id: educationIdCounter,
             schoolName: e.target.schoolNameInput.value,
             titleOfStudy: e.target.titleOfStudyInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
@@ -40,6 +40,7 @@ const CustomiserEducation = ({ education, setEducation }) => {
         let newEducationHistory = [...education, addedEducationItem];
 
         setEducation(newEducationHistory);
+        setEducationIdCounter(educationIdCounter + 1);
     }
 
     return(
