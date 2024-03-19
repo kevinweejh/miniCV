@@ -57,11 +57,9 @@ const CustomiserEducation = ({ education, setEducation }) => {
                         <input type="text" id="titleOfStudyInput" name="titleOfStudyInput" placeholder="Percussions"></input>
                         <div className="flex flex-row">
                             <div className="flex flex-col">
-                                <label htmlFor="yearFromInput">Start Date: </label>
                                 <DatePicker id="yearFromInput" views={['year', 'month']} name="yearFromInput" value={startDate} label="Start Date" onChange={setStartDate} />
                             </div>
                             <div className="flex flex-col">
-                                <label htmlFor="yearToInput">End Date: </label>
                                 {isCurrent 
                                     ? <input type="text" value="Present" disabled /> 
                                     : <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} label="End Date" onChange={setEndDate} disabled={isCurrent} />
