@@ -17,11 +17,14 @@ const CustomiserGeneral = ({ info, setInfo }) => {
             mobile: value
         }
         setInfo(updatedGeneralInfo);
+
+        const generalTab = document.querySelector("#generalTab");
+        generalTab.removeAttribute("open");
     };
 
     return(
         <>
-            <details>
+            <details id="generalTab">
                 <summary className="flex flex-col p-2 text-2xl font-semibold text-center md:text-left hover:cursor-pointer hover:bg-gray-100">General</summary>
                 <div className="p-4 bg-gray-200">
                     <form className="flex flex-col" onSubmit={handleGeneralInfoSave}>
