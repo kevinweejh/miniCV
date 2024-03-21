@@ -2,17 +2,20 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
+import CustomiserPreviousEntries from './CustomiserPreviousEntries';
 
 const CustomiserEducation = ({ education, setEducation }) => {
 
     const [educationIdCounter, setEducationIdCounter] = useState(0);
 
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
     const [isCurrent, setIsCurrent] = useState(false);
 
     const [achievementsList, setAchievementsList] = useState([]);
     const [achievementIdCounter, setAchievementIdCounter] = useState(0);
+
+    const isArrayFilled = education.length > 0;
 
     const handleAchievementsListAdd = (newAchievement) => {
         let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
@@ -66,7 +69,7 @@ const CustomiserEducation = ({ education, setEducation }) => {
                                 }
                             </div>
                         </div>
-                        <label htmlFor="yearToPresent">I am currently studying here.</label>
+                        <p>I am currently studying here.</p>
                         <input
                             type="checkbox"
                             id="currentCheckbox"
@@ -76,6 +79,11 @@ const CustomiserEducation = ({ education, setEducation }) => {
                         <CustomiserItemAchievementsList achievementsList={achievementsList} handleAchievementsListAdd={handleAchievementsListAdd} />
                         <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Save</button>
                     </form>
+                </div>
+                <div className="bg-gray-200 flex flex-col divide-y divide-gray-400 border-t-2 border-black">
+                    {isArrayFilled && education.map((educationItem) => 
+                        <CustomiserPreviousEntries key={educationItem.id} entry={educationItem} />
+                    )}
                 </div>
             </details>
             <hr></hr>
