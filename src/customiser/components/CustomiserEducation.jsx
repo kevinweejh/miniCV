@@ -82,7 +82,7 @@ const CustomiserEducation = ({ education, setEducation }) => {
                 </div>
                 <div className="bg-gray-200 flex flex-col divide-y divide-gray-400 border-t-2 border-black">
                     {isArrayFilled && education.map((educationItem) => 
-                        <CustomiserPreviousEntries key={educationItem.id} entry={educationItem} />
+                        <CustomiserPreviousEntries key={educationItem.id} entry={educationItem} fullList={education} updaterFn={setEducation} />
                     )}
                 </div>
             </details>

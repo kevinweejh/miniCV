@@ -82,7 +82,7 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                 </div>
                 <div className="bg-gray-200 flex flex-col divide-y divide-gray-400 border-t-2 border-black">
                     {isArrayFilled && experience.map((experienceItem) => 
-                        <CustomiserPreviousEntries key={experienceItem.id} entry={experienceItem} />
+                        <CustomiserPreviousEntries key={experienceItem.id} entry={experienceItem} fullList={experience} updaterFn={setExperience} />
                     )}
                 </div>
             </details>
