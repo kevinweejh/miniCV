@@ -2,22 +2,14 @@ import PropTypes from 'prop-types';
 import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 
 const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
-    const currentStatus = nonGeneralSectionItem.currentlyWorking || nonGeneralSectionItem.currentlyStudying;
     return (
         <>
-            <h1 className="text-lg font-semibold">
-                {nonGeneralSectionItem.schoolName
-                    ? nonGeneralSectionItem.schoolName
-                    : nonGeneralSectionItem.companyName}
-            </h1>
+            <h1 className="text-lg font-semibold">{nonGeneralSectionItem.orgName}</h1>
             <div className="flex flex-row justify-between">
-                <p className="text-left">
-                    {nonGeneralSectionItem.titleOfStudy
-                        ? nonGeneralSectionItem.titleOfStudy
-                        : nonGeneralSectionItem.positionTitle}
-                </p>
+                <p className="text-left">{nonGeneralSectionItem.position}</p>
                 <p className="text-right">
-                    {nonGeneralSectionItem.yearFrom} to {currentStatus ? 'Present' : nonGeneralSectionItem.yearTo}
+                    {nonGeneralSectionItem.yearFrom} to{' '}
+                    {nonGeneralSectionItem.currentStatus ? 'Present' : nonGeneralSectionItem.yearTo}
                 </p>
             </div>
             <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />
@@ -28,14 +20,11 @@ const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
 ViewerNonGeneralItem.propTypes = {
     nonGeneralSectionItem: PropTypes.shape({
         id: PropTypes.number,
-        companyName: PropTypes.string,
-        positionTitle: PropTypes.string,
-        schoolName: PropTypes.string,
-        titleOfStudy: PropTypes.string,
+        orgName: PropTypes.string,
+        position: PropTypes.string,
         yearFrom: PropTypes.string,
         yearTo: PropTypes.string,
-        currentlyWorking: PropTypes.bool,
-        currentlyStudying: PropTypes.bool,
+        currentStatus: PropTypes.bool,
         achievementsList: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.number,

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ViewerNonGeneralItem from './ViewerNonGeneralItem';
 
-const ViewerNonGeneral = ({ nonGeneralSection }) => {
+const ViewerNonGeneral = ({ nonGeneralSection, formType }) => {
     const isArrayFilled = nonGeneralSection.length > 0;
     const isObjectFilled = isArrayFilled
         ? Object.values(nonGeneralSection[0]).some((value) => value != null && value !== '' && !Array.isArray(value))
@@ -11,9 +11,7 @@ const ViewerNonGeneral = ({ nonGeneralSection }) => {
         <>
             {isArrayFilled && isObjectFilled && (
                 <section className="flex flex-col">
-                    <h1 className="text-2xl font-semibold">
-                        {nonGeneralSection[0].schoolName ? 'Education' : 'Experience'}
-                    </h1>
+                    <h1 className="text-2xl font-semibold">{formType === 'education' ? 'Education' : 'Experience'}</h1>
                     <hr></hr>
                     {nonGeneralSection.map((nonGeneralSectionItem) => (
                         <ViewerNonGeneralItem
@@ -31,14 +29,11 @@ ViewerNonGeneral.propTypes = {
     nonGeneralSection: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number,
-            companyName: PropTypes.string,
-            positionTitle: PropTypes.string,
-            schoolName: PropTypes.string,
-            titleOfStudy: PropTypes.string,
+            orgName: PropTypes.string,
+            position: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
-            currentlyWorking: PropTypes.bool,
-            currentlyStudying: PropTypes.bool,
+            currentStatus: PropTypes.bool,
             achievementsList: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.number,
@@ -47,6 +42,7 @@ ViewerNonGeneral.propTypes = {
             ),
         }),
     ).isRequired,
+    formType: PropTypes.string,
 };
 
 export default ViewerNonGeneral;
