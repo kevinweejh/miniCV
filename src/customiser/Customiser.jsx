@@ -1,6 +1,5 @@
 import CustomiserGeneral from './components/CustomiserGeneral';
-import CustomiserEducation from './components/CustomiserEducation';
-import CustomiserExperience from './components/CustomiserExperience';
+import CustomiserNonGeneral from './components/CustomiserNonGeneral';
 import PropTypes from 'prop-types';
 
 const Customiser = ({ cvData, setCvData }) => {
@@ -19,8 +18,16 @@ const Customiser = ({ cvData, setCvData }) => {
     return (
         <section className="flex flex-col border rounded-md shadow-md h-fit my-4 w-full md:mx-4 md:w-1/3">
             <CustomiserGeneral info={cvData.general} setInfo={setInfo} />
-            <CustomiserEducation education={cvData.educationHistory} setEducation={setEducation} />
-            <CustomiserExperience experience={cvData.experienceHistory} setExperience={setExperience} />
+            <CustomiserNonGeneral
+                nonGeneralSection={cvData.educationHistory}
+                setNonGeneralSection={setEducation}
+                formType="education"
+            />
+            <CustomiserNonGeneral
+                nonGeneralSection={cvData.experienceHistory}
+                setNonGeneralSection={setExperience}
+                formType="experience"
+            />
         </section>
     );
 };

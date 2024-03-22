@@ -8,14 +8,14 @@ const CustomiserPreviousEntries = ({ entry, fullList, updaterFn }) => {
     const [isDeletionDialogVisible, setIsDeletionDialogVisible] = useState(false);
     const [isEditDialogVisible, setIsEditDialogVisible] = useState(false);
 
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    const [isCurrent, setIsCurrent] = useState(false);
+    // const [startDate, setStartDate] = useState(null);
+    // const [endDate, setEndDate] = useState(null);
+    // const [isCurrent, setIsCurrent] = useState(false);
 
-    const [achievementsList, setAchievementsList] = useState([]);
-    const [achievementIdCounter, setAchievementIdCounter] = useState(0);
+    // const [achievementsList, setAchievementsList] = useState([]);
+    // const [achievementIdCounter, setAchievementIdCounter] = useState(0);
 
-    const isArrayFilled = education.length > 0;
+    // const isArrayFilled = education.length > 0;
 
     const handleOpenDeletionDialog = () => {
         setIsDeletionDialogVisible(true);
@@ -47,11 +47,9 @@ const CustomiserPreviousEntries = ({ entry, fullList, updaterFn }) => {
 
     return (
         <div className="px-4 py-2">
-            <span className="text-xl font-semibold">
-                {entry.titleOfStudy ? entry.titleOfStudy : entry.positionTitle}
-            </span>
+            <span className="text-xl font-semibold">{entry.position}</span>
             <span> at </span>
-            <span className="text-xl font-semibold">{entry.schoolName ? entry.schoolName : entry.companyName}</span>
+            <span className="text-xl font-semibold">{entry.orgName}</span>
             <button className="border border-black rounded" onClick={handleOpenEditDialog}>
                 Edit
             </button>
@@ -81,7 +79,7 @@ const CustomiserPreviousEntries = ({ entry, fullList, updaterFn }) => {
                                 name="schoolNameInput"
                                 placeholder="Berklee College of Music"
                             >
-                                {entry.schoolName}
+                                {entry.orgName}
                             </input>
                             <label htmlFor="titleOfStudyInput">Title of Study: </label>
                             <input
@@ -90,9 +88,9 @@ const CustomiserPreviousEntries = ({ entry, fullList, updaterFn }) => {
                                 name="titleOfStudyInput"
                                 placeholder="Percussions"
                             >
-                                {entry.titleOfStudy}
+                                {entry.orgName}
                             </input>
-                            <div className="flex flex-row">
+                            {/* <div className="flex flex-row">
                                 <div className="flex flex-col">
                                     <DatePicker
                                         id="yearFromInput"
@@ -129,7 +127,7 @@ const CustomiserPreviousEntries = ({ entry, fullList, updaterFn }) => {
                             <CustomiserItemAchievementsList
                                 achievementsList={achievementsList}
                                 handleAchievementsListAdd={handleAchievementsListAdd}
-                            />
+                            /> */}
                             <button
                                 type="submit"
                                 className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400"
@@ -147,13 +145,11 @@ const CustomiserPreviousEntries = ({ entry, fullList, updaterFn }) => {
 CustomiserPreviousEntries.propTypes = {
     entry: PropTypes.shape({
         id: PropTypes.number,
-        schoolName: PropTypes.string,
-        companyName: PropTypes.string,
-        titleOfStudy: PropTypes.string,
-        positionTitle: PropTypes.string,
+        orgName: PropTypes.string,
+        position: PropTypes.string,
         yearFrom: PropTypes.string,
         yearTo: PropTypes.string,
-        currentlyStudying: PropTypes.bool,
+        currentStatus: PropTypes.bool,
         achievementsList: PropTypes.arrayOf(
             PropTypes.shape({
                 id: PropTypes.number,
@@ -164,13 +160,11 @@ CustomiserPreviousEntries.propTypes = {
     fullList: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number,
-            schoolName: PropTypes.string,
-            companyName: PropTypes.string,
-            titleOfStudy: PropTypes.string,
-            positionTitle: PropTypes.string,
+            orgName: PropTypes.string,
+            position: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
-            currentlyStudying: PropTypes.bool,
+            currentStatus: PropTypes.bool,
             achievementsList: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.number,

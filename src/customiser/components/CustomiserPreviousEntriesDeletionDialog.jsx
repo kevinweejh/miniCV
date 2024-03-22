@@ -11,8 +11,7 @@ const CustomiserPreviousEntriesDeletionDialog = ({ entry, handleDeletion, handle
                 <pre className="font-sans min-h-fit">
                     You are about to delete&#160;
                     <span className="underline">
-                        {entry.titleOfStudy ? entry.titleOfStudy : entry.positionTitle} at{' '}
-                        {entry.schoolName ? entry.schoolName : entry.companyName}
+                        {entry.position} at {entry.orgName}
                     </span>
                     . Press OK to confirm.
                 </pre>
@@ -41,10 +40,8 @@ const CustomiserPreviousEntriesDeletionDialog = ({ entry, handleDeletion, handle
 CustomiserPreviousEntriesDeletionDialog.propTypes = {
     entry: PropTypes.shape({
         id: PropTypes.number,
-        schoolName: PropTypes.string,
-        companyName: PropTypes.string,
-        titleOfStudy: PropTypes.string,
-        positionTitle: PropTypes.string,
+        orgName: PropTypes.string,
+        position: PropTypes.string,
     }).isRequired,
     handleDeletion: PropTypes.func.isRequired,
     handleCloseDeletionDialog: PropTypes.func.isRequired,

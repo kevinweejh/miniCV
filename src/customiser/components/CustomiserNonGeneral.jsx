@@ -4,8 +4,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 import CustomiserPreviousEntries from './CustomiserPreviousEntries';
 
-const CustomiserExperience = ({ experience, setExperience }) => {
-    const [experienceIdCounter, setExperienceIdCounter] = useState(0);
+const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formType }) => {
+    const [idCounter, setIdCounter] = useState(0);
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
@@ -14,7 +14,7 @@ const CustomiserExperience = ({ experience, setExperience }) => {
     const [achievementsList, setAchievementsList] = useState([]);
     const [achievementIdCounter, setAchievementIdCounter] = useState(0);
 
-    const isArrayFilled = experience.length > 0;
+    const isArrayFilled = nonGeneralSection.length > 0;
 
     const handleAchievementsListAdd = (newAchievement) => {
         let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
@@ -22,23 +22,23 @@ const CustomiserExperience = ({ experience, setExperience }) => {
         setAchievementIdCounter(achievementIdCounter + 1);
     };
 
-    const handleExperienceHistoryAdd = (e) => {
+    const handleNonGeneralItemAdd = (e) => {
         e.preventDefault();
 
-        const addedExperienceItem = {
-            id: experienceIdCounter,
-            companyName: e.target.companyNameInput.value,
-            positionTitle: e.target.positionTitleInput.value,
+        const addedNonGeneralItem = {
+            id: idCounter,
+            orgName: e.target.orgNameInput.value,
+            position: e.target.positionInput.value,
             yearFrom: startDate ? startDate.format('MMM YYYY') : '',
             yearTo: endDate ? endDate.format('MMM YYYY') : '',
-            currentlyWorking: isCurrent,
+            currentStatus: isCurrent,
             achievementsList: achievementsList,
         };
 
-        let newExperienceHistory = [...experience, addedExperienceItem];
+        let newNonGeneralSectionHistory = [...nonGeneralSection, addedNonGeneralItem];
 
-        setExperience(newExperienceHistory);
-        setExperienceIdCounter(experienceIdCounter + 1);
+        setNonGeneralSection(newNonGeneralSectionHistory);
+        setIdCounter(idCounter + 1);
 
         setStartDate(null);
         setEndDate(null);
@@ -51,24 +51,45 @@ const CustomiserExperience = ({ experience, setExperience }) => {
         <>
             <details>
                 <summary className="flex flex-col p-2 text-2xl font-semibold text-center md:text-left hover:cursor-pointer hover:bg-gray-100">
-                    Experience
+                    {formType === 'education' ? 'Education' : 'Experience'}
                 </summary>
                 <div className="p-4 bg-gray-200">
-                    <form className="flex flex-col" onSubmit={handleExperienceHistoryAdd}>
-                        <label htmlFor="companyNameInput">Company Name: </label>
-                        <input
-                            type="text"
-                            id="companyNameInput"
-                            name="companyNameInput"
-                            placeholder="Umbrella Corp."
-                        ></input>
-                        <label htmlFor="positionTitleInput">Position/Title: </label>
-                        <input
-                            type="text"
-                            id="positionTitleInput"
-                            name="positionTitleInput"
-                            placeholder="Chief Scientist"
-                        ></input>
+                    <form className="flex flex-col" onSubmit={handleNonGeneralItemAdd}>
+                        {formType === 'education' ? (
+                            <>
+                                <label htmlFor="orgNameInput">School Name: </label>
+                                <input
+                                    type="text"
+                                    id="orgNameInput"
+                                    name="orgNameInput"
+                                    placeholder="Berklee College of Music"
+                                ></input>
+                                <label htmlFor="positionInput">Title of Study: </label>
+                                <input
+                                    type="text"
+                                    id="positionInput"
+                                    name="positionInput"
+                                    placeholder="Percussions"
+                                ></input>
+                            </>
+                        ) : (
+                            <>
+                                <label htmlFor="orgNameInput">Company Name: </label>
+                                <input
+                                    type="text"
+                                    id="orgNameInput"
+                                    name="orgNameInput"
+                                    placeholder="Umbrella Corp."
+                                ></input>
+                                <label htmlFor="positionTitleInput">Position/Title: </label>
+                                <input
+                                    type="text"
+                                    id="positionInput"
+                                    name="positionInput"
+                                    placeholder="Chief Scientist"
+                                ></input>
+                            </>
+                        )}
                         <div className="flex flex-row">
                             <div className="flex flex-col">
                                 <DatePicker
@@ -94,7 +115,11 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                                 )}
                             </div>
                         </div>
-                        <label htmlFor="currentCheckbox">I am currently working here.</label>
+                        <label htmlFor="currentCheckbox">
+                            {formType === 'education'
+                                ? 'I am currently studying here.'
+                                : 'I am currently working here.'}
+                        </label>
                         <input
                             type="checkbox"
                             id="currentCheckbox"
@@ -115,12 +140,12 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                 </div>
                 <div className="bg-gray-200 flex flex-col divide-y divide-gray-400 border-t-2 border-black">
                     {isArrayFilled &&
-                        experience.map((experienceItem) => (
+                        nonGeneralSection.map((nonGeneralSectionItem) => (
                             <CustomiserPreviousEntries
-                                key={experienceItem.id}
-                                entry={experienceItem}
-                                fullList={experience}
-                                updaterFn={setExperience}
+                                key={nonGeneralSectionItem.id}
+                                entry={nonGeneralSectionItem}
+                                fullList={nonGeneralSection}
+                                updaterFn={setNonGeneralSection}
                             />
                         ))}
                 </div>
@@ -130,15 +155,15 @@ const CustomiserExperience = ({ experience, setExperience }) => {
     );
 };
 
-CustomiserExperience.propTypes = {
-    experience: PropTypes.arrayOf(
+CustomiserNonGeneral.propTypes = {
+    nonGeneralSection: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number,
-            companyName: PropTypes.string,
-            positionTitle: PropTypes.string,
+            orgName: PropTypes.string,
+            position: PropTypes.string,
             yearFrom: PropTypes.string,
             yearTo: PropTypes.string,
-            currentlyWorking: PropTypes.bool,
+            currentStatus: PropTypes.bool,
             achievements: PropTypes.arrayOf(
                 PropTypes.shape({
                     id: PropTypes.number,
@@ -147,7 +172,8 @@ CustomiserExperience.propTypes = {
             ),
         }),
     ).isRequired,
-    setExperience: PropTypes.func.isRequired,
+    setNonGeneralSection: PropTypes.func.isRequired,
+    formType: PropTypes.string.isRequired,
 };
 
-export default CustomiserExperience;
+export default CustomiserNonGeneral;
