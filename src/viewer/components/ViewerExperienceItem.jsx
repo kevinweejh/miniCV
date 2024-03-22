@@ -3,17 +3,19 @@ import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 
 const ViewerExperienceItem = ({ experienceItem }) => {
     const currentlyWorking = experienceItem.currentlyWorking;
-    return(
+    return (
         <>
             <h1 className="text-lg font-semibold">{experienceItem.companyName}</h1>
             <div className="flex flex-row justify-between">
                 <p className="text-left">{experienceItem.positionTitle}</p>
-                <p className="text-right">{experienceItem.yearFrom} to {currentlyWorking ? 'Present' : experienceItem.yearTo}</p>
+                <p className="text-right">
+                    {experienceItem.yearFrom} to {currentlyWorking ? 'Present' : experienceItem.yearTo}
+                </p>
             </div>
             <ViewerItemAchievementsList achievementsList={experienceItem.achievementsList} />
         </>
-    )
-}
+    );
+};
 
 ViewerExperienceItem.propTypes = {
     experienceItem: PropTypes.shape({
@@ -27,7 +29,7 @@ ViewerExperienceItem.propTypes = {
             PropTypes.shape({
                 id: PropTypes.number,
                 text: PropTypes.string,
-            })
+            }),
         ),
     }).isRequired,
 };

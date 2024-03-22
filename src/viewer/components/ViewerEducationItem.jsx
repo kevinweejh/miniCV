@@ -3,17 +3,19 @@ import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 
 const ViewerEducationItem = ({ educationItem }) => {
     const currentlyStudying = educationItem.currentlyStudying;
-    return(
+    return (
         <>
             <h1 className="text-lg font-semibold">{educationItem.schoolName}</h1>
             <div className="flex flex-row justify-between">
                 <p className="text-left">{educationItem.titleOfStudy}</p>
-                <p className="text-right">{educationItem.yearFrom} to {currentlyStudying ? 'Present' : educationItem.yearTo}</p>
+                <p className="text-right">
+                    {educationItem.yearFrom} to {currentlyStudying ? 'Present' : educationItem.yearTo}
+                </p>
             </div>
             <ViewerItemAchievementsList achievementsList={educationItem.achievementsList} />
         </>
-    )
-}
+    );
+};
 
 ViewerEducationItem.propTypes = {
     educationItem: PropTypes.shape({
@@ -27,9 +29,9 @@ ViewerEducationItem.propTypes = {
             PropTypes.shape({
                 id: PropTypes.number,
                 text: PropTypes.string,
-            })
+            }),
         ),
     }).isRequired,
-}
+};
 
 export default ViewerEducationItem;

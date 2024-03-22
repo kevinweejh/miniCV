@@ -5,7 +5,6 @@ import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 import CustomiserPreviousEntries from './CustomiserPreviousEntries';
 
 const CustomiserExperience = ({ experience, setExperience }) => {
-
     const [experienceIdCounter, setExperienceIdCounter] = useState(0);
 
     const [startDate, setStartDate] = useState(null);
@@ -21,7 +20,7 @@ const CustomiserExperience = ({ experience, setExperience }) => {
         let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
         setAchievementsList(newAchievementsList);
         setAchievementIdCounter(achievementIdCounter + 1);
-    }
+    };
 
     const handleExperienceHistoryAdd = (e) => {
         e.preventDefault();
@@ -34,7 +33,7 @@ const CustomiserExperience = ({ experience, setExperience }) => {
             yearTo: endDate ? endDate.format('MMM YYYY') : '',
             currentlyWorking: isCurrent,
             achievementsList: achievementsList,
-        }
+        };
 
         let newExperienceHistory = [...experience, addedExperienceItem];
 
@@ -46,27 +45,53 @@ const CustomiserExperience = ({ experience, setExperience }) => {
         setIsCurrent(false);
         setAchievementsList([]);
         e.target.reset();
-    }
+    };
 
-    return(
+    return (
         <>
             <details>
-                <summary className="flex flex-col p-2 text-2xl font-semibold text-center md:text-left hover:cursor-pointer hover:bg-gray-100">Experience</summary>
+                <summary className="flex flex-col p-2 text-2xl font-semibold text-center md:text-left hover:cursor-pointer hover:bg-gray-100">
+                    Experience
+                </summary>
                 <div className="p-4 bg-gray-200">
                     <form className="flex flex-col" onSubmit={handleExperienceHistoryAdd}>
                         <label htmlFor="companyNameInput">Company Name: </label>
-                        <input type="text" id="companyNameInput" name="companyNameInput" placeholder="Umbrella Corp."></input>
+                        <input
+                            type="text"
+                            id="companyNameInput"
+                            name="companyNameInput"
+                            placeholder="Umbrella Corp."
+                        ></input>
                         <label htmlFor="positionTitleInput">Position/Title: </label>
-                        <input type="text" id="positionTitleInput" name="positionTitleInput" placeholder="Chief Scientist"></input>
+                        <input
+                            type="text"
+                            id="positionTitleInput"
+                            name="positionTitleInput"
+                            placeholder="Chief Scientist"
+                        ></input>
                         <div className="flex flex-row">
                             <div className="flex flex-col">
-                                <DatePicker id="yearFromInput" views={['year', 'month']} name="yearFromInput" value={startDate} onChange={setStartDate} />
+                                <DatePicker
+                                    id="yearFromInput"
+                                    views={['year', 'month']}
+                                    name="yearFromInput"
+                                    value={startDate}
+                                    onChange={setStartDate}
+                                />
                             </div>
                             <div className="flex flex-col">
-                                {isCurrent 
-                                    ? <input type="text" value="Present" disabled />
-                                    : <DatePicker id="yearToInput" views={['year', 'month']} name="yearToInput" value={endDate} onChange={setEndDate} disabled={isCurrent} />
-                                }
+                                {isCurrent ? (
+                                    <input type="text" value="Present" disabled />
+                                ) : (
+                                    <DatePicker
+                                        id="yearToInput"
+                                        views={['year', 'month']}
+                                        name="yearToInput"
+                                        value={endDate}
+                                        onChange={setEndDate}
+                                        disabled={isCurrent}
+                                    />
+                                )}
                             </div>
                         </div>
                         <label htmlFor="currentCheckbox">I am currently working here.</label>
@@ -74,22 +99,36 @@ const CustomiserExperience = ({ experience, setExperience }) => {
                             type="checkbox"
                             id="currentCheckbox"
                             checked={isCurrent}
-                            onChange={ (e) => setIsCurrent(e.target.checked) }
+                            onChange={(e) => setIsCurrent(e.target.checked)}
                         />
-                        <CustomiserItemAchievementsList achievementsList={achievementsList} handleAchievementsListAdd={handleAchievementsListAdd} />
-                        <button type="submit" className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400">Add</button>
+                        <CustomiserItemAchievementsList
+                            achievementsList={achievementsList}
+                            handleAchievementsListAdd={handleAchievementsListAdd}
+                        />
+                        <button
+                            type="submit"
+                            className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400"
+                        >
+                            Add
+                        </button>
                     </form>
                 </div>
                 <div className="bg-gray-200 flex flex-col divide-y divide-gray-400 border-t-2 border-black">
-                    {isArrayFilled && experience.map((experienceItem) => 
-                        <CustomiserPreviousEntries key={experienceItem.id} entry={experienceItem} fullList={experience} updaterFn={setExperience} />
-                    )}
+                    {isArrayFilled &&
+                        experience.map((experienceItem) => (
+                            <CustomiserPreviousEntries
+                                key={experienceItem.id}
+                                entry={experienceItem}
+                                fullList={experience}
+                                updaterFn={setExperience}
+                            />
+                        ))}
                 </div>
             </details>
             <hr></hr>
         </>
-    )
-}
+    );
+};
 
 CustomiserExperience.propTypes = {
     experience: PropTypes.arrayOf(
@@ -104,11 +143,11 @@ CustomiserExperience.propTypes = {
                 PropTypes.shape({
                     id: PropTypes.number,
                     text: PropTypes.string,
-                })
+                }),
             ),
-        })
+        }),
     ).isRequired,
     setExperience: PropTypes.func.isRequired,
-}
+};
 
 export default CustomiserExperience;

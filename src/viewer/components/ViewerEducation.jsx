@@ -3,22 +3,24 @@ import ViewerEducationItem from './ViewerEducationItem';
 
 const ViewerEducation = ({ education }) => {
     const isArrayFilled = education.length > 0;
-    const isObjectFilled = isArrayFilled ? Object.values(education[0]).some(value => value != null && value !== '') : false;
+    const isObjectFilled = isArrayFilled
+        ? Object.values(education[0]).some((value) => value != null && value !== '')
+        : false;
 
-    return(
+    return (
         <>
-            {(isArrayFilled && isObjectFilled) && 
+            {isArrayFilled && isObjectFilled && (
                 <section>
                     <h1 className="text-2xl font-semibold">Education</h1>
                     <hr></hr>
-                    {education.map((educationItem) => 
+                    {education.map((educationItem) => (
                         <ViewerEducationItem key={educationItem.id} educationItem={educationItem} />
-                    )}
+                    ))}
                 </section>
-            }
+            )}
         </>
-    )
-}
+    );
+};
 
 ViewerEducation.propTypes = {
     education: PropTypes.arrayOf(
@@ -33,10 +35,10 @@ ViewerEducation.propTypes = {
                 PropTypes.shape({
                     id: PropTypes.number,
                     text: PropTypes.string,
-                })
+                }),
             ),
-        })
-    ).isRequired
+        }),
+    ).isRequired,
 };
 
 export default ViewerEducation;
