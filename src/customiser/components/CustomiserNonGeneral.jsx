@@ -3,16 +3,22 @@ import { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 import CustomiserPreviousEntries from './CustomiserPreviousEntries';
+import dayjs from 'dayjs';
 
 const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formType }) => {
     const [idCounter, setIdCounter] = useState(0);
 
+    const [orgName, setOrgName] = useState(null);
+    const [position, setPosition] = useState(null);
+
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [isCurrent, setIsCurrent] = useState(false);
+    const [currentStatus, setCurrentStatus] = useState(false);
 
     const [achievementsList, setAchievementsList] = useState([]);
     const [achievementIdCounter, setAchievementIdCounter] = useState(0);
+
+    const [editingId, setEditingId] = useState(null);
 
     const isArrayFilled = nonGeneralSection.length > 0;
 
@@ -26,25 +32,49 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
         e.preventDefault();
 
         const addedNonGeneralItem = {
-            id: idCounter,
+            id: editingId !== null ? editingId : idCounter,
             orgName: e.target.orgNameInput.value,
             position: e.target.positionInput.value,
-            yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? endDate.format('MMM YYYY') : '',
-            currentStatus: isCurrent,
+            yearFrom: startDate ? startDate.format('MMM YYYY') : null,
+            yearTo: endDate ? endDate.format('MMM YYYY') : null,
+            currentStatus: currentStatus,
             achievementsList: achievementsList,
         };
 
-        let newNonGeneralSectionHistory = [...nonGeneralSection, addedNonGeneralItem];
+        let newNonGeneralSectionHistory;
+
+        if (editingId !== null) {
+            // Editing -> Replace the existing entry with edited entry
+            newNonGeneralSectionHistory = nonGeneralSection.map((nonGeneralSectionItem) => {
+                return nonGeneralSectionItem.id === editingId ? addedNonGeneralItem : nonGeneralSectionItem;
+            });
+        } else {
+            // New entry -> Append to array of entries
+            newNonGeneralSectionHistory = [...nonGeneralSection, addedNonGeneralItem];
+            setIdCounter(idCounter + 1);
+        }
 
         setNonGeneralSection(newNonGeneralSectionHistory);
-        setIdCounter(idCounter + 1);
 
+        setOrgName(null);
+        setPosition(null);
         setStartDate(null);
         setEndDate(null);
-        setIsCurrent(false);
+        setCurrentStatus(false);
         setAchievementsList([]);
+        setEditingId(null);
         e.target.reset();
+    };
+
+    const handleEdit = (entry) => {
+        setOrgName(entry.orgName);
+        setPosition(entry.position);
+        setStartDate(entry.yearFrom ? dayjs(entry.yearFrom, 'MMM YYYY') : null);
+        setEndDate(entry.yearTo ? dayjs(entry.yearTo, 'MMM YYYY') : null);
+        setCurrentStatus(entry.currentStatus);
+        setAchievementsList(entry.achievementsList);
+
+        setEditingId(entry.id);
     };
 
     return (
@@ -63,6 +93,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     id="orgNameInput"
                                     name="orgNameInput"
                                     placeholder="Berklee College of Music"
+                                    value={orgName || null}
+                                    onChange={(e) => setOrgName(e.target.value)}
                                 ></input>
                                 <label htmlFor="positionInput">Title of Study: </label>
                                 <input
@@ -70,6 +102,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     id="positionInput"
                                     name="positionInput"
                                     placeholder="Percussions"
+                                    value={position || null}
+                                    onChange={(e) => setPosition(e.target.value)}
                                 ></input>
                             </>
                         ) : (
@@ -80,13 +114,17 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     id="orgNameInput"
                                     name="orgNameInput"
                                     placeholder="Umbrella Corp."
+                                    value={orgName || null}
+                                    onChange={(e) => setOrgName(e.target.value)}
                                 ></input>
-                                <label htmlFor="positionTitleInput">Position/Title: </label>
+                                <label htmlFor="positionInput">Position/Title: </label>
                                 <input
                                     type="text"
                                     id="positionInput"
                                     name="positionInput"
                                     placeholder="Chief Scientist"
+                                    value={position || null}
+                                    onChange={(e) => setPosition(e.target.value)}
                                 ></input>
                             </>
                         )}
@@ -96,21 +134,21 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     id="yearFromInput"
                                     views={['year', 'month']}
                                     name="yearFromInput"
-                                    value={startDate}
-                                    onChange={setStartDate}
+                                    value={startDate ? dayjs(startDate) : null}
+                                    onChange={(newValue) => setStartDate(newValue ? dayjs(newValue) : null)}
                                 />
                             </div>
                             <div className="flex flex-col">
-                                {isCurrent ? (
+                                {currentStatus ? (
                                     <input type="text" value="Present" disabled />
                                 ) : (
                                     <DatePicker
                                         id="yearToInput"
                                         views={['year', 'month']}
                                         name="yearToInput"
-                                        value={endDate}
-                                        onChange={setEndDate}
-                                        disabled={isCurrent}
+                                        value={endDate ? dayjs(endDate) : null}
+                                        onChange={(newValue) => setEndDate(newValue ? dayjs(newValue) : null)}
+                                        disabled={currentStatus}
                                     />
                                 )}
                             </div>
@@ -123,8 +161,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         <input
                             type="checkbox"
                             id="currentCheckbox"
-                            checked={isCurrent}
-                            onChange={(e) => setIsCurrent(e.target.checked)}
+                            checked={currentStatus}
+                            onChange={(e) => setCurrentStatus(e.target.checked)}
                         />
                         <CustomiserItemAchievementsList
                             achievementsList={achievementsList}
@@ -146,6 +184,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                 entry={nonGeneralSectionItem}
                                 fullList={nonGeneralSection}
                                 updaterFn={setNonGeneralSection}
+                                editHandler={handleEdit}
                             />
                         ))}
                 </div>
