@@ -172,7 +172,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             type="submit"
                             className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400"
                         >
-                            Add
+                            {editingId !== null ? 'Save' : 'Add'}
                         </button>
                     </form>
                 </div>
