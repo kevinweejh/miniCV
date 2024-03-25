@@ -11,7 +11,8 @@ const ViewerGeneral = ({ info }) => {
                         {info.firstName} {info.lastName}
                     </h1>
                     <p>
-                        {info.email} | {info.mobile}
+                        {info.email} | {info.mobile} {info.stateInputVis ? `| ${info.state}` : ''}
+                        {info.cityInputVis && info.stateInputVis ? `, ${info.city}` : ''}
                     </p>
                 </section>
             )}
@@ -24,7 +25,12 @@ ViewerGeneral.propTypes = {
         firstName: PropTypes.string,
         lastName: PropTypes.string,
         email: PropTypes.string,
+        countryCode: PropTypes.string,
         mobile: PropTypes.string,
+        state: PropTypes.string,
+        city: PropTypes.string,
+        stateInputVis: PropTypes.bool,
+        cityInputVis: PropTypes.bool,
     }).isRequired,
 };
 
