@@ -130,49 +130,32 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                 </summary>
                 <div className="p-4 bg-gray-200">
                     <form className="flex flex-col" onSubmit={handleNonGeneralItemAdd}>
-                        {formType === 'education' ? (
-                            <>
-                                <label htmlFor="orgNameInput">School Name: </label>
-                                <input
-                                    type="text"
-                                    id="orgNameInput"
-                                    name="orgNameInput"
-                                    placeholder="Berklee College of Music"
-                                    value={orgName || null}
-                                    onChange={(e) => setOrgName(e.target.value)}
-                                ></input>
-                                <label htmlFor="positionInput">Title of Study: </label>
-                                <input
-                                    type="text"
-                                    id="positionInput"
-                                    name="positionInput"
-                                    placeholder="Percussions"
-                                    value={position || null}
-                                    onChange={(e) => setPosition(e.target.value)}
-                                ></input>
-                            </>
-                        ) : (
-                            <>
-                                <label htmlFor="orgNameInput">Company Name: </label>
-                                <input
-                                    type="text"
-                                    id="orgNameInput"
-                                    name="orgNameInput"
-                                    placeholder="Umbrella Corp."
-                                    value={orgName || null}
-                                    onChange={(e) => setOrgName(e.target.value)}
-                                ></input>
-                                <label htmlFor="positionInput">Position/Title: </label>
-                                <input
-                                    type="text"
-                                    id="positionInput"
-                                    name="positionInput"
-                                    placeholder="Chief Scientist"
-                                    value={position || null}
-                                    onChange={(e) => setPosition(e.target.value)}
-                                ></input>
-                            </>
-                        )}
+                        <label htmlFor="orgNameInput">
+                            {formType === 'education' ? 'School Name:' : 'Company Name:'}
+                        </label>
+                        <input
+                            type="text"
+                            id="orgNameInput"
+                            name="orgNameInput"
+                            placeholder={formType === 'education' ? 'Enter school name' : 'Enter company name'}
+                            value={orgName || null}
+                            onChange={(e) => setOrgName(e.target.value)}
+                        ></input>
+                        <label htmlFor="positionInput">
+                            {formType === 'education' ? 'Course:' : 'Position/Title:'}
+                        </label>
+                        <input
+                            type="text"
+                            id="positionInput"
+                            name="positionInput"
+                            placeholder={
+                                formType === 'education'
+                                    ? 'Enter your course of studies'
+                                    : 'Enter your position or title'
+                            }
+                            value={position || null}
+                            onChange={(e) => setPosition(e.target.value)}
+                        ></input>
                         <div className="flex flex-row">
                             <div className="flex flex-col">
                                 <DatePicker
