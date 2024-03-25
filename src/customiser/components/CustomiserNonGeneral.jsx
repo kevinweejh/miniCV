@@ -20,7 +20,19 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
     const [editingId, setEditingId] = useState(null);
 
+    const [order, setOrder] = useState([]);
+
     const isArrayFilled = nonGeneralSection.length > 0;
+
+    const sortNonGeneralSection = (nonGeneralSection, order) => {
+        const sortedNonGeneralSection = nonGeneralSection.sort((a, b) => {
+            const indexA = order.indexOf(a.id);
+            const indexB = order.indexOf(b.id);
+            return indexA - indexB;
+        });
+
+        setNonGeneralSection(sortedNonGeneralSection);
+    };
 
     const handleAchievementsListAdd = (newAchievement) => {
         let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
@@ -51,6 +63,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
         } else {
             // New entry -> Append to array of entries
             newNonGeneralSectionHistory = [...nonGeneralSection, addedNonGeneralItem];
+            setOrder([...order, idCounter]);
             setIdCounter(idCounter + 1);
         }
 
@@ -75,6 +88,38 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
         setAchievementsList(entry.achievementsList);
 
         setEditingId(entry.id);
+    };
+
+    const reorderUp = (entry) => {
+        const currentPos = order.indexOf(entry.id);
+
+        // Already first item in order array
+        if (currentPos <= 0) {
+            return;
+        }
+
+        const newOrder = [...order];
+        newOrder.splice(currentPos, 1);
+        newOrder.splice(currentPos - 1, 0, entry.id);
+
+        setOrder(newOrder);
+        sortNonGeneralSection(nonGeneralSection, newOrder);
+    };
+
+    const reorderDown = (entry) => {
+        const currentPos = order.indexOf(entry.id);
+
+        // Already last item in order array
+        if (currentPos === order.length - 1) {
+            return;
+        }
+
+        const newOrder = [...order];
+        newOrder.splice(currentPos, 1);
+        newOrder.splice(currentPos + 1, 0, entry.id);
+
+        setOrder(newOrder);
+        sortNonGeneralSection(nonGeneralSection, newOrder);
     };
 
     return (
@@ -185,6 +230,10 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                 fullList={nonGeneralSection}
                                 updaterFn={setNonGeneralSection}
                                 editHandler={handleEdit}
+                                order={order}
+                                setOrder={setOrder}
+                                reorderUp={reorderUp}
+                                reorderDown={reorderDown}
                             />
                         ))}
                 </div>
