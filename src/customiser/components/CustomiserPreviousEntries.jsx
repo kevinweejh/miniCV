@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import CustomiserPreviousEntriesDeletionDialog from './CustomiserPreviousEntriesDeletionDialog';
+import EditIcon from '../../assets/edit.svg?react';
+import DeleteIcon from '../../assets/delete.svg?react';
+import ShiftUpIcon from '../../assets/shift-up.svg?react';
+import ShiftDownIcon from '../../assets/shift-down.svg?react';
 
 const CustomiserPreviousEntries = ({
     entry,
@@ -31,22 +35,39 @@ const CustomiserPreviousEntries = ({
     };
 
     return (
-        <div className="px-4 py-2">
-            <span className="text-xl font-semibold">{entry.position}</span>
-            <span> at </span>
-            <span className="text-xl font-semibold">{entry.orgName}</span>
-            <button className="border border-black rounded" onClick={() => editHandler(entry)}>
-                Edit
-            </button>
-            <button className="border border-black rounded" onClick={handleOpenDeletionDialog}>
-                X
-            </button>
-            <button className="border border-black rounded" onClick={() => reorderUp(entry)}>
-                ^
-            </button>
-            <button className="border border-black rounded" onClick={() => reorderDown(entry)}>
-                ⌄
-            </button>
+        <div className="grid grid-cols-4 px-4 py-2 justify-between">
+            <div className="col-span-3 items-center font-medium">
+                {entry.position} <br></br>
+                <span className="font-normal">@ </span>
+                {entry.orgName}
+            </div>
+            <div className="flex col-span-1">
+                <div>
+                    <button
+                        className="border border-black rounded max-w-11 max-h-11"
+                        onClick={() => editHandler(entry)}
+                    >
+                        <EditIcon className="w-full h-auto" />
+                    </button>
+                    <button
+                        className="border border-black rounded max-w-11 max-h-11"
+                        onClick={handleOpenDeletionDialog}
+                    >
+                        <DeleteIcon className="w-full h-auto" />
+                    </button>
+                </div>
+                <div>
+                    <button className="border border-black rounded max-w-11 max-h-11" onClick={() => reorderUp(entry)}>
+                        <ShiftUpIcon className="w-full h-auto" />
+                    </button>
+                    <button
+                        className="border border-black rounded max-w-11 max-h-11"
+                        onClick={() => reorderDown(entry)}
+                    >
+                        <ShiftDownIcon className="w-full h-auto" />
+                    </button>
+                </div>
+            </div>
 
             {isDeletionDialogVisible && (
                 <CustomiserPreviousEntriesDeletionDialog
