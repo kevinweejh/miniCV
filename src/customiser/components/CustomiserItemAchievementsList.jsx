@@ -15,12 +15,14 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
 
     return (
         <>
+            <p className="mt-2">Achievements:</p>
             <ul>
                 {achievementsList.map((achievement) => (
                     <CustomiserItemAchievement key={achievement.id} text={achievement.text} />
                 ))}
             </ul>
             <input
+                className="mt-2"
                 id="newAchievement"
                 type="text"
                 value={newAchievement}
@@ -30,7 +32,7 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
             <button
                 onClick={handleAddClick}
                 type="button"
-                className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400"
+                className="border rounded-md w-fit mt-2 ml-auto px-2 border-gray-400 hover:bg-gray-400"
             >
                 Add achievement
             </button>

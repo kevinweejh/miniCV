@@ -130,7 +130,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                 </summary>
                 <div className="p-4 bg-gray-200">
                     <form className="flex flex-col" onSubmit={handleNonGeneralItemAdd}>
-                        <label htmlFor="orgNameInput">
+                        <label htmlFor="orgNameInput" className="mt-2">
                             {formType === 'education' ? 'School Name:' : 'Company Name:'}
                         </label>
                         <input
@@ -141,7 +141,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             value={orgName || null}
                             onChange={(e) => setOrgName(e.target.value)}
                         ></input>
-                        <label htmlFor="positionInput">
+                        <label htmlFor="positionInput" className="mt-2">
                             {formType === 'education' ? 'Course:' : 'Position/Title:'}
                         </label>
                         <input
@@ -156,8 +156,9 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             value={position || null}
                             onChange={(e) => setPosition(e.target.value)}
                         ></input>
-                        <div className="flex flex-row">
-                            <div className="flex flex-col">
+                        <div className="grid grid-cols-8 gap-2 items-center mt-2">
+                            <div className="col-span-1 text-center">From</div>
+                            <div className="col-span-3 items-center">
                                 <DatePicker
                                     id="yearFromInput"
                                     views={['year', 'month']}
@@ -166,9 +167,10 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     onChange={(newValue) => setStartDate(newValue ? dayjs(newValue) : null)}
                                 />
                             </div>
-                            <div className="flex flex-col">
+                            <div className="col-span-1 text-center">To</div>
+                            <div className="col-span-3 items-center">
                                 {currentStatus ? (
-                                    <input type="text" value="Present" disabled />
+                                    <input className="text-center" type="text" value="Present" disabled />
                                 ) : (
                                     <DatePicker
                                         id="yearToInput"
@@ -181,24 +183,26 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                 )}
                             </div>
                         </div>
-                        <label htmlFor="currentCheckbox">
-                            {formType === 'education'
-                                ? 'I am currently studying here.'
-                                : 'I am currently working here.'}
-                        </label>
-                        <input
-                            type="checkbox"
-                            id="currentCheckbox"
-                            checked={currentStatus}
-                            onChange={(e) => setCurrentStatus(e.target.checked)}
-                        />
+                        <div className="flex gap-2 mt-2">
+                            <input
+                                type="checkbox"
+                                id="currentCheckbox"
+                                checked={currentStatus}
+                                onChange={(e) => setCurrentStatus(e.target.checked)}
+                            />
+                            <label htmlFor="currentCheckbox">
+                                {formType === 'education'
+                                    ? 'I am currently studying here.'
+                                    : 'I am currently working here.'}
+                            </label>
+                        </div>
                         <CustomiserItemAchievementsList
                             achievementsList={achievementsList}
                             handleAchievementsListAdd={handleAchievementsListAdd}
                         />
                         <button
                             type="submit"
-                            className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400"
+                            className="border rounded-md w-fit mt-2 ml-auto px-2 border-gray-400 hover:bg-gray-400"
                         >
                             {editingId !== null ? 'Save' : 'Add'}
                         </button>

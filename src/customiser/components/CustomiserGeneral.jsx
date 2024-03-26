@@ -43,7 +43,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                 </summary>
                 <div className="p-4 bg-gray-200">
                     <form className="flex flex-col" onSubmit={handleGeneralInfoSave}>
-                        <label htmlFor="firstNameInput">First Name: </label>
+                        <label htmlFor="firstNameInput" className="mt-2">
+                            First Name:{' '}
+                        </label>
                         <input
                             type="text"
                             id="firstNameInput"
@@ -53,7 +55,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             onChange={(e) => setFirstName(e.target.value)}
                             required
                         ></input>
-                        <label htmlFor="lastNameInput">Last Name: </label>
+                        <label htmlFor="lastNameInput" className="mt-2">
+                            Last Name:{' '}
+                        </label>
                         <input
                             type="text"
                             id="lastNameInput"
@@ -73,7 +77,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         ></input>
-                        <label htmlFor="mobileInput">Mobile No.: </label>
+                        <label htmlFor="mobileInput" className="mt-2">
+                            Mobile No.:{' '}
+                        </label>
                         <PhoneInput
                             id="mobileInput"
                             name="mobileInput"
@@ -82,7 +88,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             onChange={setMobile}
                             required
                         />
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
                                 id="showStateSelector"
@@ -105,7 +111,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             </>
                         )}
 
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
                                 id="showCitySelector"
