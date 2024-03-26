@@ -9,6 +9,10 @@ const CustomiserGeneral = ({ info, setInfo }) => {
     const [lastName, setLastName] = useState(null);
     const [email, setEmail] = useState(null);
     const [mobile, setMobile] = useState(null);
+    const [portfolioInputVis, setPortfolioInputVis] = useState(false);
+    const [portfolio, setPortfolio] = useState(null);
+    const [gitHubInputVis, setGitHubInputVis] = useState(false);
+    const [gitHub, setGitHub] = useState(null);
     const [stateInputVis, setStateInputVis] = useState(false);
     const [state, setState] = useState(null);
     const [cityInputVis, setCityInputVis] = useState(false);
@@ -24,6 +28,10 @@ const CustomiserGeneral = ({ info, setInfo }) => {
             email: email,
             countryCode: parsePhoneNumber(formatPhoneNumberIntl(mobile)).country,
             mobile: formatPhoneNumberIntl(mobile),
+            portfolioInputVis: portfolioInputVis,
+            portfolio: portfolio,
+            gitHubInputVis: gitHubInputVis,
+            gitHub: gitHub,
             stateInputVis: stateInputVis,
             state: state,
             cityInputVis: cityInputVis,
@@ -91,11 +99,11 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
-                                id="showStateSelector"
+                                id="showStateInput"
                                 checked={stateInputVis}
                                 onChange={(e) => setStateInputVis(e.target.checked)}
                             />
-                            <label htmlFor="showStateSelector">Include state</label>
+                            <label htmlFor="showStateInput">Include state</label>
                         </div>
 
                         {stateInputVis && (
@@ -106,6 +114,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                     id="stateInput"
                                     name="stateInput"
                                     value={state}
+                                    placeholder="Enter state"
                                     onChange={(e) => setState(e.target.value)}
                                 ></input>
                             </>
@@ -114,11 +123,11 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
-                                id="showCitySelector"
+                                id="showCityInput"
                                 checked={cityInputVis}
                                 onChange={(e) => setCityInputVis(e.target.checked)}
                             />
-                            <label htmlFor="showCitySelector">Include city</label>
+                            <label htmlFor="showCityInput">Include city</label>
                         </div>
 
                         {cityInputVis && (
@@ -129,7 +138,54 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                     id="cityInput"
                                     name="cityInput"
                                     value={city}
+                                    placeholder="Enter city"
                                     onChange={(e) => setCity(e.target.value)}
+                                ></input>
+                            </>
+                        )}
+                        <div className="flex gap-2 mt-2">
+                            <input
+                                type="checkbox"
+                                id="showPortfolioInput"
+                                checked={portfolioInputVis}
+                                onChange={(e) => setPortfolioInputVis(e.target.checked)}
+                            />
+                            <label htmlFor="showPortfolioInput">Include portfolio</label>
+                        </div>
+
+                        {portfolioInputVis && (
+                            <>
+                                <label htmlFor="portfolioInput">Portfolio URL: </label>
+                                <input
+                                    type="text"
+                                    id="portfolioInput"
+                                    name="portfolioInput"
+                                    value={portfolio}
+                                    placeholder="Enter portfolio URL"
+                                    onChange={(e) => setPortfolio(e.target.value)}
+                                ></input>
+                            </>
+                        )}
+                        <div className="flex gap-2 mt-2">
+                            <input
+                                type="checkbox"
+                                id="showGitHubInput"
+                                checked={gitHubInputVis}
+                                onChange={(e) => setGitHubInputVis(e.target.checked)}
+                            />
+                            <label htmlFor="showGitHubInput">Include GitHub profile</label>
+                        </div>
+
+                        {gitHubInputVis && (
+                            <>
+                                <label htmlFor="gitHubInput">GitHub profile name: </label>
+                                <input
+                                    type="text"
+                                    id="gitHubInput"
+                                    name="gitHubInput"
+                                    value={gitHub}
+                                    placeholder="Enter GitHub profile name"
+                                    onChange={(e) => setGitHub(e.target.value)}
                                 ></input>
                             </>
                         )}

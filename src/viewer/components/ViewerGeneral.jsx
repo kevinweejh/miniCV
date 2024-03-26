@@ -11,7 +11,10 @@ const ViewerGeneral = ({ info }) => {
                         {info.firstName} {info.lastName}
                     </h1>
                     <p>
-                        {info.email} | {info.mobile} {info.stateInputVis ? `| ${info.state}` : ''}
+                        {info.email} | {info.mobile}
+                        {info.portfolioInputVis ? ` | ${info.portfolio}` : ''}
+                        {info.gitHubInputVis ? ` | github.com/${info.gitHub} ` : ''}
+                        {info.stateInputVis ? ` | ${info.state}` : ''}
                         {info.cityInputVis && info.stateInputVis ? `, ${info.city}` : ''}
                     </p>
                 </section>
@@ -31,6 +34,10 @@ ViewerGeneral.propTypes = {
         city: PropTypes.string,
         stateInputVis: PropTypes.bool,
         cityInputVis: PropTypes.bool,
+        portfolio: PropTypes.string,
+        gitHub: PropTypes.string,
+        portfolioInputVis: PropTypes.bool,
+        gitHubInputVis: PropTypes.bool,
     }).isRequired,
 };
 
