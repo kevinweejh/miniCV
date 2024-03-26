@@ -5,10 +5,10 @@ const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
     return (
         <>
             <h1 className="text-lg font-semibold">{nonGeneralSectionItem.orgName}</h1>
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-row justify-between mb-2">
                 <p className="text-left">{nonGeneralSectionItem.position}</p>
                 <p className="text-right">
-                    {nonGeneralSectionItem.yearFrom} to{' '}
+                    {nonGeneralSectionItem.yearFrom} –{' '}
                     {nonGeneralSectionItem.currentStatus ? 'Present' : nonGeneralSectionItem.yearTo}
                 </p>
             </div>
