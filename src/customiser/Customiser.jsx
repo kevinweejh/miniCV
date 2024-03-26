@@ -16,7 +16,7 @@ const Customiser = ({ cvData, setCvData }) => {
     };
 
     return (
-        <section className="flex flex-col border rounded-md shadow-md h-fit my-4 w-full md:mx-4 md:w-1/3">
+        <section className="flex flex-col border rounded-md border-regent-st-blue-400 h-fit my-4 w-full md:mx-4 md:w-1/3">
             <CustomiserGeneral info={cvData.general} setInfo={setInfo} />
             <CustomiserNonGeneral
                 nonGeneralSection={cvData.educationHistory}

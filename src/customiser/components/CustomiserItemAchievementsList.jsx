@@ -32,7 +32,7 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
             <button
                 onClick={handleAddClick}
                 type="button"
-                className="border rounded-md w-fit mt-2 ml-auto px-2 border-gray-400 hover:bg-gray-400"
+                className="text-lg text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
             >
                 Add achievement
             </button>

@@ -38,10 +38,10 @@ const CustomiserGeneral = ({ info, setInfo }) => {
     return (
         <>
             <details id="generalTab">
-                <summary className="flex flex-col p-2 text-2xl font-semibold text-center md:text-left hover:cursor-pointer hover:bg-gray-100">
+                <summary className="flex flex-col rounded-t-md p-2 text-2xl font-semibold text-center bg-regent-st-blue-500 text-regent-st-blue-50 md:text-left hover:cursor-pointer hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700">
                     General
                 </summary>
-                <div className="p-4 bg-gray-200">
+                <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleGeneralInfoSave}>
                         <label htmlFor="firstNameInput" className="mt-2">
                             First Name:{' '}
@@ -135,14 +135,13 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         )}
                         <button
                             type="submit"
-                            className="border rounded-md w-fit mt-4 ml-auto px-2 border-gray-400 hover:bg-gray-400"
+                            className="text-lg text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
                             Save
                         </button>
                     </form>
                 </div>
             </details>
-            <hr></hr>
         </>
     );
 };

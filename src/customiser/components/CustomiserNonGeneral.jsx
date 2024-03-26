@@ -125,10 +125,10 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
     return (
         <>
             <details>
-                <summary className="flex flex-col p-2 text-2xl font-semibold text-center md:text-left hover:cursor-pointer hover:bg-gray-100">
+                <summary className="flex flex-col p-2 text-2xl font-semibold text-center border-t border-regent-st-blue-400 bg-regent-st-blue-500 text-regent-st-blue-50 md:text-left hover:cursor-pointer hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700">
                     {formType === 'education' ? 'Education' : 'Experience'}
                 </summary>
-                <div className="p-4 bg-gray-200">
+                <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleNonGeneralItemAdd}>
                         <label htmlFor="orgNameInput" className="mt-2">
                             {formType === 'education' ? 'School Name:' : 'Company Name:'}
@@ -202,13 +202,13 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         />
                         <button
                             type="submit"
-                            className="border rounded-md w-fit mt-2 ml-auto px-2 border-gray-400 hover:bg-gray-400"
+                            className="border text-lg text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
-                            {editingId !== null ? 'Save' : 'Add'}
+                            {editingId !== null ? 'Save entry' : 'Add entry'}
                         </button>
                     </form>
                 </div>
-                <div className="bg-gray-200 flex flex-col divide-y divide-gray-400 border-t-2 border-black">
+                <div className="bg-gray-200 flex flex-col divide-y divide-regent-st-blue-400 border-t border-regent-st-blue-400">
                     {isArrayFilled &&
                         nonGeneralSection.map((nonGeneralSectionItem) => (
                             <CustomiserPreviousEntries
@@ -225,7 +225,6 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         ))}
                 </div>
             </details>
-            <hr></hr>
         </>
     );
 };

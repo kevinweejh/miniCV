@@ -35,7 +35,7 @@ const CustomiserPreviousEntries = ({
     };
 
     return (
-        <div className="grid grid-cols-4 px-4 py-2 justify-between">
+        <div className="grid grid-cols-4 px-4 py-2 justify-between bg-regent-st-blue-100 text-regent-st-blue-950">
             <div className="col-span-3 items-center font-medium">
                 {entry.position} <br></br>
                 <span className="font-normal">@ </span>
@@ -44,24 +44,27 @@ const CustomiserPreviousEntries = ({
             <div className="flex col-span-1">
                 <div>
                     <button
-                        className="border border-black rounded max-w-11 max-h-11"
+                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
                         onClick={() => editHandler(entry)}
                     >
                         <EditIcon className="w-full h-auto" />
                     </button>
                     <button
-                        className="border border-black rounded max-w-11 max-h-11"
+                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
                         onClick={handleOpenDeletionDialog}
                     >
                         <DeleteIcon className="w-full h-auto" />
                     </button>
                 </div>
                 <div>
-                    <button className="border border-black rounded max-w-11 max-h-11" onClick={() => reorderUp(entry)}>
+                    <button
+                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
+                        onClick={() => reorderUp(entry)}
+                    >
                         <ShiftUpIcon className="w-full h-auto" />
                     </button>
                     <button
-                        className="border border-black rounded max-w-11 max-h-11"
+                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
                         onClick={() => reorderDown(entry)}
                     >
                         <ShiftDownIcon className="w-full h-auto" />
