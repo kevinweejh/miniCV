@@ -41,30 +41,30 @@ const CustomiserPreviousEntries = ({
                 <span className="font-normal">@ </span>
                 {entry.orgName}
             </div>
-            <div className="flex col-span-1">
-                <div>
+            <div className="flex gap-2 col-span-1 justify-center">
+                <div className="flex flex-col gap-2">
                     <button
-                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
+                        className="border-2 p-1 border-regent-st-blue-500 rounded max-w-8 max-h-8 hover:bg-regent-st-blue-200 active:bg-regent-st-blue-200"
                         onClick={() => editHandler(entry)}
                     >
                         <EditIcon className="w-full h-auto" />
                     </button>
                     <button
-                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
+                        className="border-2 p-1 border-regent-st-blue-500 rounded max-w-8 max-h-8 hover:bg-regent-st-blue-200 active:bg-regent-st-blue-200"
                         onClick={handleOpenDeletionDialog}
                     >
                         <DeleteIcon className="w-full h-auto" />
                     </button>
                 </div>
-                <div>
+                <div className="flex flex-col gap-2">
                     <button
-                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
+                        className="border-2 p-1 border-regent-st-blue-500 rounded max-w-8 max-h-8 hover:bg-regent-st-blue-200 active:bg-regent-st-blue-200"
                         onClick={() => reorderUp(entry)}
                     >
                         <ShiftUpIcon className="w-full h-auto" />
                     </button>
                     <button
-                        className="border border-regent-st-blue-600 rounded max-w-11 max-h-11"
+                        className="border-2 p-1 border-regent-st-blue-500 rounded max-w-8 max-h-8 hover:bg-regent-st-blue-200 active:bg-regent-st-blue-200"
                         onClick={() => reorderDown(entry)}
                     >
                         <ShiftDownIcon className="w-full h-auto" />
@@ -97,6 +97,7 @@ CustomiserPreviousEntries.propTypes = {
                 text: PropTypes.string,
             }),
         ),
+        formType: PropTypes.string,
     }).isRequired,
     fullList: PropTypes.arrayOf(
         PropTypes.shape({
@@ -112,6 +113,7 @@ CustomiserPreviousEntries.propTypes = {
                     text: PropTypes.string,
                 }),
             ),
+            formType: PropTypes.string,
         }),
     ).isRequired,
     updaterFn: PropTypes.func.isRequired,
