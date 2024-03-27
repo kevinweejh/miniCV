@@ -58,6 +58,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         </label>
                         <input
                             type="text"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                             id="firstNameInput"
                             name="firstNameInput"
                             placeholder="Enter your first name"
@@ -70,6 +71,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         </label>
                         <input
                             type="text"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                             id="lastNameInput"
                             name="lastNameInput"
                             placeholder="Enter your last name"
@@ -80,6 +82,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         <label htmlFor="emailInput">E-Mail: </label>
                         <input
                             type="email"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                             id="emailInput"
                             name="emailInput"
                             placeholder="yourname@example.com"
@@ -88,7 +91,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             required
                         ></input>
                         <label htmlFor="mobileInput" className="mt-2">
-                            Mobile No.:{' '}
+                            Mobile No.:
                         </label>
                         <PhoneInput
                             id="mobileInput"
@@ -101,6 +104,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
+                                className="accent-regent-st-blue-400"
                                 id="showStateInput"
                                 checked={stateInputVis}
                                 onChange={(e) => setStateInputVis(e.target.checked)}
@@ -113,6 +117,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 <label htmlFor="stateInput">State: </label>
                                 <input
                                     type="text"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                                     id="stateInput"
                                     name="stateInput"
                                     value={state}
@@ -125,6 +130,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
+                                className="accent-regent-st-blue-400"
                                 id="showCityInput"
                                 checked={cityInputVis}
                                 onChange={(e) => setCityInputVis(e.target.checked)}
@@ -137,6 +143,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 <label htmlFor="cityInput">City: </label>
                                 <input
                                     type="text"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                                     id="cityInput"
                                     name="cityInput"
                                     value={city}
@@ -148,6 +155,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
+                                className="accent-regent-st-blue-400"
                                 id="showPortfolioInput"
                                 checked={portfolioInputVis}
                                 onChange={(e) => setPortfolioInputVis(e.target.checked)}
@@ -171,6 +179,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 <label htmlFor="portfolioInput">Portfolio URL: </label>
                                 <input
                                     type="text"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                                     id="portfolioInput"
                                     name="portfolioInput"
                                     value={portfolio}
@@ -182,6 +191,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         <div className="flex gap-2 mt-2">
                             <input
                                 type="checkbox"
+                                className="accent-regent-st-blue-400"
                                 id="showGitHubInput"
                                 checked={gitHubInputVis}
                                 onChange={(e) => setGitHubInputVis(e.target.checked)}
@@ -208,6 +218,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 <label htmlFor="gitHubInput">GitHub profile name: </label>
                                 <input
                                     type="text"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                                     id="gitHubInput"
                                     name="gitHubInput"
                                     value={gitHub}

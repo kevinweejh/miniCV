@@ -23,7 +23,7 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
             </ul>
             <div className="grid grid-cols-12 gap-1 mt-2 items-center">
                 <textarea
-                    className="col-span-10 resize-none outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md"
+                    className="col-span-10 resize-none outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                     id="newAchievement"
                     value={newAchievement}
                     onChange={(e) => setNewAchievement(e.target.value)}

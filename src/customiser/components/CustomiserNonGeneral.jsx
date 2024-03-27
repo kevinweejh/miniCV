@@ -136,6 +136,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         </label>
                         <input
                             type="text"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                             id="orgNameInput"
                             name="orgNameInput"
                             placeholder={formType === 'education' ? 'Enter school name' : 'Enter company name'}
@@ -147,6 +148,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         </label>
                         <input
                             type="text"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
                             id="positionInput"
                             name="positionInput"
                             placeholder={
@@ -164,6 +166,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     <div className="col-span-3 items-center">
                                         <DatePicker
                                             id="yearFromInput"
+                                            format="MMM YYYY"
                                             views={['year', 'month']}
                                             name="yearFromInput"
                                             value={startDate ? dayjs(startDate) : null}
@@ -188,6 +191,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                 ) : (
                                     <DatePicker
                                         id="yearToInput"
+                                        format="MMM YYYY"
                                         views={['year', 'month']}
                                         name="yearToInput"
                                         value={endDate ? dayjs(endDate) : null}
@@ -201,6 +205,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             <div className="flex gap-2 mt-2">
                                 <input
                                     type="checkbox"
+                                    className="accent-regent-st-blue-400"
                                     id="currentCheckbox"
                                     checked={currentStatus}
                                     onChange={(e) => setCurrentStatus(e.target.checked)}
