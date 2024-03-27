@@ -51,6 +51,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
             yearTo: endDate ? endDate.format('MMM YYYY') : null,
             currentStatus: currentStatus,
             achievementsList: achievementsList,
+            formType: formType,
         };
 
         let newNonGeneralSectionHistory;

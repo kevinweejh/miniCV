@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import ViewerNonGeneralItem from './ViewerNonGeneralItem';
 
-const ViewerNonGeneral = ({ nonGeneralSection, formType }) => {
+const ViewerNonGeneral = ({ nonGeneralSection }) => {
+    const formType = nonGeneralSection.formType;
     const isArrayFilled = nonGeneralSection.length > 0;
     const isObjectFilled = isArrayFilled
         ? Object.values(nonGeneralSection[0]).some((value) => value != null && value !== '' && !Array.isArray(value))
@@ -40,9 +41,9 @@ ViewerNonGeneral.propTypes = {
                     text: PropTypes.string,
                 }),
             ),
+            formType: PropTypes.string,
         }),
     ).isRequired,
-    formType: PropTypes.string,
 };
 
 export default ViewerNonGeneral;
