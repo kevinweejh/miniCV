@@ -3,6 +3,8 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { formatPhoneNumberIntl, parsePhoneNumber } from 'react-phone-number-input';
 import { useState } from 'react';
+import { Tooltip } from 'react-tooltip';
+import TooltipIcon from '../../assets/tooltip.svg?react';
 
 const CustomiserGeneral = ({ info, setInfo }) => {
     const [firstName, setFirstName] = useState(null);
@@ -151,6 +153,17 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 onChange={(e) => setPortfolioInputVis(e.target.checked)}
                             />
                             <label htmlFor="showPortfolioInput">Include portfolio</label>
+                            <div>
+                                <a
+                                    data-tooltip-id="portfolioTooltip"
+                                    data-tooltip-wrapper="div"
+                                    data-tooltip-html="<u>Designers & Creatives</u><br/>Showcase your artistry, published work, and personal style by adding a link to your portfolio."
+                                    data-tooltip-place="top"
+                                >
+                                    <TooltipIcon className="max-w-6 max-h-6" />
+                                </a>
+                                <Tooltip id="portfolioTooltip" className="max-w-[70%] md:max-w-[20%]" />
+                            </div>
                         </div>
 
                         {portfolioInputVis && (
@@ -174,6 +187,20 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 onChange={(e) => setGitHubInputVis(e.target.checked)}
                             />
                             <label htmlFor="showGitHubInput">Include GitHub profile</label>
+                            <div>
+                                <a
+                                    data-tooltip-id="gitHubTooltip"
+                                    data-tooltip-wrapper="div"
+                                    data-tooltip-html="<u>Software Developers</u><br/>Showcase your coding skills, contributions to open-source
+                                    projects, and collaboration abilities by adding your GitHub profile. <br/><br/>Just enter the
+                                    underlined portion: <br/>
+                                    https://github.com/<u>kevinweejh</u>"
+                                    data-tooltip-place="top"
+                                >
+                                    <TooltipIcon className="max-w-6 max-h-6" />
+                                </a>
+                                <Tooltip id="gitHubTooltip" className="max-w-[70%] md:max-w-[20%]" />
+                            </div>
                         </div>
 
                         {gitHubInputVis && (
