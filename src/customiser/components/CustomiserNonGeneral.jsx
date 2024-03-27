@@ -158,17 +158,30 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             onChange={(e) => setPosition(e.target.value)}
                         ></input>
                         <div className="grid grid-cols-8 gap-2 items-center mt-2">
-                            <div className="col-span-1 text-center">From</div>
-                            <div className="col-span-3 items-center">
-                                <DatePicker
-                                    id="yearFromInput"
-                                    views={['year', 'month']}
-                                    name="yearFromInput"
-                                    value={startDate ? dayjs(startDate) : null}
-                                    onChange={(newValue) => setStartDate(newValue ? dayjs(newValue) : null)}
-                                />
-                            </div>
-                            <div className="col-span-1 text-center">To</div>
+                            {formType === 'experience' && (
+                                <>
+                                    <div className="col-span-1 text-center">From</div>
+                                    <div className="col-span-3 items-center">
+                                        <DatePicker
+                                            id="yearFromInput"
+                                            views={['year', 'month']}
+                                            name="yearFromInput"
+                                            value={startDate ? dayjs(startDate) : null}
+                                            onChange={(newValue) => setStartDate(newValue ? dayjs(newValue) : null)}
+                                        />
+                                    </div>
+                                </>
+                            )}
+                            {formType === 'education' ? (
+                                <>
+                                    <div className="col-span-5">Date of Graduation:</div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="col-span-1 text-center">To</div>
+                                </>
+                            )}
+
                             <div className="col-span-3 items-center">
                                 {currentStatus ? (
                                     <input className="text-center" type="text" value="Present" disabled />
@@ -184,22 +197,22 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                 )}
                             </div>
                         </div>
-                        <div className="flex gap-2 mt-2">
-                            <input
-                                type="checkbox"
-                                id="currentCheckbox"
-                                checked={currentStatus}
-                                onChange={(e) => setCurrentStatus(e.target.checked)}
-                            />
-                            <label htmlFor="currentCheckbox">
-                                {formType === 'education'
-                                    ? 'I am currently studying here.'
-                                    : 'I am currently working here.'}
-                            </label>
-                        </div>
+                        {formType === 'experience' && (
+                            <div className="flex gap-2 mt-2">
+                                <input
+                                    type="checkbox"
+                                    id="currentCheckbox"
+                                    checked={currentStatus}
+                                    onChange={(e) => setCurrentStatus(e.target.checked)}
+                                />
+                                <label htmlFor="currentCheckbox">I am currently working here.</label>
+                            </div>
+                        )}
+
                         <CustomiserItemAchievementsList
                             achievementsList={achievementsList}
                             handleAchievementsListAdd={handleAchievementsListAdd}
+                            formType={formType}
                         />
                         <button
                             type="submit"
