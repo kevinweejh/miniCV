@@ -35,7 +35,7 @@ const CustomiserPreviousEntries = ({
     };
 
     return (
-        <div className="grid grid-cols-4 px-4 py-2 justify-between bg-regent-st-blue-100 text-regent-st-blue-950">
+        <div className="grid grid-cols-4 px-4 py-2 justify-between items-center bg-regent-st-blue-100 text-regent-st-blue-950">
             <div className="col-span-3 items-center font-medium">
                 {entry.position} <br></br>
                 <span className="font-normal">@ </span>
