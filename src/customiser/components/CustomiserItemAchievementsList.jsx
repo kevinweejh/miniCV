@@ -15,7 +15,7 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
 
     return (
         <>
-            <p className="mt-2">{formType === 'education' ? 'Additional details:' : 'Achievements:'}</p>
+            <p className="mt-2 font-semibold">{formType === 'education' ? 'Additional details:' : 'Achievements:'}</p>
             <ul>
                 {achievementsList.map((achievement) => (
                     <CustomiserItemAchievement key={achievement.id} text={achievement.text} />
@@ -33,7 +33,7 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
                     <button
                         onClick={handleAddClick}
                         type="button"
-                        className="text-lg text-center rounded-[50%] w-fit px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
+                        className="text-lg font-semibold text-center rounded-[50%] w-fit px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                     >
                         +
                     </button>

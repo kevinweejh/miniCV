@@ -53,7 +53,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                 </summary>
                 <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleGeneralInfoSave}>
-                        <label htmlFor="firstNameInput" className="mt-2">
+                        <label htmlFor="firstNameInput" className="mt-2 font-semibold">
                             First Name
                         </label>
                         <input
@@ -66,7 +66,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             onChange={(e) => setFirstName(e.target.value)}
                             required
                         ></input>
-                        <label htmlFor="lastNameInput" className="mt-2">
+                        <label htmlFor="lastNameInput" className="mt-2 font-semibold">
                             Last Name
                         </label>
                         <input
@@ -79,7 +79,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             onChange={(e) => setLastName(e.target.value)}
                             required
                         ></input>
-                        <label htmlFor="emailInput">E-Mail</label>
+                        <label htmlFor="emailInput" className="mt-2 font-semibold">
+                            E-Mail
+                        </label>
                         <input
                             type="email"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -90,7 +92,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         ></input>
-                        <label htmlFor="mobileInput" className="mt-2">
+                        <label htmlFor="mobileInput" className="mt-2 font-semibold">
                             Mobile No.
                         </label>
                         <PhoneInput
@@ -114,7 +116,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {stateInputVis && (
                             <>
-                                <label htmlFor="stateInput">State</label>
+                                <label htmlFor="stateInput" className="font-semibold">
+                                    State
+                                </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -140,7 +144,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {cityInputVis && (
                             <>
-                                <label htmlFor="cityInput">City</label>
+                                <label htmlFor="cityInput" className="font-semibold">
+                                    City
+                                </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -176,7 +182,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {portfolioInputVis && (
                             <>
-                                <label htmlFor="portfolioInput">Portfolio URL</label>
+                                <label htmlFor="portfolioInput" className="font-semibold">
+                                    Portfolio URL
+                                </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -215,7 +223,9 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {gitHubInputVis && (
                             <>
-                                <label htmlFor="gitHubInput">GitHub profile name</label>
+                                <label htmlFor="gitHubInput" className="font-semibold">
+                                    GitHub Profile Name
+                                </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -229,7 +239,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         )}
                         <button
                             type="submit"
-                            className="text-lg text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
+                            className="text-lg font-semibold text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
                             Save
                         </button>

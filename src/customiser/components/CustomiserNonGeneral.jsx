@@ -131,7 +131,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                 </summary>
                 <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleNonGeneralItemAdd}>
-                        <label htmlFor="orgNameInput" className="mt-2">
+                        <label htmlFor="orgNameInput" className="mt-2 font-semibold">
                             {formType === 'education' ? 'School Name:' : 'Company Name:'}
                         </label>
                         <input
@@ -143,7 +143,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             value={orgName || null}
                             onChange={(e) => setOrgName(e.target.value)}
                         ></input>
-                        <label htmlFor="positionInput" className="mt-2">
+                        <label htmlFor="positionInput" className="mt-2 font-semibold">
                             {formType === 'education' ? 'Course' : 'Position/Title'}
                         </label>
                         <input
@@ -162,7 +162,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         <div className="grid grid-cols-8 gap-2 items-center mt-2">
                             {formType === 'experience' && (
                                 <>
-                                    <div className="col-span-1 text-center">From</div>
+                                    <div className="col-span-1 text-center font-semibold">From</div>
                                     <div className="col-span-3 items-center">
                                         <DatePicker
                                             id="yearFromInput"
@@ -177,11 +177,11 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             )}
                             {formType === 'education' ? (
                                 <>
-                                    <div className="col-span-5">Date of Graduation:</div>
+                                    <div className="col-span-5 font-semibold">Date of Graduation:</div>
                                 </>
                             ) : (
                                 <>
-                                    <div className="col-span-1 text-center">To</div>
+                                    <div className="col-span-1 text-center font-semibold">To</div>
                                 </>
                             )}
 
@@ -221,7 +221,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         />
                         <button
                             type="submit"
-                            className="border text-lg text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
+                            className="border text-lg font-semibold text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
                             {editingId !== null ? 'Save entry' : 'Add entry'}
                         </button>
