@@ -144,7 +144,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             onChange={(e) => setOrgName(e.target.value)}
                         ></input>
                         <label htmlFor="positionInput" className="mt-2">
-                            {formType === 'education' ? 'Course:' : 'Position/Title:'}
+                            {formType === 'education' ? 'Course' : 'Position/Title'}
                         </label>
                         <input
                             type="text"

@@ -54,7 +54,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                 <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleGeneralInfoSave}>
                         <label htmlFor="firstNameInput" className="mt-2">
-                            First Name:{' '}
+                            First Name
                         </label>
                         <input
                             type="text"
@@ -67,7 +67,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             required
                         ></input>
                         <label htmlFor="lastNameInput" className="mt-2">
-                            Last Name:{' '}
+                            Last Name
                         </label>
                         <input
                             type="text"
@@ -79,7 +79,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             onChange={(e) => setLastName(e.target.value)}
                             required
                         ></input>
-                        <label htmlFor="emailInput">E-Mail: </label>
+                        <label htmlFor="emailInput">E-Mail</label>
                         <input
                             type="email"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -91,7 +91,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             required
                         ></input>
                         <label htmlFor="mobileInput" className="mt-2">
-                            Mobile No.:
+                            Mobile No.
                         </label>
                         <PhoneInput
                             id="mobileInput"
@@ -114,7 +114,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {stateInputVis && (
                             <>
-                                <label htmlFor="stateInput">State: </label>
+                                <label htmlFor="stateInput">State</label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -140,7 +140,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {cityInputVis && (
                             <>
-                                <label htmlFor="cityInput">City: </label>
+                                <label htmlFor="cityInput">City</label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -176,7 +176,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {portfolioInputVis && (
                             <>
-                                <label htmlFor="portfolioInput">Portfolio URL: </label>
+                                <label htmlFor="portfolioInput">Portfolio URL</label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
@@ -215,7 +215,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
                         {gitHubInputVis && (
                             <>
-                                <label htmlFor="gitHubInput">GitHub profile name: </label>
+                                <label htmlFor="gitHubInput">GitHub profile name</label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
