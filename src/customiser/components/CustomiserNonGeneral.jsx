@@ -134,7 +134,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                 <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleNonGeneralItemAdd}>
                         <label htmlFor="orgNameInput" className="mt-2 font-semibold">
-                            {formType === 'education' ? 'School Name:' : 'Company Name:'}
+                            {formType === 'education' ? 'School Name' : 'Company Name'}
                         </label>
                         <input
                             type="text"
@@ -241,7 +241,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             type="submit"
                             className="border text-lg font-semibold text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
-                            {editingId !== null ? 'Save entry' : 'Add entry'}
+                            {editingId !== null ? 'Save Entry' : 'Add Entry'}
                         </button>
                     </form>
                 </div>

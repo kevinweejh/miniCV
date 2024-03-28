@@ -15,7 +15,7 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
 
     return (
         <>
-            <p className="mt-2 font-semibold">{formType === 'education' ? 'Additional details:' : 'Achievements:'}</p>
+            <p className="mt-2 font-semibold">{formType === 'education' ? 'Additional Details' : 'Achievements'}</p>
             <ul>
                 {achievementsList.map((achievement) => (
                     <CustomiserItemAchievement key={achievement.id} text={achievement.text} />
