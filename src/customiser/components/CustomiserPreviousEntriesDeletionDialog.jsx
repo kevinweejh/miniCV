@@ -5,28 +5,28 @@ const CustomiserPreviousEntriesDeletionDialog = ({ entry, handleDeletion, handle
         <div id="deletionConfirmationDialog">
             <dialog
                 open
-                className="border border-gray-400 bg-white rounded-2xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-5 w-10/12 z-10"
+                className="border border-regent-st-blue-400 bg-regent-st-blue-100 text-regent-st-blue-950 rounded-2xl fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-5 w-10/12 z-10"
             >
                 <strong className="text-lg">Warning</strong>
-                <pre className="font-sans min-h-fit">
+                <p className="font-sans min-h-fit break-words">
                     You are about to delete&#160;
                     <span className="underline">
                         {entry.position} at {entry.orgName}
                     </span>
-                    . Press OK to confirm.
-                </pre>
-                <form method="dialog" className="text-lg font-bold mt-5 flex flex-col text-center">
+                    .
+                </p>
+                <form method="dialog" className="text-lg font-bold mt-5 flex flex-col text-center gap-2">
                     <button
                         id="confirmBtn"
                         onClick={handleDeletion}
-                        className="w-full p-2.5 border rounded-2xl text-white bg-blue-600 hover:bg-blue-500 hover:text-gray-200 cursor-pointer"
+                        className="w-full p-2.5 border rounded-2xl border-red-600 text-white bg-red-600 hover:bg-red-700 cursor-pointer"
                     >
-                        OK
+                        Delete
                     </button>
                     <button
                         id="cancelBtn"
                         onClick={handleCloseDeletionDialog}
-                        className="w-full p-2.5 border rounded-2xl text-white bg-red-600 hover:bg-red-500 hover:text-gray-200 cursor-pointer"
+                        className="w-full p-2.5 border rounded-2xl border-regent-st-blue-400 text-white bg-regent-st-blue-400 hover:bg-regent-st-blue-500 cursor-pointer"
                     >
                         Cancel
                     </button>
