@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import CustomiserItemDetail from './CustomiserItemDetail';
-import { Tooltip } from 'react-tooltip';
-import TooltipIcon from '../../assets/tooltip.svg?react';
 
 const CustomiserItemDetailsList = ({ detailsList, handleDetailsListAdd, formType }) => {
     const [newDetail, setNewDetail] = useState('');
@@ -19,31 +17,6 @@ const CustomiserItemDetailsList = ({ detailsList, handleDetailsListAdd, formType
         <>
             <div className="flex gap-2 mt-2">
                 <p className="font-semibold">{formType === 'skills' ? 'Skills' : 'Details'}</p>
-                {formType === 'skills' ? (
-                    <div>
-                        <a
-                            data-tooltip-id="skillsTooltip"
-                            data-tooltip-wrapper="div"
-                            data-tooltip-html=""
-                            data-tooltip-place="top"
-                        >
-                            <TooltipIcon className="max-w-6 max-h-6" />
-                        </a>
-                        <Tooltip id="skillsTooltip" className="max-w-[70%] md:max-w-[20%]" />
-                    </div>
-                ) : (
-                    <div>
-                        <a
-                            data-tooltip-id="detailsTooltip"
-                            data-tooltip-wrapper="div"
-                            data-tooltip-html=""
-                            data-tooltip-place="top"
-                        >
-                            <TooltipIcon className="max-w-6 max-h-6" />
-                        </a>
-                        <Tooltip id="detailsTooltip" className="max-w-[70%] md:max-w-[20%]" />
-                    </div>
-                )}
             </div>
             <ul>
                 {detailsList.map((detail) => (

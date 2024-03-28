@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import CustomiserItemDetailsList from './CustomiserItemDetailsList';
 import CustomiserOtherPreviousEntries from './CustomiserOtherPreviousEntries.jsx';
-// import { Tooltip } from 'react-tooltip';
-// import TooltipIcon from '../../assets/tooltip.svg?react';
+import { Tooltip } from 'react-tooltip';
+import TooltipIcon from '../../assets/tooltip.svg?react';
 
 const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
     const [idCounter, setIdCounter] = useState(0);
@@ -118,9 +118,25 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
                 </summary>
                 <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleOtherItemAdd}>
-                        <label htmlFor="titleInput" className="mt-2 font-semibold">
-                            {formType === 'skills' ? 'Skill Category' : 'Project Title'}
-                        </label>
+                        <div className="mt-2 flex flex-row gap-2 items-center">
+                            <label htmlFor="titleInput" className="font-semibold">
+                                {formType === 'skills' ? 'Skill Category' : 'Project Title'}
+                            </label>
+                            {formType === 'skills' && (
+                                <div>
+                                    <a
+                                        data-tooltip-id="skillsCategoryTooltip"
+                                        data-tooltip-wrapper="div"
+                                        data-tooltip-html="Suggested categories for <u>software developers</u>:</br>Languages, Tools, Non-Technical Skills. <br/><br/>General list of categories to select from:</br>Technical Skills, Non-Technical/Soft Skills, Certifications/Licenses, Creative Skills, Research Skills, Analytical Skills, Legal/Regulatory Knowledge, Spoken/Written Languages. </br></br>Advice: Limit to maximum 3 categories for conciseness."
+                                        data-tooltip-place="top"
+                                    >
+                                        <TooltipIcon className="max-w-6 max-h-6" />
+                                    </a>
+                                    <Tooltip id="skillsCategoryTooltip" className="max-w-[70%] md:max-w-[20%]" />
+                                </div>
+                            )}
+                        </div>
+
                         <input
                             type="text"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
