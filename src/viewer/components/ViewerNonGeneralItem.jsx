@@ -10,26 +10,37 @@ const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
         <>
             {formType === 'education' ? (
                 <>
-                    <div className="flex flex-row justify-between">
-                        <p className="text-lg font-semibold text-left">{nonGeneralSectionItem.orgName}</p>
-                        <p className="text-right">
-                            {graduated ? nonGeneralSectionItem.yearTo : `Expected ${nonGeneralSectionItem.yearTo}`}
-                        </p>
-                    </div>
+                    <div className="mb-2">
+                        <div className="grid grid-cols-3 gap-4">
+                            <div className="col-span-2 flex flex-wrap">
+                                <span className="font-semibold text-left whitespace-nowrap">
+                                    {nonGeneralSectionItem.orgName}&nbsp;
+                                </span>
+                                <span className="text-base">{nonGeneralSectionItem.position}</span>
+                            </div>
 
-                    <p className="text-base font-normal"> &#8226; {nonGeneralSectionItem.position}</p>
+                            <p className="text-right">
+                                {graduated ? nonGeneralSectionItem.yearTo : `Expected ${nonGeneralSectionItem.yearTo}`}
+                            </p>
+                        </div>
+                        <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />
+                    </div>
                 </>
             ) : (
                 <>
-                    <h1 className="text-lg font-semibold">{nonGeneralSectionItem.orgName}</h1>
-                    <div className="flex flex-row justify-between mb-2">
-                        <p className="text-left">{nonGeneralSectionItem.position}</p>
-                        <p className="text-right">
-                            {nonGeneralSectionItem.yearFrom} &#8211;{' '}
-                            {nonGeneralSectionItem.currentStatus ? 'Present' : nonGeneralSectionItem.yearTo}
-                        </p>
+                    <div className="mb-2">
+                        <div className="flex flex-row justify-between">
+                            <p className="text-left font-semibold">
+                                {nonGeneralSectionItem.position},{' '}
+                                <span className="font-normal">{nonGeneralSectionItem.orgName}</span>
+                            </p>
+                            <p className="text-right">
+                                {nonGeneralSectionItem.yearFrom} &#8211;{' '}
+                                {nonGeneralSectionItem.currentStatus ? 'Present' : nonGeneralSectionItem.yearTo}
+                            </p>
+                        </div>
+                        <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />
                     </div>
-                    <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />
                 </>
             )}
         </>
