@@ -11,7 +11,7 @@ const ViewerNonGeneral = ({ nonGeneralSection }) => {
     return (
         <>
             {isArrayFilled && isObjectFilled && (
-                <section className="flex flex-col">
+                <section className="flex flex-col mb-2">
                     <h1 className="text-2xl font-semibold">{formType === 'education' ? 'Education' : 'Experience'}</h1>
                     <hr></hr>
                     {nonGeneralSection.map((nonGeneralSectionItem) => (

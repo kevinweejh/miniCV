@@ -11,7 +11,7 @@ const ViewerOthers = ({ otherSection }) => {
     return (
         <>
             {isArrayFilled && isObjectFilled && (
-                <section className="flex flex-col">
+                <section className="flex flex-col mb-2">
                     <h1 className="text-2xl font-semibold">{formType === 'skills' ? 'Skills' : 'Projects'}</h1>
                     <hr></hr>
                     {otherSection.map((otherSectionItem) => (
