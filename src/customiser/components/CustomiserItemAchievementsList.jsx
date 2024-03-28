@@ -24,7 +24,7 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
                         <a
                             data-tooltip-id="detailsTooltip"
                             data-tooltip-wrapper="div"
-                            data-tooltip-html="<u>GPA</u><br/>Only include if above 3.75/4.00, or 4.50/5.00. <br/>E.g. GPA: 3.96/4.00 <br/><br/><u>Award(s)</u><br/>Only include if extremely impressive and widely known. <br/>E.g. Awarded the President's Scholarship 2022<br/><br/><u>Notable Coursework</u><br/>Only include if extremely specialized and relevant to the role. <br/>E.g. Noteable Coursework: Underwater Autonomous Robotics"
+                            data-tooltip-html="<u>GPA</u><br/>Only include if above 3.75/4.00, or 4.50/5.00. <br/>E.g. GPA: 3.96/4.00 <br/><br/><u>Award(s)</u><br/>Only include if extremely impressive and widely known. <br/>E.g. Awarded the President's Scholarship 2022<br/><br/><u>Notable Coursework</u><br/>Only include if extremely specialized and relevant to the role. <br/>E.g. Notable Coursework: Underwater Autonomous Robotics"
                             data-tooltip-place="top"
                         >
                             <TooltipIcon className="max-w-6 max-h-6" />
