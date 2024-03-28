@@ -58,7 +58,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         </label>
                         <input
                             type="text"
-                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1mt-1"
                             id="firstNameInput"
                             name="firstNameInput"
                             placeholder="Enter your first name"
@@ -71,7 +71,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         </label>
                         <input
                             type="text"
-                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1mt-1"
                             id="lastNameInput"
                             name="lastNameInput"
                             placeholder="Enter your last name"
@@ -84,7 +84,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         </label>
                         <input
                             type="email"
-                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1mt-1"
                             id="emailInput"
                             name="emailInput"
                             placeholder="yourname@example.com"
@@ -97,6 +97,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                         </label>
                         <PhoneInput
                             id="mobileInput"
+                            className="mt-1"
                             name="mobileInput"
                             placeholder="Enter phone number"
                             value={mobile}
@@ -121,7 +122,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 </label>
                                 <input
                                     type="text"
-                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
                                     id="stateInput"
                                     name="stateInput"
                                     value={state}
@@ -149,7 +150,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 </label>
                                 <input
                                     type="text"
-                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
                                     id="cityInput"
                                     name="cityInput"
                                     value={city}
@@ -187,7 +188,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 </label>
                                 <input
                                     type="text"
-                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
                                     id="portfolioInput"
                                     name="portfolioInput"
                                     value={portfolio}
@@ -228,7 +229,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                                 </label>
                                 <input
                                     type="text"
-                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                                    className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
                                     id="gitHubInput"
                                     name="gitHubInput"
                                     value={gitHub}

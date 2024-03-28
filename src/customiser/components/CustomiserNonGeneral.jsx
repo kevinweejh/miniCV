@@ -138,7 +138,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         </label>
                         <input
                             type="text"
-                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
                             id="orgNameInput"
                             name="orgNameInput"
                             placeholder={formType === 'education' ? 'Enter school name' : 'Enter company name'}
@@ -166,7 +166,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
                         <input
                             type="text"
-                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
+                            className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
                             id="positionInput"
                             name="positionInput"
                             placeholder={
