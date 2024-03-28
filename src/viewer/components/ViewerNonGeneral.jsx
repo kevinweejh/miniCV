@@ -2,11 +2,15 @@ import PropTypes from 'prop-types';
 import ViewerNonGeneralItem from './ViewerNonGeneralItem';
 
 const ViewerNonGeneral = ({ nonGeneralSection }) => {
-    const formType = nonGeneralSection.formType;
+    let formType = null;
     const isArrayFilled = nonGeneralSection.length > 0;
     const isObjectFilled = isArrayFilled
         ? Object.values(nonGeneralSection[0]).some((value) => value != null && value !== '' && !Array.isArray(value))
         : false;
+
+    if (isArrayFilled) {
+        formType = nonGeneralSection[0].formType;
+    }
 
     return (
         <>

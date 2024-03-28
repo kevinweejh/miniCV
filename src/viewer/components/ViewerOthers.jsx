@@ -2,11 +2,15 @@ import PropTypes from 'prop-types';
 import ViewerOtherItem from './ViewerOtherItem';
 
 const ViewerOthers = ({ otherSection }) => {
-    const formType = otherSection.formType;
+    let formType = null;
     const isArrayFilled = otherSection.length > 0;
     const isObjectFilled = isArrayFilled
         ? Object.values(otherSection[0]).some((value) => value != null && value !== '' && !Array.isArray(value))
         : false;
+
+    if (isArrayFilled) {
+        formType = otherSection[0].formType;
+    }
 
     return (
         <>
