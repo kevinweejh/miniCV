@@ -4,6 +4,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CustomiserItemAchievementsList from './CustomiserItemAchievementsList';
 import CustomiserPreviousEntries from './CustomiserPreviousEntries';
 import dayjs from 'dayjs';
+import { Tooltip } from 'react-tooltip';
+import TooltipIcon from '../../assets/tooltip.svg?react';
 
 const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formType }) => {
     const [idCounter, setIdCounter] = useState(0);
@@ -143,9 +145,25 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             value={orgName || null}
                             onChange={(e) => setOrgName(e.target.value)}
                         ></input>
-                        <label htmlFor="positionInput" className="mt-2 font-semibold">
-                            {formType === 'education' ? 'Course' : 'Position/Title'}
-                        </label>
+                        <div className="flex gap-2 mt-2">
+                            <label htmlFor="positionInput" className="font-semibold">
+                                {formType === 'education' ? 'Course' : 'Position/Title'}
+                            </label>
+                            {formType === 'education' && (
+                                <div>
+                                    <a
+                                        data-tooltip-id="courseTooltip"
+                                        data-tooltip-wrapper="div"
+                                        data-tooltip-html="Depending on your preference, you can either truncate: <br/>[BE in Mechanical Engineering] <br/>or write in full: <br/>[Bachelor <u>of</u> Engineering <u>in</u> Mechanical Engineering] <br/><br/><u>BE/BEng</u> = Bachelor of Engineering <br/><u>BS/BSc</u> = Bachelor of Science <br/><u>BA</u> = Bachelor of Arts <br/><u>MArch</u> = Master of Architecture <br/>For PhD, just write 'PhD in ___'"
+                                        data-tooltip-place="top"
+                                    >
+                                        <TooltipIcon className="max-w-6 max-h-6" />
+                                    </a>
+                                    <Tooltip id="courseTooltip" className="max-w-[70%] md:max-w-[20%]" />
+                                </div>
+                            )}
+                        </div>
+
                         <input
                             type="text"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1"
