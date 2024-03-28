@@ -1,5 +1,6 @@
 import ViewerGeneral from './components/ViewerGeneral';
 import ViewerNonGeneral from './components/ViewerNonGeneral';
+import ViewerOthers from './components/ViewerOthers';
 import PropTypes from 'prop-types';
 
 const Viewer = ({ cvData }) => {
@@ -8,6 +9,8 @@ const Viewer = ({ cvData }) => {
             <ViewerGeneral info={cvData.generalInfo} />
             <ViewerNonGeneral nonGeneralSection={cvData.educationHistory} />
             <ViewerNonGeneral nonGeneralSection={cvData.experienceHistory} />
+            <ViewerOthers otherSection={cvData.skillsList} />
+            <ViewerOthers otherSection={cvData.projectsList} />
         </section>
     );
 };

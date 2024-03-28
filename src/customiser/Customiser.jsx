@@ -1,5 +1,6 @@
 import CustomiserGeneral from './components/CustomiserGeneral';
 import CustomiserNonGeneral from './components/CustomiserNonGeneral';
+import CustomiserOthers from './components/CustomiserOthers';
 import PropTypes from 'prop-types';
 
 const Customiser = ({ cvData, setCvData }) => {
@@ -15,6 +16,14 @@ const Customiser = ({ cvData, setCvData }) => {
         setCvData({ ...cvData, experienceHistory: newExperience });
     };
 
+    const setSkills = (newSkills) => {
+        setCvData({ ...cvData, skillsList: newSkills });
+    };
+
+    const setProjects = (newProjects) => {
+        setCvData({ ...cvData, projectsList: newProjects });
+    };
+
     return (
         <section className="flex flex-col border rounded-md border-regent-st-blue-400 h-fit my-4 w-full md:mx-4 md:w-1/3">
             <CustomiserGeneral info={cvData.general} setInfo={setInfo} />
@@ -28,6 +37,8 @@ const Customiser = ({ cvData, setCvData }) => {
                 setNonGeneralSection={setExperience}
                 formType="experience"
             />
+            <CustomiserOthers otherSection={cvData.skillsList} setOtherSection={setSkills} formType="skills" />
+            <CustomiserOthers otherSection={cvData.projectsList} setOtherSection={setProjects} formType="projects" />
         </section>
     );
 };
