@@ -1,10 +1,7 @@
 {
-    "generalInfo": {
-        "firstName": "",
-        "lastName": "",
-        "email": "",
-        "mobile": ""
-    },
+    "generalInfo": {},
+    "skillsList": [],
+    "projectsList": [],
     "educationHistory": [],
     "experienceHistory": []
 }
