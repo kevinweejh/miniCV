@@ -8,7 +8,7 @@
 
 ### Purpose
 
-`resu-me` is a dynamic resume generator designed to simplify and enhance the process of spinning up professional resumes. Whether you're a seasoned professional or just starting, `resu-me` makes it easy to produce polished and personalized resumes that stand out.
+`resu-me` is a dynamic resume generator designed to simplify and enhance the process of spinning up professional resumes. Whether you're a seasoned professional or just starting, `resu-me` makes it easy to produce polished and personalized resumes that stand out. Note: The development of `resu-me` leans towards applicants for technical roles. However, usage is open to all applicants.  
 
 Check out the live version here: [resu-me Demo](https://bright-yeot-7554ea.netlify.app/).
 
@@ -75,7 +75,9 @@ For support or to report issues, contact me at [hello@codebykevin.dev](mailto:he
 
 ## Acknowledgements and References
 
-This project utilizes resources from [Tailwind CSS](https://tailwindcss.com/docs/installation) and [Vite](https://vitejs.dev/guide/) documentation, UI Colors' [Tailwind CSS Color Generator](https://uicolors.app/create) for styling, [Netlify](https://docs.netlify.com/) for deployment, along with third-party libraries like [react-phone-number-input](https://gitlab.com/catamphetamine/react-phone-number-input#readme), [react-tooltip](https://github.com/ReactTooltip/react-tooltip#readme) and the [MUI X](https://mui.com/x/introduction/) component library.
+This project utilizes resources from [Tailwind CSS](https://tailwindcss.com/docs/installation) and [Vite](https://vitejs.dev/guide/) documentation, UI Colors' [Tailwind CSS Color Generator](https://uicolors.app/create) for styling, [Netlify](https://docs.netlify.com/) for deployment, along with third-party libraries like [react-phone-number-input](https://gitlab.com/catamphetamine/react-phone-number-input#readme), [react-tooltip](https://github.com/ReactTooltip/react-tooltip#readme) and the [MUI X](https://mui.com/x/introduction/) component library. 
+
+Resume template and tips are referenced from [r/cscareerquestions](https://www.reddit.com/r/cscareerquestions/) and [r/EngineeringResumes](https://www.reddit.com/r/EngineeringResumes/).
 
 ## License
 
