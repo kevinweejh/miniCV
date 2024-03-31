@@ -4,10 +4,9 @@
   <i align="center">Craft your professional journey with ease</i> 📄✨
 </p>
 
-## Project Overview
-
-### Purpose
-
+# resu-me
+#### Video Demo: (https://youtu.be/TUyz8_qLm1Y)
+#### Description: 
 `resu-me` is a dynamic resume generator designed to simplify and enhance the process of spinning up professional resumes. Whether you're a seasoned professional or just starting, `resu-me` makes it easy to produce polished and personalized resumes that stand out. Note: The development of `resu-me` leans towards applicants for technical roles. However, usage is open to all applicants.  
 
 Check out the live version here: [resu-me Demo](https://bright-yeot-7554ea.netlify.app/).
