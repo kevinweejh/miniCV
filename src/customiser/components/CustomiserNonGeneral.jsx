@@ -10,12 +10,14 @@ import TooltipIcon from '../../assets/tooltip.svg?react';
 const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formType }) => {
     const [idCounter, setIdCounter] = useState(0);
 
-    const [orgName, setOrgName] = useState(null);
-    const [position, setPosition] = useState(null);
+    const [form, setForm] = useState({
+        orgName: null,
+        position: null,
+        currentStatus: false,
+    });
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [currentStatus, setCurrentStatus] = useState(false);
 
     const [achievementsList, setAchievementsList] = useState([]);
     const [achievementIdCounter, setAchievementIdCounter] = useState(0);
@@ -25,6 +27,15 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
     const [order, setOrder] = useState([]);
 
     const isArrayFilled = nonGeneralSection.length > 0;
+
+    const handleChange = (e) => {
+        // Handle 'checkbox' and value inputs accordingly
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        setForm({
+            ...form,
+            [e.target.name]: value,
+        });
+    };
 
     const sortNonGeneralSection = (nonGeneralSection, order) => {
         const sortedNonGeneralSection = nonGeneralSection.sort((a, b) => {
@@ -47,11 +58,11 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
         const addedNonGeneralItem = {
             id: editingId !== null ? editingId : idCounter,
-            orgName: e.target.orgNameInput.value,
-            position: e.target.positionInput.value,
+            orgName: form.orgName,
+            position: form.position,
             yearFrom: startDate ? startDate.format('MMM YYYY') : null,
             yearTo: endDate ? endDate.format('MMM YYYY') : null,
-            currentStatus: currentStatus,
+            currentStatus: form.currentStatus,
             achievementsList: achievementsList,
             formType: formType,
         };
@@ -72,22 +83,28 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
         setNonGeneralSection(newNonGeneralSectionHistory);
 
-        setOrgName(null);
-        setPosition(null);
+        setForm({
+            ...form,
+            orgName: null,
+            position: null,
+            currentStatus: false,
+        });
         setStartDate(null);
         setEndDate(null);
-        setCurrentStatus(false);
         setAchievementsList([]);
         setEditingId(null);
         e.target.reset();
     };
 
     const handleEdit = (entry) => {
-        setOrgName(entry.orgName);
-        setPosition(entry.position);
+        setForm({
+            ...form,
+            orgName: entry.orgName,
+            position: entry.position,
+            currentStatus: entry.currentStatus,
+        });
         setStartDate(entry.yearFrom ? dayjs(entry.yearFrom, 'MMM YYYY') : null);
         setEndDate(entry.yearTo ? dayjs(entry.yearTo, 'MMM YYYY') : null);
-        setCurrentStatus(entry.currentStatus);
         setAchievementsList(entry.achievementsList);
 
         setEditingId(entry.id);
@@ -133,26 +150,26 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                 </summary>
                 <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleNonGeneralItemAdd}>
-                        <label htmlFor="orgNameInput" className="mt-2 font-semibold">
+                        <label htmlFor="orgName" className="mt-2 font-semibold">
                             {formType === 'education' ? 'School Name' : 'Company Name'}
                         </label>
                         <input
                             type="text"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
-                            id="orgNameInput"
-                            name="orgNameInput"
+                            id="orgName"
+                            name="orgName"
                             placeholder={formType === 'education' ? 'Enter school name' : 'Enter company name'}
-                            value={orgName || null}
-                            onChange={(e) => setOrgName(e.target.value)}
+                            value={form.orgName || null}
+                            onChange={handleChange}
                         ></input>
                         <div className="flex gap-2 mt-2">
-                            <label htmlFor="positionInput" className="font-semibold">
+                            <label htmlFor="position" className="font-semibold">
                                 {formType === 'education' ? 'Course' : 'Position/Title'}
                             </label>
                             {formType === 'education' && (
                                 <div>
                                     <a
-                                        href="#positionInput"
+                                        href="#position"
                                         aria-describedby="courseTooltip"
                                         data-tooltip-id="courseTooltip"
                                         data-tooltip-wrapper="div"
@@ -169,15 +186,15 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                         <input
                             type="text"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
-                            id="positionInput"
-                            name="positionInput"
+                            id="position"
+                            name="position"
                             placeholder={
                                 formType === 'education'
                                     ? 'Enter your course of studies'
                                     : 'Enter your position or title'
                             }
-                            value={position || null}
-                            onChange={(e) => setPosition(e.target.value)}
+                            value={form.position || null}
+                            onChange={handleChange}
                         ></input>
                         <div className="grid grid-cols-8 gap-2 items-center mt-2">
                             {formType === 'experience' && (
@@ -206,7 +223,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             )}
 
                             <div className="col-span-3 items-center">
-                                {currentStatus ? (
+                                {form.currentStatus ? (
                                     <input className="text-center" type="text" value="Present" disabled />
                                 ) : (
                                     <DatePicker
@@ -216,7 +233,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                         name="yearToInput"
                                         value={endDate ? dayjs(endDate) : null}
                                         onChange={(newValue) => setEndDate(newValue ? dayjs(newValue) : null)}
-                                        disabled={currentStatus}
+                                        disabled={form.currentStatus}
                                     />
                                 )}
                             </div>
@@ -226,11 +243,12 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                 <input
                                     type="checkbox"
                                     className="accent-regent-st-blue-400"
-                                    id="currentCheckbox"
-                                    checked={currentStatus}
-                                    onChange={(e) => setCurrentStatus(e.target.checked)}
+                                    id="currentStatus"
+                                    name="currentStatus"
+                                    checked={form.currentStatus}
+                                    onChange={handleChange}
                                 />
-                                <label htmlFor="currentCheckbox">I am currently working here.</label>
+                                <label htmlFor="currentStatus">I am currently working here.</label>
                             </div>
                         )}
 
