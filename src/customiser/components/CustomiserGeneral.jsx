@@ -7,37 +7,49 @@ import { Tooltip } from 'react-tooltip';
 import TooltipIcon from '../../assets/tooltip.svg?react';
 
 const CustomiserGeneral = ({ info, setInfo }) => {
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [mobile, setMobile] = useState(null);
-    const [portfolioInputVis, setPortfolioInputVis] = useState(false);
-    const [portfolio, setPortfolio] = useState(null);
-    const [gitHubInputVis, setGitHubInputVis] = useState(false);
-    const [gitHub, setGitHub] = useState(null);
-    const [stateInputVis, setStateInputVis] = useState(false);
-    const [state, setState] = useState(null);
-    const [cityInputVis, setCityInputVis] = useState(false);
-    const [city, setCity] = useState(null);
+    const [mobile, setMobile] = useState(null); // As required for PhoneInput component
+    const [form, setForm] = useState({
+        firstName: null,
+        lastName: null,
+        email: null,
+        mobile: null,
+        portfolioInputVis: false,
+        portfolio: null,
+        gitHubInputVis: false,
+        gitHub: null,
+        stateInputVis: false,
+        state: null,
+        cityInputVis: false,
+        city: null,
+    });
+
+    const handleChange = (e) => {
+        // Handle 'checkbox' and value inputs accordingly
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        setForm({
+            ...form,
+            [e.target.name]: value,
+        });
+    };
 
     const handleGeneralInfoSave = (e) => {
         e.preventDefault();
 
         const updatedGeneralInfo = {
             ...info,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email,
             countryCode: parsePhoneNumber(formatPhoneNumberIntl(mobile)).country,
             mobile: formatPhoneNumberIntl(mobile),
-            portfolioInputVis: portfolioInputVis,
-            portfolio: portfolio,
-            gitHubInputVis: gitHubInputVis,
-            gitHub: gitHub,
-            stateInputVis: stateInputVis,
-            state: state,
-            cityInputVis: cityInputVis,
-            city: city,
+            portfolioInputVis: form.portfolioInputVis,
+            portfolio: form.portfolio,
+            gitHubInputVis: form.gitHubInputVis,
+            gitHub: form.gitHub,
+            stateInputVis: form.stateInputVis,
+            state: form.state,
+            cityInputVis: form.cityInputVis,
+            city: form.city,
         };
         setInfo(updatedGeneralInfo);
 
@@ -53,43 +65,43 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                 </summary>
                 <div className="p-4 bg-regent-st-blue-100 text-regent-st-blue-950">
                     <form className="flex flex-col" onSubmit={handleGeneralInfoSave}>
-                        <label htmlFor="firstNameInput" className="mt-2 font-semibold">
+                        <label htmlFor="firstName" className="mt-2 font-semibold">
                             First Name
                         </label>
                         <input
                             type="text"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1mt-1"
-                            id="firstNameInput"
-                            name="firstNameInput"
+                            id="firstName"
+                            name="firstName"
                             placeholder="Enter your first name"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
+                            value={form.firstName}
+                            onChange={handleChange}
                             required
                         ></input>
-                        <label htmlFor="lastNameInput" className="mt-2 font-semibold">
+                        <label htmlFor="lastName" className="mt-2 font-semibold">
                             Last Name
                         </label>
                         <input
                             type="text"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1mt-1"
-                            id="lastNameInput"
-                            name="lastNameInput"
+                            id="lastName"
+                            name="lastName"
                             placeholder="Enter your last name"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
+                            value={form.lastName}
+                            onChange={handleChange}
                             required
                         ></input>
-                        <label htmlFor="emailInput" className="mt-2 font-semibold">
+                        <label htmlFor="email" className="mt-2 font-semibold">
                             E-Mail
                         </label>
                         <input
                             type="email"
                             className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1mt-1"
-                            id="emailInput"
-                            name="emailInput"
+                            id="email"
+                            name="email"
                             placeholder="yourname@example.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={form.email}
+                            onChange={handleChange}
                             required
                         ></input>
                         <label htmlFor="mobileInput" className="mt-2 font-semibold">
@@ -100,7 +112,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             className="mt-1"
                             name="mobileInput"
                             placeholder="Enter phone number"
-                            value={mobile}
+                            value={form.mobile}
                             onChange={setMobile}
                             required
                         />
@@ -108,26 +120,27 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             <input
                                 type="checkbox"
                                 className="accent-regent-st-blue-400"
-                                id="showStateInput"
-                                checked={stateInputVis}
-                                onChange={(e) => setStateInputVis(e.target.checked)}
+                                id="stateInputVis"
+                                name="stateInputVis"
+                                checked={form.stateInputVis}
+                                onChange={handleChange}
                             />
-                            <label htmlFor="showStateInput">Include state</label>
+                            <label htmlFor="stateInputVis">Include state</label>
                         </div>
 
-                        {stateInputVis && (
+                        {form.stateInputVis && (
                             <>
-                                <label htmlFor="stateInput" className="font-semibold">
+                                <label htmlFor="state" className="font-semibold">
                                     State
                                 </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
-                                    id="stateInput"
-                                    name="stateInput"
-                                    value={state}
+                                    id="state"
+                                    name="state"
+                                    value={form.state}
                                     placeholder="Enter state"
-                                    onChange={(e) => setState(e.target.value)}
+                                    onChange={handleChange}
                                 ></input>
                             </>
                         )}
@@ -136,26 +149,27 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             <input
                                 type="checkbox"
                                 className="accent-regent-st-blue-400"
-                                id="showCityInput"
-                                checked={cityInputVis}
-                                onChange={(e) => setCityInputVis(e.target.checked)}
+                                id="cityInputVis"
+                                name="cityInputVis"
+                                checked={form.cityInputVis}
+                                onChange={handleChange}
                             />
-                            <label htmlFor="showCityInput">Include city</label>
+                            <label htmlFor="cityInputVis">Include city</label>
                         </div>
 
-                        {cityInputVis && (
+                        {form.cityInputVis && (
                             <>
-                                <label htmlFor="cityInput" className="font-semibold">
+                                <label htmlFor="city" className="font-semibold">
                                     City
                                 </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
-                                    id="cityInput"
-                                    name="cityInput"
-                                    value={city}
+                                    id="city"
+                                    name="city"
+                                    value={form.city}
                                     placeholder="Enter city"
-                                    onChange={(e) => setCity(e.target.value)}
+                                    onChange={handleChange}
                                 ></input>
                             </>
                         )}
@@ -163,11 +177,12 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             <input
                                 type="checkbox"
                                 className="accent-regent-st-blue-400"
-                                id="showPortfolioInput"
-                                checked={portfolioInputVis}
-                                onChange={(e) => setPortfolioInputVis(e.target.checked)}
+                                id="portfolioInputVis"
+                                name="portfolioInputVis"
+                                checked={form.portfolioInputVis}
+                                onChange={handleChange}
                             />
-                            <label htmlFor="showPortfolioInput">Include portfolio</label>
+                            <label htmlFor="portfolioInputVis">Include portfolio</label>
                             <div>
                                 <a
                                     data-tooltip-id="portfolioTooltip"
@@ -181,19 +196,19 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             </div>
                         </div>
 
-                        {portfolioInputVis && (
+                        {form.portfolioInputVis && (
                             <>
-                                <label htmlFor="portfolioInput" className="font-semibold">
+                                <label htmlFor="portfolio" className="font-semibold">
                                     Portfolio URL
                                 </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
-                                    id="portfolioInput"
-                                    name="portfolioInput"
-                                    value={portfolio}
+                                    id="portfolio"
+                                    name="portfolio"
+                                    value={form.portfolio}
                                     placeholder="Enter portfolio URL"
-                                    onChange={(e) => setPortfolio(e.target.value)}
+                                    onChange={handleChange}
                                 ></input>
                             </>
                         )}
@@ -201,11 +216,12 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             <input
                                 type="checkbox"
                                 className="accent-regent-st-blue-400"
-                                id="showGitHubInput"
-                                checked={gitHubInputVis}
-                                onChange={(e) => setGitHubInputVis(e.target.checked)}
+                                id="gitHubInputVis"
+                                name="gitHubInputVis"
+                                checked={form.gitHubInputVis}
+                                onChange={handleChange}
                             />
-                            <label htmlFor="showGitHubInput">Include GitHub profile</label>
+                            <label htmlFor="gitHubInputVis">Include GitHub profile</label>
                             <div>
                                 <a
                                     data-tooltip-id="gitHubTooltip"
@@ -222,19 +238,19 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             </div>
                         </div>
 
-                        {gitHubInputVis && (
+                        {form.gitHubInputVis && (
                             <>
-                                <label htmlFor="gitHubInput" className="font-semibold">
+                                <label htmlFor="gitHub" className="font-semibold">
                                     GitHub Profile Name
                                 </label>
                                 <input
                                     type="text"
                                     className="outline-regent-st-blue-400 border border-regent-st-blue-400 rounded-md p-1 mt-1"
-                                    id="gitHubInput"
-                                    name="gitHubInput"
-                                    value={gitHub}
+                                    id="gitHub"
+                                    name="gitHub"
+                                    value={form.gitHub}
                                     placeholder="Enter GitHub profile name"
-                                    onChange={(e) => setGitHub(e.target.value)}
+                                    onChange={handleChange}
                                 ></input>
                             </>
                         )}
