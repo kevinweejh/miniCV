@@ -47,7 +47,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
 
     return (
         <>
-            <details id="generalTab">
+            <details data-testid="generalTab" id="generalTab">
                 <summary className="flex flex-col rounded-t-md p-2 text-2xl font-semibold text-center bg-regent-st-blue-500 text-regent-st-blue-50 md:text-left hover:cursor-pointer hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700">
                     General
                 </summary>
