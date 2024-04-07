@@ -22,6 +22,8 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
                 {formType === 'education' ? (
                     <div>
                         <a
+                            href="#detailsTooltip"
+                            aria-describedby="detailsTooltip"
                             data-tooltip-id="detailsTooltip"
                             data-tooltip-wrapper="div"
                             data-tooltip-html="<u>GPA</u><br/>Only include if above 3.75/4.00, or 4.50/5.00. <br/>E.g. GPA: 3.96/4.00 <br/><br/><u>Award(s)</u><br/>Only include if extremely impressive and widely known. <br/>E.g. Awarded the President's Scholarship 2022<br/><br/><u>Notable Coursework</u><br/>Only include if extremely specialized and relevant to the role. <br/>E.g. Notable Coursework: Underwater Autonomous Robotics"
@@ -34,6 +36,8 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
                 ) : (
                     <div>
                         <a
+                            href="#achievementsTooltip"
+                            aria-describedby="achievementsTooltip"
                             data-tooltip-id="achievementsTooltip"
                             data-tooltip-wrapper="div"
                             data-tooltip-html="For roles where performance is evaluated based on <u>clear, quantitative outcomes</u>, use the <u>XYZ Method</u>. <br/>Accomplished [X] as measured by [Y], by doing [Z]. <br/>E.g. Grew revenue for 15 small and medium business clients by 10% QoQ by mapping new software features as solutions to their business goals. <br/><br/>For roles that prioritise <u>problem-solving skills and innovation</u>, use the <u>CAR Method</u>. <br/>Challenge, Action, Result <br/>E.g. Increased sales-per-hour from 23 to 38 by implementing a faster lookup system. <br/><br/>For <u>managerial</u> roles, use the <u>STAR Method</u>. <br/>Situation, Task, Action, Result <br/>E.g. Led a team project that identified workflow bottlenecks and implemented a new management tool, resulting in a 20% increase in productivity. "

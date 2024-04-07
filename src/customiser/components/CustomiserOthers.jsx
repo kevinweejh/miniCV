@@ -125,6 +125,8 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
                             {formType === 'skills' && (
                                 <div>
                                     <a
+                                        href="#titleInput"
+                                        aria-describedby="skillsCategoryTooltip"
                                         data-tooltip-id="skillsCategoryTooltip"
                                         data-tooltip-wrapper="div"
                                         data-tooltip-html="Suggested categories for <u>software developers</u>:</br>Languages, Tools, Non-Technical Skills. <br/><br/>General list of categories to select from:</br>Technical Skills, Non-Technical/Soft Skills, Certifications/Licenses, Creative Skills, Research Skills, Analytical Skills, Legal/Regulatory Knowledge, Spoken/Written Languages. </br></br>Advice: Limit to maximum 3 categories for conciseness."

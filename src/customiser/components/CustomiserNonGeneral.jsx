@@ -152,6 +152,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             {formType === 'education' && (
                                 <div>
                                     <a
+                                        href="#positionInput"
+                                        aria-describedby="courseTooltip"
                                         data-tooltip-id="courseTooltip"
                                         data-tooltip-wrapper="div"
                                         data-tooltip-html="Depending on your preference, you can either truncate: <br/>[BE in Mechanical Engineering] <br/>or write in full: <br/>[Bachelor <u>of</u> Engineering <u>in</u> Mechanical Engineering] <br/><br/><u>BE/BEng</u> = Bachelor of Engineering <br/><u>BS/BSc</u> = Bachelor of Science <br/><u>BA</u> = Bachelor of Arts <br/><u>MArch</u> = Master of Architecture <br/>For PhD, just write 'PhD in ___'"

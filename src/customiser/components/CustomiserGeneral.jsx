@@ -185,6 +185,8 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             <label htmlFor="portfolioInputVis">Include portfolio</label>
                             <div>
                                 <a
+                                    href="#portfolioInputVis"
+                                    aria-describedby="portfolioTooltip"
                                     data-tooltip-id="portfolioTooltip"
                                     data-tooltip-wrapper="div"
                                     data-tooltip-html="<u>Designers & Creatives</u><br/>Showcase your artistry, published work, and personal style by adding a link to your portfolio."
@@ -224,6 +226,8 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             <label htmlFor="gitHubInputVis">Include GitHub profile</label>
                             <div>
                                 <a
+                                    href="#gitHubInputVis"
+                                    aria-describedby="gitHubTooltip"
                                     data-tooltip-id="gitHubTooltip"
                                     data-tooltip-wrapper="div"
                                     data-tooltip-html="<u>Software Developers</u><br/>Showcase your coding skills, contributions to open-source
