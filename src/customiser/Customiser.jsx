@@ -2,6 +2,13 @@ import CustomiserGeneral from './components/CustomiserGeneral';
 import CustomiserNonGeneral from './components/CustomiserNonGeneral';
 import CustomiserOthers from './components/CustomiserOthers';
 import PropTypes from 'prop-types';
+import { jsPDF } from 'jspdf';
+
+// Default export is a4 paper, portrait, using millimeters for units
+const doc = new jsPDF();
+
+doc.text('Hello world!', 10, 10);
+doc.save('a4.pdf');
 
 const Customiser = ({ cvData, setCvData }) => {
     const setInfo = (newInfo) => {
