@@ -6,7 +6,7 @@ const ViewerGeneral = ({ info }) => {
     return (
         <>
             {isObjectFilled && (
-                <section className="flex flex-col text-center mb-2">
+                <section className="flex flex-col grow text-center mb-2">
                     <h1 className="text-2xl font-semibold">
                         {info.firstName} {info.lastName}
                     </h1>
