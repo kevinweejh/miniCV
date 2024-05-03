@@ -9,18 +9,18 @@ import TooltipIcon from '../../assets/tooltip.svg?react';
 const CustomiserGeneral = ({ info, setInfo }) => {
     const [mobile, setMobile] = useState(null); // As required for PhoneInput component
     const [form, setForm] = useState({
-        firstName: null,
-        lastName: null,
-        email: null,
-        mobile: null,
+        firstName: '',
+        lastName: '',
+        email: '',
+        mobile: '',
         portfolioInputVis: false,
-        portfolio: null,
+        portfolio: '',
         gitHubInputVis: false,
-        gitHub: null,
+        gitHub: '',
         stateInputVis: false,
-        state: null,
+        state: '',
         cityInputVis: false,
-        city: null,
+        city: '',
     });
 
     const handleChange = (e) => {

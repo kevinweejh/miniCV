@@ -11,18 +11,18 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
     const [idCounter, setIdCounter] = useState(0);
 
     const [form, setForm] = useState({
-        orgName: null,
-        position: null,
+        orgName: '',
+        position: '',
         currentStatus: false,
     });
 
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     const [achievementsList, setAchievementsList] = useState([]);
     const [achievementIdCounter, setAchievementIdCounter] = useState(0);
 
-    const [editingId, setEditingId] = useState(null);
+    const [editingId, setEditingId] = useState('');
 
     const [order, setOrder] = useState([]);
 
@@ -57,11 +57,11 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
         e.preventDefault();
 
         const addedNonGeneralItem = {
-            id: editingId !== null ? editingId : idCounter,
+            id: editingId !== '' ? editingId : idCounter,
             orgName: form.orgName,
             position: form.position,
-            yearFrom: startDate ? startDate.format('MMM YYYY') : null,
-            yearTo: endDate ? endDate.format('MMM YYYY') : null,
+            yearFrom: startDate ? startDate.format('MMM YYYY') : '',
+            yearTo: endDate ? endDate.format('MMM YYYY') : '',
             currentStatus: form.currentStatus,
             achievementsList: achievementsList,
             formType: formType,
@@ -69,7 +69,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
         let newNonGeneralSectionHistory;
 
-        if (editingId !== null) {
+        if (editingId !== '') {
             // Editing -> Replace the existing entry with edited entry
             newNonGeneralSectionHistory = nonGeneralSection.map((nonGeneralSectionItem) => {
                 return nonGeneralSectionItem.id === editingId ? addedNonGeneralItem : nonGeneralSectionItem;
@@ -85,14 +85,14 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
         setForm({
             ...form,
-            orgName: null,
-            position: null,
+            orgName: '',
+            position: '',
             currentStatus: false,
         });
-        setStartDate(null);
-        setEndDate(null);
+        setStartDate('');
+        setEndDate('');
         setAchievementsList([]);
-        setEditingId(null);
+        setEditingId('');
         e.target.reset();
     };
 
@@ -103,8 +103,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
             position: entry.position,
             currentStatus: entry.currentStatus,
         });
-        setStartDate(entry.yearFrom ? dayjs(entry.yearFrom, 'MMM YYYY') : null);
-        setEndDate(entry.yearTo ? dayjs(entry.yearTo, 'MMM YYYY') : null);
+        setStartDate(entry.yearFrom ? dayjs(entry.yearFrom, 'MMM YYYY') : '');
+        setEndDate(entry.yearTo ? dayjs(entry.yearTo, 'MMM YYYY') : '');
         setAchievementsList(entry.achievementsList);
 
         setEditingId(entry.id);
@@ -159,7 +159,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             id="orgName"
                             name="orgName"
                             placeholder={formType === 'education' ? 'Enter school name' : 'Enter company name'}
-                            value={form.orgName || null}
+                            value={form.orgName || ''}
                             onChange={handleChange}
                         ></input>
                         <div className="flex gap-2 mt-2">
@@ -193,7 +193,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     ? 'Enter your course of studies'
                                     : 'Enter your position or title'
                             }
-                            value={form.position || null}
+                            value={form.position || ''}
                             onChange={handleChange}
                         ></input>
                         <div className="grid grid-cols-8 gap-2 items-center mt-2">
@@ -206,8 +206,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                             format="MMM YYYY"
                                             views={['year', 'month']}
                                             name="yearFromInput"
-                                            value={startDate ? dayjs(startDate) : null}
-                                            onChange={(newValue) => setStartDate(newValue ? dayjs(newValue) : null)}
+                                            value={startDate ? dayjs(startDate) : ''}
+                                            onChange={(newValue) => setStartDate(newValue ? dayjs(newValue) : '')}
                                         />
                                     </div>
                                 </>
@@ -231,8 +231,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                         format="MMM YYYY"
                                         views={['year', 'month']}
                                         name="yearToInput"
-                                        value={endDate ? dayjs(endDate) : null}
-                                        onChange={(newValue) => setEndDate(newValue ? dayjs(newValue) : null)}
+                                        value={endDate ? dayjs(endDate) : ''}
+                                        onChange={(newValue) => setEndDate(newValue ? dayjs(newValue) : '')}
                                         disabled={form.currentStatus}
                                     />
                                 )}
@@ -261,7 +261,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             type="submit"
                             className="border text-lg font-semibold text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
-                            {editingId !== null ? 'Save Entry' : 'Add Entry'}
+                            {editingId !== '' ? 'Save Entry' : 'Add Entry'}
                         </button>
                     </form>
                 </div>
