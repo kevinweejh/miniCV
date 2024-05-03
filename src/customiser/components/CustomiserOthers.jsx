@@ -8,13 +8,13 @@ import TooltipIcon from '../../assets/tooltip.svg?react';
 const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
     const [idCounter, setIdCounter] = useState(0);
 
-    const [title, setTitle] = useState(null);
-    const [link, setLink] = useState(null);
+    const [title, setTitle] = useState('');
+    const [link, setLink] = useState('');
 
     const [detailsList, setDetailsList] = useState([]);
     const [detailIdCounter, setDetailIdCounter] = useState(0);
 
-    const [editingId, setEditingId] = useState(null);
+    const [editingId, setEditingId] = useState('');
 
     const [order, setOrder] = useState([]);
 
@@ -40,16 +40,16 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
         e.preventDefault();
 
         const addedOtherItem = {
-            id: editingId !== null ? editingId : idCounter,
+            id: editingId !== '' ? editingId : idCounter,
             title: e.target.titleInput.value,
-            link: formType !== 'skills' ? e.target.linkInput.value : null,
+            link: formType !== 'skills' ? e.target.linkInput.value : '',
             detailsList: detailsList,
             formType: formType,
         };
 
         let newOtherSectionHistory;
 
-        if (editingId !== null) {
+        if (editingId !== '') {
             // Editing -> Replace the existing entry with edited entry
             newOtherSectionHistory = otherSection.map((otherSectionItem) => {
                 return otherSectionItem.id === editingId ? addedOtherItem : otherSectionItem;
@@ -63,10 +63,10 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
 
         setOtherSection(newOtherSectionHistory);
 
-        setTitle(null);
-        setLink(null);
+        setTitle('');
+        setLink('');
         setDetailsList([]);
-        setEditingId(null);
+        setEditingId('');
         e.target.reset();
     };
 
@@ -145,7 +145,7 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
                             id="titleInput"
                             name="titleInput"
                             placeholder={formType === 'skills' ? 'Enter skill category' : 'Enter project title'}
-                            value={title || null}
+                            value={title || ''}
                             onChange={(e) => setTitle(e.target.value)}
                         ></input>
                         {formType === 'projects' && (
@@ -162,7 +162,7 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
                                     id="linkInput"
                                     name="linkInput"
                                     placeholder="Enter your project URL"
-                                    value={link || null}
+                                    value={link || ''}
                                     onChange={(e) => setLink(e.target.value)}
                                 ></input>
                             </>
@@ -177,7 +177,7 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
                             type="submit"
                             className="border text-lg font-semibold text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
-                            {editingId !== null ? 'Save Entry' : 'Add Entry'}
+                            {editingId !== '' ? 'Save Entry' : 'Add Entry'}
                         </button>
                     </form>
                 </div>
