@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { formatPhoneNumberIntl, parsePhoneNumber } from 'react-phone-number-input';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Tooltip } from 'react-tooltip';
 import TooltipIcon from '../../assets/tooltip.svg?react';
 
@@ -22,6 +22,8 @@ const CustomiserGeneral = ({ info, setInfo }) => {
         cityInputVis: false,
         city: '',
     });
+
+    const generalTabRef = useRef(null); // For closing the 'General' tab on save
 
     const handleChange = (e) => {
         // Handle 'checkbox' and value inputs accordingly
@@ -53,13 +55,14 @@ const CustomiserGeneral = ({ info, setInfo }) => {
         };
         setInfo(updatedGeneralInfo);
 
-        const generalTab = document.querySelector('#generalTab');
-        generalTab.removeAttribute('open');
+        // Automatically closes the 'General' tab on save
+        // 'General' tab rarely needs further adjustments after initial input
+        generalTabRef.current.removeAttribute('open');
     };
 
     return (
         <>
-            <details data-testid="generalTab" id="generalTab">
+            <details data-testid="generalTab" ref={generalTabRef}>
                 <summary className="flex flex-col rounded-t-md p-2 text-2xl font-semibold text-center bg-regent-st-blue-500 text-regent-st-blue-50 md:text-left hover:cursor-pointer hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700">
                     General
                 </summary>
