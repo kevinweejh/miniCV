@@ -6,10 +6,15 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'react-tooltip/dist/react-tooltip.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <App />
-        </LocalizationProvider>
-    </React.StrictMode>,
-);
+const rootElement = document.getElementById('root');
+if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(
+        <React.StrictMode>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <App />
+            </LocalizationProvider>
+        </React.StrictMode>
+    );
+}
+
