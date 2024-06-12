@@ -1,7 +1,16 @@
-import PropTypes from 'prop-types';
 import ViewerOtherItem from './ViewerOtherItem';
 
-const ViewerOthers = ({ otherSection }) => {
+interface ViewerOthersProps {
+    otherSection: {
+        id: number;
+        title: string;
+        link: string;
+        detailsList: { id: number; text: string; }[];
+        formType: string;
+    }[];
+}
+
+const ViewerOthers: React.FC<ViewerOthersProps> = ({ otherSection }) => {
     let formType = null;
     const isArrayFilled = otherSection.length > 0;
     const isObjectFilled = isArrayFilled
@@ -25,23 +34,6 @@ const ViewerOthers = ({ otherSection }) => {
             )}
         </>
     );
-};
-
-ViewerOthers.propTypes = {
-    otherSection: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            title: PropTypes.string,
-            link: PropTypes.string,
-            detailsList: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.number,
-                    text: PropTypes.string,
-                }),
-            ),
-            formType: PropTypes.string,
-        }),
-    ).isRequired,
 };
 
 export default ViewerOthers;
