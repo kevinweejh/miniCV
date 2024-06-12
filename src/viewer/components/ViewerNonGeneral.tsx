@@ -14,9 +14,9 @@ interface ViewerNonGeneralProps {
 }
 
 const ViewerNonGeneral: React.FC<ViewerNonGeneralProps> = ({ nonGeneralSection }) => {
-    let formType = null;
-    const isArrayFilled = nonGeneralSection.length > 0;
-    const isObjectFilled = isArrayFilled
+    let formType: string | null = null;
+    const isArrayFilled: boolean = nonGeneralSection.length > 0;
+    const isObjectFilled: boolean = isArrayFilled
         ? Object.values(nonGeneralSection[0]).some((value) => value != null && value !== '' && !Array.isArray(value))
         : false;
 

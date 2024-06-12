@@ -11,9 +11,9 @@ interface ViewerOthersProps {
 }
 
 const ViewerOthers: React.FC<ViewerOthersProps> = ({ otherSection }) => {
-    let formType = null;
-    const isArrayFilled = otherSection.length > 0;
-    const isObjectFilled = isArrayFilled
+    let formType: string | null = null;
+    const isArrayFilled: boolean = otherSection.length > 0;
+    const isObjectFilled: boolean = isArrayFilled
         ? Object.values(otherSection[0]).some((value) => value != null && value !== '' && !Array.isArray(value))
         : false;
 

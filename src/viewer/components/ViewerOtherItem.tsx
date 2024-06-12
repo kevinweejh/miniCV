@@ -11,8 +11,8 @@ interface ViewerOtherItemProps {
 }
 
 const ViewerOtherItem: React.FC<ViewerOtherItemProps> = ({ otherSectionItem }) => {
-    const formType = otherSectionItem.formType;
-    const skillsList = otherSectionItem.detailsList.map((detail) => detail.text);
+    const formType: string = otherSectionItem.formType;
+    const skillsList: string[] = otherSectionItem.detailsList.map((detail) => detail.text);
     return (
         <>
             {formType === 'skills' ? (

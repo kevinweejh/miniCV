@@ -18,9 +18,9 @@ interface ViewerNonGeneralItemProps {
 }
 
 const ViewerNonGeneralItem: React.FC<ViewerNonGeneralItemProps> = ({ nonGeneralSectionItem }) => {
-    const formType = nonGeneralSectionItem.formType;
+    const formType: string = nonGeneralSectionItem.formType;
     const educationDateToObject = dayjs(nonGeneralSectionItem.yearTo);
-    const graduated = educationDateToObject.isBefore(dayjs());
+    const graduated: boolean = educationDateToObject.isBefore(dayjs());
     return (
         <>
             {formType === 'education' ? (

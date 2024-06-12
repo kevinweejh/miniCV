@@ -17,7 +17,7 @@ interface ViewerGeneralProps {
 }
 
 const ViewerGeneral: React.FC<ViewerGeneralProps> = ({ info }) => {
-    const isObjectFilled = Object.values(info).some((value) => value != null && value !== '');
+    const isObjectFilled: boolean = Object.values(info).some((value) => value != null && value !== '');
 
     return (
         <>
