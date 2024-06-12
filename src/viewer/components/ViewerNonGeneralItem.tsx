@@ -1,8 +1,23 @@
-import PropTypes from 'prop-types';
 import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 import dayjs from 'dayjs';
 
-const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
+interface ViewerNonGeneralItemProps {
+    nonGeneralSectionItem: {
+        id: number;
+        orgName: string;
+        position: string;
+        yearFrom: string;
+        yearTo: string;
+        currentStatus: boolean;
+        achievementsList:{
+            id: number;
+            text: string;
+        }[];
+        formType: string;
+    }
+}
+
+const ViewerNonGeneralItem: React.FC<ViewerNonGeneralItemProps> = ({ nonGeneralSectionItem }) => {
     const formType = nonGeneralSectionItem.formType;
     const educationDateToObject = dayjs(nonGeneralSectionItem.yearTo);
     const graduated = educationDateToObject.isBefore(dayjs());
@@ -45,24 +60,6 @@ const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
             )}
         </>
     );
-};
-
-ViewerNonGeneralItem.propTypes = {
-    nonGeneralSectionItem: PropTypes.shape({
-        id: PropTypes.number,
-        orgName: PropTypes.string,
-        position: PropTypes.string,
-        yearFrom: PropTypes.string,
-        yearTo: PropTypes.string,
-        currentStatus: PropTypes.bool,
-        achievementsList: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.number,
-                text: PropTypes.string,
-            }),
-        ),
-        formType: PropTypes.string,
-    }).isRequired,
 };
 
 export default ViewerNonGeneralItem;
