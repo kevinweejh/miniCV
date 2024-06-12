@@ -1,7 +1,19 @@
-import PropTypes from 'prop-types';
 import ViewerNonGeneralItem from './ViewerNonGeneralItem';
 
-const ViewerNonGeneral = ({ nonGeneralSection }) => {
+interface ViewerNonGeneralProps {
+    nonGeneralSection: {
+        id: number;
+        orgName: string;
+        position: string;
+        yearFrom: string;
+        yearTo: string;
+        currentStatus: boolean;
+        achievementsList: { id: number; text: string; }[];
+        formType: string;
+    }[];
+}
+
+const ViewerNonGeneral: React.FC<ViewerNonGeneralProps> = ({ nonGeneralSection }) => {
     let formType = null;
     const isArrayFilled = nonGeneralSection.length > 0;
     const isObjectFilled = isArrayFilled
@@ -28,26 +40,6 @@ const ViewerNonGeneral = ({ nonGeneralSection }) => {
             )}
         </>
     );
-};
-
-ViewerNonGeneral.propTypes = {
-    nonGeneralSection: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            orgName: PropTypes.string,
-            position: PropTypes.string,
-            yearFrom: PropTypes.string,
-            yearTo: PropTypes.string,
-            currentStatus: PropTypes.bool,
-            achievementsList: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.number,
-                    text: PropTypes.string,
-                }),
-            ),
-            formType: PropTypes.string,
-        }),
-    ).isRequired,
 };
 
 export default ViewerNonGeneral;
