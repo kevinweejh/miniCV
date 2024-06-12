@@ -1,6 +1,22 @@
-import PropTypes from 'prop-types';
+interface ViewerGeneralProps {
+    info: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        countryCode: string;
+        mobile: string;
+        state: string;
+        city: string;
+        stateInputVis: boolean;
+        cityInputVis: boolean;
+        portfolio: string;
+        gitHub: string;
+        portfolioInputVis: boolean;
+        gitHubInputVis: boolean;
+    }
+}
 
-const ViewerGeneral = ({ info }) => {
+const ViewerGeneral: React.FC<ViewerGeneralProps> = ({ info }) => {
     const isObjectFilled = Object.values(info).some((value) => value != null && value !== '');
 
     return (
@@ -21,24 +37,6 @@ const ViewerGeneral = ({ info }) => {
             )}
         </>
     );
-};
-
-ViewerGeneral.propTypes = {
-    info: PropTypes.shape({
-        firstName: PropTypes.string,
-        lastName: PropTypes.string,
-        email: PropTypes.string,
-        countryCode: PropTypes.string,
-        mobile: PropTypes.string,
-        state: PropTypes.string,
-        city: PropTypes.string,
-        stateInputVis: PropTypes.bool,
-        cityInputVis: PropTypes.bool,
-        portfolio: PropTypes.string,
-        gitHub: PropTypes.string,
-        portfolioInputVis: PropTypes.bool,
-        gitHubInputVis: PropTypes.bool,
-    }).isRequired,
 };
 
 export default ViewerGeneral;
