@@ -1,11 +1,16 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import CustomiserItemAchievement from './CustomiserItemAchievement';
 import { Tooltip } from 'react-tooltip';
 import TooltipIcon from '../../assets/tooltip.svg?react';
 
-const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsListAdd, formType }) => {
-    const [newAchievement, setNewAchievement] = useState('');
+interface CustomiserItemAchievementsListProps {
+    achievementsList: { id: number; text: string }[];
+    handleAchievementsListAdd: (newAchievement: string) => void;
+    formType: string;
+}
+
+const CustomiserItemAchievementsList: React.FC<CustomiserItemAchievementsListProps> = ({ achievementsList, handleAchievementsListAdd, formType }) => {
+    const [newAchievement, setNewAchievement] = useState<string>('');
 
     const handleAddClick = () => {
         if (newAchievement.trim()) {
@@ -74,17 +79,6 @@ const CustomiserItemAchievementsList = ({ achievementsList, handleAchievementsLi
             </div>
         </>
     );
-};
-
-CustomiserItemAchievementsList.propTypes = {
-    achievementsList: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            text: PropTypes.string,
-        }),
-    ).isRequired,
-    handleAchievementsListAdd: PropTypes.func.isRequired,
-    formType: PropTypes.string,
 };
 
 export default CustomiserItemAchievementsList;
