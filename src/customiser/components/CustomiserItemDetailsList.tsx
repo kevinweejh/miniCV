@@ -1,11 +1,16 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
 import CustomiserItemDetail from './CustomiserItemDetail';
 
-const CustomiserItemDetailsList = ({ detailsList, handleDetailsListAdd, formType }) => {
-    const [newDetail, setNewDetail] = useState('');
+interface CustomiserItemDetailsListProps {
+    detailsList: { id: number; text: string }[]; 
+    handleDetailsListAdd: (newDetail: string) => void;
+    formType: string;
+}
 
-    const handleAddClick = () => {
+const CustomiserItemDetailsList: React.FC<CustomiserItemDetailsListProps> = ({ detailsList, handleDetailsListAdd, formType }) => {
+    const [newDetail, setNewDetail] = useState<string>('');
+
+    const handleAddClick = (): void => {
         if (newDetail.trim()) {
             // Check if the input is not just empty spaces
             handleDetailsListAdd(newDetail);
@@ -43,17 +48,6 @@ const CustomiserItemDetailsList = ({ detailsList, handleDetailsListAdd, formType
             </div>
         </>
     );
-};
-
-CustomiserItemDetailsList.propTypes = {
-    detailsList: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            text: PropTypes.string,
-        }),
-    ).isRequired,
-    handleDetailsListAdd: PropTypes.func.isRequired,
-    formType: PropTypes.string,
 };
 
 export default CustomiserItemDetailsList;
