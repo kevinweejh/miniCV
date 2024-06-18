@@ -6,7 +6,26 @@ import DeleteIcon from '../../assets/delete.svg?react';
 import ShiftUpIcon from '../../assets/shift-up.svg?react';
 import ShiftDownIcon from '../../assets/shift-down.svg?react';
 
-const CustomiserOtherPreviousEntries = ({
+interface OtherItem {
+    id: number | null;
+    title: string;
+    link: string;
+    detailsList: { id: number; text: string }[]; 
+    formType: string;
+}
+
+interface CustomiserOtherPreviousEntriesProps {
+    entry: OtherItem;
+    fullList: OtherItem[];
+    updaterFn: React.Dispatch<React.SetStateAction<OtherItem[]>>;
+    editHandler: (entry: OtherItem) => void;
+    order: number[];
+    setOrder: React.Dispatch<React.SetStateAction<number[]>>;
+    reorderUp: (entry: OtherItem) => void;
+    reorderDown: (entry: OtherItem) => void;
+}
+
+const CustomiserOtherPreviousEntries: React.FC<CustomiserOtherPreviousEntriesProps> = ({
     entry,
     fullList,
     updaterFn,
@@ -16,24 +35,24 @@ const CustomiserOtherPreviousEntries = ({
     reorderUp,
     reorderDown,
 }) => {
-    const [isDeletionDialogVisible, setIsDeletionDialogVisible] = useState(false);
+    const [isDeletionDialogVisible, setIsDeletionDialogVisible] = useState<boolean>(false);
 
-    const formType = entry.formType;
-    const skillsList = entry.detailsList.map((detail) => detail.text);
+    const formType: string = entry.formType;
+    const skillsList: string[] = entry.detailsList.map((detail) => detail.text);
 
-    const handleOpenDeletionDialog = () => {
+    const handleOpenDeletionDialog = (): void => {
         setIsDeletionDialogVisible(true);
     };
 
-    const handleDeletion = () => {
+    const handleDeletion = (): void => {
         setIsDeletionDialogVisible(false);
-        const updatedList = fullList.filter((item) => item.id != entry.id);
-        const updatedOrder = order.filter((item) => item != entry.id);
+        const updatedList: OtherItem[] = fullList.filter((item) => item.id != entry.id);
+        const updatedOrder: number[] = order.filter((item) => item != entry.id);
         updaterFn(updatedList);
         setOrder(updatedOrder);
     };
 
-    const handleCloseDeletionDialog = () => {
+    const handleCloseDeletionDialog = (): void => {
         setIsDeletionDialogVisible(false);
     };
 
@@ -83,41 +102,6 @@ const CustomiserOtherPreviousEntries = ({
             )}
         </div>
     );
-};
-
-CustomiserOtherPreviousEntries.propTypes = {
-    entry: PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-        link: PropTypes.string,
-        detailsList: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.number,
-                text: PropTypes.string,
-            }),
-        ),
-        formType: PropTypes.string,
-    }).isRequired,
-    fullList: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            title: PropTypes.string,
-            link: PropTypes.string,
-            detailsList: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.number,
-                    text: PropTypes.string,
-                }),
-            ),
-            formType: PropTypes.string,
-        }),
-    ).isRequired,
-    updaterFn: PropTypes.func.isRequired,
-    editHandler: PropTypes.func.isRequired,
-    order: PropTypes.arrayOf(PropTypes.number),
-    setOrder: PropTypes.func.isRequired,
-    reorderUp: PropTypes.func.isRequired,
-    reorderDown: PropTypes.func.isRequired,
 };
 
 export default CustomiserOtherPreviousEntries;
