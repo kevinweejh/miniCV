@@ -1,5 +1,5 @@
 interface CustomiserPreviousEntriesDeletionDialogProps {
-    entry: { id: number; orgName: string; position: string };
+    entry: { id: number | null; orgName: string; position: string };
     handleDeletion: () => void;
     handleCloseDeletionDialog: () => void;
 }

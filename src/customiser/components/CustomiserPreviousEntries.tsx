@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import CustomiserPreviousEntriesDeletionDialog from './CustomiserPreviousEntriesDeletionDialog';
+import dayjs from 'dayjs';
 import EditIcon from '../../assets/edit.svg?react';
 import DeleteIcon from '../../assets/delete.svg?react';
 import ShiftUpIcon from '../../assets/shift-up.svg?react';
 import ShiftDownIcon from '../../assets/shift-down.svg?react';
 
 interface NonGeneralItem {
-    id: number;
+    id: number | null;
     orgName: string;
     position: string;
-    yearFrom: string;
-    yearTo: string;
+    yearFrom: string | dayjs.Dayjs;
+    yearTo: string | dayjs.Dayjs;
     currentStatus: boolean;
     achievementsList: { id: number; text: string }[];
     formType: string;

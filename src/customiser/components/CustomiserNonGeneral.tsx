@@ -7,69 +7,104 @@ import dayjs from 'dayjs';
 import { Tooltip } from 'react-tooltip';
 import TooltipIcon from '../../assets/tooltip.svg?react';
 
-const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formType }) => {
-    const [idCounter, setIdCounter] = useState(0);
+interface NonGeneralItem {
+    id: number | null;
+    orgName: string;
+    position: string;
+    yearFrom: string | dayjs.Dayjs;
+    yearTo: string | dayjs.Dayjs;
+    currentStatus: boolean;
+    achievementsList: { id: number; text: string }[];
+    formType: string;
+}
 
-    const [form, setForm] = useState({
+interface AchievementItem {
+    id: number; 
+    text: string;
+}
+
+interface CustomiserNonGeneralProps {
+    nonGeneralSection: NonGeneralItem[];
+    setNonGeneralSection: React.Dispatch<React.SetStateAction<NonGeneralItem[]>>;
+    formType: string;
+}
+
+interface FormItem {
+    orgName: string;
+    position: string;
+    currentStatus: boolean;
+}
+
+const CustomiserNonGeneral: React.FC<CustomiserNonGeneralProps> = ({ 
+    nonGeneralSection, 
+    setNonGeneralSection, 
+    formType 
+}) => {
+    const [idCounter, setIdCounter] = useState<number>(0);
+
+    const [form, setForm] = useState<FormItem>({
         orgName: '',
         position: '',
         currentStatus: false,
     });
 
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [startDate, setStartDate] = useState<string | dayjs.Dayjs>('');
+    const [endDate, setEndDate] = useState<string| dayjs.Dayjs>('');
 
-    const [achievementsList, setAchievementsList] = useState([]);
-    const [achievementIdCounter, setAchievementIdCounter] = useState(0);
+    const [achievementsList, setAchievementsList] = useState<AchievementItem[]>([]);
+    const [achievementIdCounter, setAchievementIdCounter] = useState<number>(0);
 
-    const [editingId, setEditingId] = useState('');
+    const [editingId, setEditingId] = useState<number | null>(null);
 
-    const [order, setOrder] = useState([]);
+    const [order, setOrder] = useState<number[]>([]);
 
-    const isArrayFilled = nonGeneralSection.length > 0;
+    const isArrayFilled: boolean = nonGeneralSection.length > 0;
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         // Handle 'checkbox' and value inputs accordingly
-        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        const value: boolean | string = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         setForm({
             ...form,
             [e.target.name]: value,
         });
     };
 
-    const sortNonGeneralSection = (nonGeneralSection, order) => {
-        const sortedNonGeneralSection = nonGeneralSection.sort((a, b) => {
-            const indexA = order.indexOf(a.id);
-            const indexB = order.indexOf(b.id);
+    const sortNonGeneralSection = (
+        nonGeneralSection: NonGeneralItem[],
+        order: number[]
+    ): void => {
+        const sortedNonGeneralSection: NonGeneralItem[] = nonGeneralSection.sort((a, b) => {
+            const indexA = order.indexOf(a.id ?? -1);
+            const indexB = order.indexOf(b.id ?? -1);
             return indexA - indexB;
         });
 
         setNonGeneralSection(sortedNonGeneralSection);
     };
 
-    const handleAchievementsListAdd = (newAchievement) => {
-        let newAchievementsList = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
+    const handleAchievementsListAdd = (newAchievement: string): void => {
+        let newAchievementsList: AchievementItem[] = [...achievementsList, { id: achievementIdCounter, text: newAchievement }];
         setAchievementsList(newAchievementsList);
         setAchievementIdCounter(achievementIdCounter + 1);
     };
 
-    const handleNonGeneralItemAdd = (e) => {
+    const handleNonGeneralItemAdd = (e: React.ChangeEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
-        const addedNonGeneralItem = {
-            id: editingId !== '' ? editingId : idCounter,
+        const addedNonGeneralItem: NonGeneralItem = {
+            id: editingId !== null ? editingId : idCounter,
             orgName: form.orgName,
             position: form.position,
-            yearFrom: startDate ? startDate.format('MMM YYYY') : '',
-            yearTo: endDate ? endDate.format('MMM YYYY') : '',
+            yearFrom: startDate ? (typeof startDate === 'string' ? startDate : startDate.format('MMM YYYY')) : '',
+            yearTo: endDate ? (typeof endDate === 'string' ? endDate : endDate.format('MMM YYYY')) : '',
             currentStatus: form.currentStatus,
             achievementsList: achievementsList,
             formType: formType,
         };
 
-        let newNonGeneralSectionHistory;
+        let newNonGeneralSectionHistory: NonGeneralItem[];
 
-        if (editingId !== '') {
+        if (editingId !== null) {
             // Editing -> Replace the existing entry with edited entry
             newNonGeneralSectionHistory = nonGeneralSection.map((nonGeneralSectionItem) => {
                 return nonGeneralSectionItem.id === editingId ? addedNonGeneralItem : nonGeneralSectionItem;
@@ -92,11 +127,11 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
         setStartDate('');
         setEndDate('');
         setAchievementsList([]);
-        setEditingId('');
+        setEditingId(null);
         e.target.reset();
     };
 
-    const handleEdit = (entry) => {
+    const handleEdit = (entry: NonGeneralItem): void => {
         setForm({
             ...form,
             orgName: entry.orgName,
@@ -110,8 +145,8 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
         setEditingId(entry.id);
     };
 
-    const reorderUp = (entry) => {
-        const currentPos = order.indexOf(entry.id);
+    const reorderUp = (entry: NonGeneralItem) => {
+        const currentPos = order.indexOf(entry.id ?? -1);
 
         // Already first item in order array
         if (currentPos <= 0) {
@@ -120,14 +155,14 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
         const newOrder = [...order];
         newOrder.splice(currentPos, 1);
-        newOrder.splice(currentPos - 1, 0, entry.id);
+        newOrder.splice(currentPos - 1, 0, entry.id ?? -1);
 
         setOrder(newOrder);
         sortNonGeneralSection(nonGeneralSection, newOrder);
     };
 
-    const reorderDown = (entry) => {
-        const currentPos = order.indexOf(entry.id);
+    const reorderDown = (entry: NonGeneralItem) => {
+        const currentPos = order.indexOf(entry.id ?? -1);
 
         // Already last item in order array
         if (currentPos === order.length - 1) {
@@ -136,7 +171,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
 
         const newOrder = [...order];
         newOrder.splice(currentPos, 1);
-        newOrder.splice(currentPos + 1, 0, entry.id);
+        newOrder.splice(currentPos + 1, 0, entry.id ?? -1);
 
         setOrder(newOrder);
         sortNonGeneralSection(nonGeneralSection, newOrder);
@@ -202,7 +237,6 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     <div className="col-span-1 text-center font-semibold">From</div>
                                     <div className="col-span-3 items-center">
                                         <DatePicker
-                                            id="yearFromInput"
                                             format="MMM YYYY"
                                             views={['year', 'month']}
                                             name="yearFromInput"
@@ -227,7 +261,6 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                                     <input className="text-center" type="text" value="Present" disabled />
                                 ) : (
                                     <DatePicker
-                                        id="yearToInput"
                                         format="MMM YYYY"
                                         views={['year', 'month']}
                                         name="yearToInput"
@@ -261,7 +294,7 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
                             type="submit"
                             className="border text-lg font-semibold text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
-                            {editingId !== '' ? 'Save Entry' : 'Add Entry'}
+                            {editingId !== null ? 'Save Entry' : 'Add Entry'}
                         </button>
                     </form>
                 </div>
@@ -284,27 +317,6 @@ const CustomiserNonGeneral = ({ nonGeneralSection, setNonGeneralSection, formTyp
             </details>
         </>
     );
-};
-
-CustomiserNonGeneral.propTypes = {
-    nonGeneralSection: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            orgName: PropTypes.string,
-            position: PropTypes.string,
-            yearFrom: PropTypes.string,
-            yearTo: PropTypes.string,
-            currentStatus: PropTypes.bool,
-            achievements: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.number,
-                    text: PropTypes.string,
-                }),
-            ),
-        }),
-    ).isRequired,
-    setNonGeneralSection: PropTypes.func.isRequired,
-    formType: PropTypes.string.isRequired,
 };
 
 export default CustomiserNonGeneral;
