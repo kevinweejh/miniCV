@@ -1,18 +1,45 @@
 import PropTypes from 'prop-types';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import { formatPhoneNumberIntl, parsePhoneNumber } from 'react-phone-number-input';
+import { formatPhoneNumberIntl, parsePhoneNumber, PhoneNumber } from 'react-phone-number-input';
 import { useState, useRef } from 'react';
 import { Tooltip } from 'react-tooltip';
 import TooltipIcon from '../../assets/tooltip.svg?react';
 
-const CustomiserGeneral = ({ info, setInfo }) => {
-    const [mobile, setMobile] = useState(null); // As required for PhoneInput component
-    const [form, setForm] = useState({
+interface Info {
+    firstName: string; 
+    lastName: string; 
+    email: string; 
+    mobile: string | null;
+}
+
+interface AdditionalInfo {
+    countryCode: string | undefined | null;
+    portfolioInputVis: boolean;
+    portfolio: string;
+    gitHubInputVis: boolean;
+    gitHub: string;
+    stateInputVis: boolean;
+    state: string;
+    cityInputVis: boolean;
+    city: string;
+}
+
+type Form = Info & AdditionalInfo;
+
+interface CustomiserGeneralProps {
+    info: Info;
+    setInfo: React.Dispatch<React.SetStateAction<Form>>;
+}
+
+const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) => {
+    const [mobile, setMobile] = useState<any>(null); // As required for PhoneInput component
+    const [form, setForm] = useState<Form>({
         firstName: '',
         lastName: '',
         email: '',
         mobile: '',
+        countryCode: 'US',
         portfolioInputVis: false,
         portfolio: '',
         gitHubInputVis: false,
@@ -23,27 +50,39 @@ const CustomiserGeneral = ({ info, setInfo }) => {
         city: '',
     });
 
-    const generalTabRef = useRef(null); // For closing the 'General' tab on save
+    const generalTabRef = useRef<HTMLDetailsElement>(null); // For closing the 'General' tab on save
 
-    const handleChange = (e) => {
+    // 'General' tab rarely needs further adjustments after initial input
+    const handleRemoveAttribute = (): void => {
+        if (generalTabRef.current) {
+            generalTabRef.current.removeAttribute('open');
+        }
+    }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         // Handle 'checkbox' and value inputs accordingly
-        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        const value: boolean | string = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
         setForm({
             ...form,
             [e.target.name]: value,
         });
     };
 
-    const handleGeneralInfoSave = (e) => {
+    const handleGeneralInfoSave = (e: React.ChangeEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
-        const updatedGeneralInfo = {
+        // Ensure mobile is not null or an empty string
+        const formattedMobile = form.mobile ? formatPhoneNumberIntl(form.mobile) : null;
+        const parsedPhoneNumber = formattedMobile ? parsePhoneNumber(formattedMobile) : null;
+        const countryCode = parsedPhoneNumber ? parsedPhoneNumber.country : null;
+
+        const updatedGeneralInfo: Form = {
             ...info,
             firstName: form.firstName,
             lastName: form.lastName,
             email: form.email,
-            countryCode: parsePhoneNumber(formatPhoneNumberIntl(mobile)).country,
-            mobile: formatPhoneNumberIntl(mobile),
+            countryCode: countryCode,
+            mobile: formattedMobile,
             portfolioInputVis: form.portfolioInputVis,
             portfolio: form.portfolio,
             gitHubInputVis: form.gitHubInputVis,
@@ -56,8 +95,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
         setInfo(updatedGeneralInfo);
 
         // Automatically closes the 'General' tab on save
-        // 'General' tab rarely needs further adjustments after initial input
-        generalTabRef.current.removeAttribute('open');
+        handleRemoveAttribute();
     };
 
     return (
@@ -115,7 +153,7 @@ const CustomiserGeneral = ({ info, setInfo }) => {
                             className="mt-1"
                             name="mobileInput"
                             placeholder="Enter phone number"
-                            value={form.mobile}
+                            value={form.mobile || undefined}
                             onChange={setMobile}
                             required
                         />
@@ -272,16 +310,6 @@ const CustomiserGeneral = ({ info, setInfo }) => {
             </details>
         </>
     );
-};
-
-CustomiserGeneral.propTypes = {
-    info: PropTypes.shape({
-        firstName: PropTypes.string,
-        lastName: PropTypes.string,
-        email: PropTypes.string,
-        mobile: PropTypes.string,
-    }),
-    setInfo: PropTypes.func.isRequired,
 };
 
 export default CustomiserGeneral;
