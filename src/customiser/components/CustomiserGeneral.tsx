@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+import E164Number from 'react-phone-number-input';
 import { formatPhoneNumberIntl, parsePhoneNumber, PhoneNumber } from 'react-phone-number-input';
 import { useState, useRef } from 'react';
 import { Tooltip } from 'react-tooltip';
@@ -28,12 +29,12 @@ interface AdditionalInfo {
 type Form = Info & AdditionalInfo;
 
 interface CustomiserGeneralProps {
-    info: Info;
+    info: Form;
     setInfo: React.Dispatch<React.SetStateAction<Form>>;
 }
 
 const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) => {
-    const [mobile, setMobile] = useState<any>(null); // As required for PhoneInput component
+    // const [mobile, setMobile] = useState<any>(null); // As required for PhoneInput component
     const [form, setForm] = useState<Form>({
         firstName: '',
         lastName: '',
@@ -68,6 +69,13 @@ const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) 
         });
     };
 
+    const handleMobileChange = (value: any): void => {
+        setForm({
+            ...form,
+            mobile: value || null,
+        });
+    };
+
     const handleGeneralInfoSave = (e: React.ChangeEvent<HTMLFormElement>): void => {
         e.preventDefault();
 
@@ -77,7 +85,7 @@ const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) 
         const countryCode = parsedPhoneNumber ? parsedPhoneNumber.country : null;
 
         const updatedGeneralInfo: Form = {
-            ...info,
+            ...form,
             firstName: form.firstName,
             lastName: form.lastName,
             email: form.email,
@@ -154,7 +162,7 @@ const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) 
                             name="mobileInput"
                             placeholder="Enter phone number"
                             value={form.mobile || undefined}
-                            onChange={setMobile}
+                            onChange={handleMobileChange}
                             required
                         />
                         <div className="flex gap-2 mt-2">
