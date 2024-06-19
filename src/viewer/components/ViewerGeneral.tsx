@@ -27,7 +27,7 @@ const ViewerGeneral: React.FC<ViewerGeneralProps> = ({ info }) => {
                         {info.firstName} {info.lastName}
                     </h1>
                     <p>
-                        {info.email} | {info.mobile}
+                        {info.email}{info.mobile && ` | ${info.mobile}`}
                         {info.portfolioInputVis ? ` | ${info.portfolio}` : ''}
                         {info.gitHubInputVis ? ` | github.com/${info.gitHub} ` : ''}
                         {info.stateInputVis ? ` | ${info.state}` : ''}

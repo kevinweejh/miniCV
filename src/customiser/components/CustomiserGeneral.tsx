@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+import E164Number from 'react-phone-number-input';
 import { formatPhoneNumberIntl, parsePhoneNumber, PhoneNumber } from 'react-phone-number-input';
 import { useState, useRef } from 'react';
 import { Tooltip } from 'react-tooltip';
@@ -33,7 +34,7 @@ interface CustomiserGeneralProps {
 }
 
 const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) => {
-    const [mobile, setMobile] = useState<any>(null); // As required for PhoneInput component
+    // const [mobile, setMobile] = useState<any>(null); // As required for PhoneInput component
     const [form, setForm] = useState<Form>({
         firstName: '',
         lastName: '',
@@ -65,6 +66,13 @@ const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) 
         setForm({
             ...form,
             [e.target.name]: value,
+        });
+    };
+
+    const handleMobileChange = (value: any): void => {
+        setForm({
+            ...form,
+            mobile: value || null,
         });
     };
 
@@ -154,7 +162,7 @@ const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) 
                             name="mobileInput"
                             placeholder="Enter phone number"
                             value={form.mobile || undefined}
-                            onChange={setMobile}
+                            onChange={handleMobileChange}
                             required
                         />
                         <div className="flex gap-2 mt-2">
