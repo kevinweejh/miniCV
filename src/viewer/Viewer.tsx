@@ -1,4 +1,5 @@
 import { useState, useEffect, Fragment } from 'react';
+import dayjs from 'dayjs';
 import ViewerGeneral from './components/ViewerGeneral';
 import ViewerNonGeneral from './components/ViewerNonGeneral';
 import ViewerOthers from './components/ViewerOthers';
@@ -10,8 +11,8 @@ interface ViewerGeneralProps {
         firstName: string;
         lastName: string;
         email: string;
-        countryCode: string;
-        mobile: string;
+        countryCode: string | undefined | null;
+        mobile: string | null;
         state: string;
         city: string;
         stateInputVis: boolean;
@@ -30,13 +31,13 @@ interface ViewerGeneralOrder {
 
 interface ViewerNonGeneralProps {
     nonGeneralSection: {
-        id: number;
+        id: number | null;
         orgName: string;
         position: string;
-        yearFrom: string;
-        yearTo: string;
+        yearFrom: string | dayjs.Dayjs;
+        yearTo: string | dayjs.Dayjs;
         currentStatus: boolean;
-        achievementsList: { id: number; text: string; }[];
+        achievementsList: { id: number; text: string }[];
         formType: string;
     }[];
 }
@@ -48,10 +49,10 @@ interface ViewerNonGeneralOrder {
 
 interface ViewerOthersProps {
     otherSection: {
-        id: number;
+        id: number | null;
         title: string;
         link: string;
-        detailsList: { id: number; text: string; }[];
+        detailsList: { id: number; text: string }[]; 
         formType: string;
     }[];
 }
