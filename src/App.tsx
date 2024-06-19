@@ -81,7 +81,7 @@ const initialDataStructure: AppProps['cvData'] = {
         lastName: '',
         email: '',
         mobile: '',
-        countryCode: 'US',
+        countryCode: '',
         portfolioInputVis: false,
         portfolio: '',
         gitHubInputVis: false,

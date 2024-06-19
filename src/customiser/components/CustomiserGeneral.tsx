@@ -39,7 +39,7 @@ const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) 
         lastName: '',
         email: '',
         mobile: '',
-        countryCode: 'US',
+        countryCode: '',
         portfolioInputVis: false,
         portfolio: '',
         gitHubInputVis: false,
