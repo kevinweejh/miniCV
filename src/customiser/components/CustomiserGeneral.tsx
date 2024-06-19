@@ -28,7 +28,7 @@ interface AdditionalInfo {
 type Form = Info & AdditionalInfo;
 
 interface CustomiserGeneralProps {
-    info: Info;
+    info: Form;
     setInfo: React.Dispatch<React.SetStateAction<Form>>;
 }
 
@@ -77,7 +77,7 @@ const CustomiserGeneral: React.FC<CustomiserGeneralProps> = ({ info, setInfo }) 
         const countryCode = parsedPhoneNumber ? parsedPhoneNumber.country : null;
 
         const updatedGeneralInfo: Form = {
-            ...info,
+            ...form,
             firstName: form.firstName,
             lastName: form.lastName,
             email: form.email,
