@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types';
 import ViewerItemAchievement from './ViewerItemAchievement';
 
-const ViewerItemAchievementsList = ({ achievementsList }) => {
+interface ViewerItemAchievementProps {
+    achievementsList: { id: number; text: string; }[];
+}
+
+const ViewerItemAchievementsList: React.FC<ViewerItemAchievementProps> = ({ achievementsList }) => {
     return (
         <ul>
             {achievementsList.map((achievement) => (
@@ -9,15 +12,6 @@ const ViewerItemAchievementsList = ({ achievementsList }) => {
             ))}
         </ul>
     );
-};
-
-ViewerItemAchievementsList.propTypes = {
-    achievementsList: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            text: PropTypes.string,
-        }),
-    ).isRequired,
 };
 
 export default ViewerItemAchievementsList;

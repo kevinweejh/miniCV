@@ -1,9 +1,18 @@
-import PropTypes from 'prop-types';
 import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 
-const ViewerOtherItem = ({ otherSectionItem }) => {
-    const formType = otherSectionItem.formType;
-    const skillsList = otherSectionItem.detailsList.map((detail) => detail.text);
+interface ViewerOtherItemProps {
+    otherSectionItem: {
+        id: number | null;
+        title: string;
+        link: string;
+        detailsList: { id: number; text: string }[]; 
+        formType: string;
+    }
+}
+
+const ViewerOtherItem: React.FC<ViewerOtherItemProps> = ({ otherSectionItem }) => {
+    const formType: string = otherSectionItem.formType;
+    const skillsList: string[] = otherSectionItem.detailsList.map((detail) => detail.text);
     return (
         <>
             {formType === 'skills' ? (
@@ -24,21 +33,6 @@ const ViewerOtherItem = ({ otherSectionItem }) => {
             )}
         </>
     );
-};
-
-ViewerOtherItem.propTypes = {
-    otherSectionItem: PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-        link: PropTypes.string,
-        detailsList: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.number,
-                text: PropTypes.string,
-            }),
-        ),
-        formType: PropTypes.string,
-    }).isRequired,
 };
 
 export default ViewerOtherItem;

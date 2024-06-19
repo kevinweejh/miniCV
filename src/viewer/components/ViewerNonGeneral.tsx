@@ -1,10 +1,23 @@
-import PropTypes from 'prop-types';
 import ViewerNonGeneralItem from './ViewerNonGeneralItem';
+import dayjs from 'dayjs';
 
-const ViewerNonGeneral = ({ nonGeneralSection }) => {
-    let formType = null;
-    const isArrayFilled = nonGeneralSection.length > 0;
-    const isObjectFilled = isArrayFilled
+interface ViewerNonGeneralProps {
+    nonGeneralSection: {
+        id: number | null;
+        orgName: string;
+        position: string;
+        yearFrom: string | dayjs.Dayjs;
+        yearTo: string | dayjs.Dayjs;
+        currentStatus: boolean;
+        achievementsList: { id: number; text: string }[];
+        formType: string;
+    }[];
+}
+
+const ViewerNonGeneral: React.FC<ViewerNonGeneralProps> = ({ nonGeneralSection }) => {
+    let formType: string | null = null;
+    const isArrayFilled: boolean = nonGeneralSection.length > 0;
+    const isObjectFilled: boolean = isArrayFilled
         ? Object.values(nonGeneralSection[0]).some((value) => value != null && value !== '' && !Array.isArray(value))
         : false;
 
@@ -28,26 +41,6 @@ const ViewerNonGeneral = ({ nonGeneralSection }) => {
             )}
         </>
     );
-};
-
-ViewerNonGeneral.propTypes = {
-    nonGeneralSection: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            orgName: PropTypes.string,
-            position: PropTypes.string,
-            yearFrom: PropTypes.string,
-            yearTo: PropTypes.string,
-            currentStatus: PropTypes.bool,
-            achievementsList: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.number,
-                    text: PropTypes.string,
-                }),
-            ),
-            formType: PropTypes.string,
-        }),
-    ).isRequired,
 };
 
 export default ViewerNonGeneral;

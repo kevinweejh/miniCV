@@ -1,11 +1,26 @@
-import PropTypes from 'prop-types';
 import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 import dayjs from 'dayjs';
 
-const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
-    const formType = nonGeneralSectionItem.formType;
+interface ViewerNonGeneralItemProps {
+    nonGeneralSectionItem: {
+        id: number | null;
+        orgName: string;
+        position: string;
+        yearFrom: string | dayjs.Dayjs;
+        yearTo: string | dayjs.Dayjs;
+        currentStatus: boolean;
+        achievementsList: { id: number; text: string }[];
+        formType: string;
+    }
+}
+
+const ViewerNonGeneralItem: React.FC<ViewerNonGeneralItemProps> = ({ nonGeneralSectionItem }) => {
+    const formType: string = nonGeneralSectionItem.formType;
     const educationDateToObject = dayjs(nonGeneralSectionItem.yearTo);
-    const graduated = educationDateToObject.isBefore(dayjs());
+    const graduated: boolean = educationDateToObject.isBefore(dayjs());
+
+    const yearFromString = (typeof nonGeneralSectionItem.yearFrom === 'string') ? nonGeneralSectionItem.yearFrom : nonGeneralSectionItem.yearFrom.format('MMM YYYY'); 
+    const yearToString = (typeof nonGeneralSectionItem.yearTo === 'string') ? nonGeneralSectionItem.yearTo : nonGeneralSectionItem.yearTo.format('MMM YYYY'); 
     return (
         <>
             {formType === 'education' ? (
@@ -20,7 +35,7 @@ const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
                             </div>
 
                             <p className="text-right">
-                                {graduated ? nonGeneralSectionItem.yearTo : `Expected ${nonGeneralSectionItem.yearTo}`}
+                                {graduated ? yearToString : `Expected ${yearToString}`}
                             </p>
                         </div>
                         <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />
@@ -35,8 +50,8 @@ const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
                                 <span className="font-normal">{nonGeneralSectionItem.orgName}</span>
                             </p>
                             <p className="text-right">
-                                {nonGeneralSectionItem.yearFrom} &#8211;{' '}
-                                {nonGeneralSectionItem.currentStatus ? 'Present' : nonGeneralSectionItem.yearTo}
+                                {yearFromString} &#8211;{' '}
+                                {nonGeneralSectionItem.currentStatus ? 'Present' : yearToString}
                             </p>
                         </div>
                         <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />
@@ -45,24 +60,6 @@ const ViewerNonGeneralItem = ({ nonGeneralSectionItem }) => {
             )}
         </>
     );
-};
-
-ViewerNonGeneralItem.propTypes = {
-    nonGeneralSectionItem: PropTypes.shape({
-        id: PropTypes.number,
-        orgName: PropTypes.string,
-        position: PropTypes.string,
-        yearFrom: PropTypes.string,
-        yearTo: PropTypes.string,
-        currentStatus: PropTypes.bool,
-        achievementsList: PropTypes.arrayOf(
-            PropTypes.shape({
-                id: PropTypes.number,
-                text: PropTypes.string,
-            }),
-        ),
-        formType: PropTypes.string,
-    }).isRequired,
 };
 
 export default ViewerNonGeneralItem;

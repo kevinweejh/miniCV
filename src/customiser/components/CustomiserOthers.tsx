@@ -1,55 +1,77 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import CustomiserItemDetailsList from './CustomiserItemDetailsList';
-import CustomiserOtherPreviousEntries from './CustomiserOtherPreviousEntries.jsx';
+import CustomiserOtherPreviousEntries from './CustomiserOtherPreviousEntries.js';
 import { Tooltip } from 'react-tooltip';
 import TooltipIcon from '../../assets/tooltip.svg?react';
 
-const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
-    const [idCounter, setIdCounter] = useState(0);
+interface OtherItem {
+    id: number | null;
+    title: string;
+    link: string;
+    detailsList: { id: number; text: string }[]; 
+    formType: string;
+}
 
-    const [title, setTitle] = useState('');
-    const [link, setLink] = useState('');
+interface DetailItem {
+    id: number;
+    text: string;
+}
 
-    const [detailsList, setDetailsList] = useState([]);
-    const [detailIdCounter, setDetailIdCounter] = useState(0);
+interface CustomiserOtherProps {
+    otherSection: OtherItem[];
+    setOtherSection: React.Dispatch<React.SetStateAction<OtherItem[]>>;
+    formType: string;
+}
 
-    const [editingId, setEditingId] = useState('');
+const CustomiserOther: React.FC<CustomiserOtherProps> = ({ otherSection, setOtherSection, formType }) => {
+    const [idCounter, setIdCounter] = useState<number>(0);
 
-    const [order, setOrder] = useState([]);
+    const [title, setTitle] = useState<string>('');
+    const [link, setLink] = useState<string>('');
 
-    const isArrayFilled = otherSection.length > 0;
+    const [detailsList, setDetailsList] = useState<DetailItem[]>([]);
+    const [detailIdCounter, setDetailIdCounter] = useState<number>(0);
 
-    const sortOtherSection = (otherSection, order) => {
-        const sortedOtherSection = otherSection.sort((a, b) => {
-            const indexA = order.indexOf(a.id);
-            const indexB = order.indexOf(b.id);
+    const [editingId, setEditingId] = useState<number | null>(null);
+
+    const [order, setOrder] = useState<number[]>([]);
+
+    const isArrayFilled: boolean = otherSection.length > 0;
+
+    const sortOtherSection = (
+        otherSection: OtherItem[], 
+        order: number[]
+    ): void => {
+        const sortedOtherSection: OtherItem[] = otherSection.sort((a, b) => {
+            const indexA = order.indexOf(a.id ?? -1);
+            const indexB = order.indexOf(b.id ?? -1);
             return indexA - indexB;
         });
 
         setOtherSection(sortedOtherSection);
     };
 
-    const handleDetailsListAdd = (newDetail) => {
-        let newDetailsList = [...detailsList, { id: detailIdCounter, text: newDetail }];
+    const handleDetailsListAdd = (newDetail: string): void => {
+        let newDetailsList: DetailItem[] = [...detailsList, { id: detailIdCounter, text: newDetail }];
         setDetailsList(newDetailsList);
         setDetailIdCounter(detailIdCounter + 1);
     };
 
-    const handleOtherItemAdd = (e) => {
+    const handleOtherItemAdd = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const addedOtherItem = {
-            id: editingId !== '' ? editingId : idCounter,
+        const addedOtherItem: OtherItem = {
+            id: editingId !== null ? editingId : idCounter,
             title: e.target.titleInput.value,
             link: formType !== 'skills' ? e.target.linkInput.value : '',
             detailsList: detailsList,
             formType: formType,
         };
 
-        let newOtherSectionHistory;
+        let newOtherSectionHistory: OtherItem[];
 
-        if (editingId !== '') {
+        if (editingId !== null) {
             // Editing -> Replace the existing entry with edited entry
             newOtherSectionHistory = otherSection.map((otherSectionItem) => {
                 return otherSectionItem.id === editingId ? addedOtherItem : otherSectionItem;
@@ -66,11 +88,11 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
         setTitle('');
         setLink('');
         setDetailsList([]);
-        setEditingId('');
+        setEditingId(null);
         e.target.reset();
     };
 
-    const handleEdit = (entry) => {
+    const handleEdit = (entry: OtherItem) => {
         setTitle(entry.title);
         setLink(entry.link);
         setDetailsList(entry.detailsList);
@@ -78,8 +100,8 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
         setEditingId(entry.id);
     };
 
-    const reorderUp = (entry) => {
-        const currentPos = order.indexOf(entry.id);
+    const reorderUp = (entry: OtherItem) => {
+        const currentPos = order.indexOf(entry.id ?? -1);
 
         // Already first item in order array
         if (currentPos <= 0) {
@@ -88,14 +110,14 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
 
         const newOrder = [...order];
         newOrder.splice(currentPos, 1);
-        newOrder.splice(currentPos - 1, 0, entry.id);
+        newOrder.splice(currentPos - 1, 0, entry.id ?? -1);
 
         setOrder(newOrder);
         sortOtherSection(otherSection, newOrder);
     };
 
-    const reorderDown = (entry) => {
-        const currentPos = order.indexOf(entry.id);
+    const reorderDown = (entry: OtherItem) => {
+        const currentPos = order.indexOf(entry.id ?? -1);
 
         // Already last item in order array
         if (currentPos === order.length - 1) {
@@ -104,7 +126,7 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
 
         const newOrder = [...order];
         newOrder.splice(currentPos, 1);
-        newOrder.splice(currentPos + 1, 0, entry.id);
+        newOrder.splice(currentPos + 1, 0, entry.id ?? -1);
 
         setOrder(newOrder);
         sortOtherSection(otherSection, newOrder);
@@ -177,7 +199,7 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
                             type="submit"
                             className="border text-lg font-semibold text-center rounded-md w-fit mt-4 ml-auto px-4 py-2 text-regent-st-blue-50 bg-regent-st-blue-500 hover:bg-regent-st-blue-600 active:bg-regent-st-blue-700 hover:cursor-pointer"
                         >
-                            {editingId !== '' ? 'Save Entry' : 'Add Entry'}
+                            {editingId !== null ? 'Save Entry' : 'Add Entry'}
                         </button>
                     </form>
                 </div>
@@ -200,24 +222,6 @@ const CustomiserOther = ({ otherSection, setOtherSection, formType }) => {
             </details>
         </>
     );
-};
-
-CustomiserOther.propTypes = {
-    otherSection: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number,
-            title: PropTypes.string,
-            link: PropTypes.string,
-            detailsList: PropTypes.arrayOf(
-                PropTypes.shape({
-                    id: PropTypes.number,
-                    text: PropTypes.string,
-                }),
-            ),
-        }),
-    ).isRequired,
-    setOtherSection: PropTypes.func.isRequired,
-    formType: PropTypes.string.isRequired,
 };
 
 export default CustomiserOther;

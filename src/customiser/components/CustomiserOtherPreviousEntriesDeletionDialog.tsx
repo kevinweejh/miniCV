@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 
-const CustomiserOtherPreviousEntriesDeletionDialog = ({ entry, handleDeletion, handleCloseDeletionDialog }) => {
+interface CustomiserOtherPreviousEntriesDeletionDialogProps {
+    entry: { id: number | null; title: string; link: string };
+    handleDeletion: () => void;
+    handleCloseDeletionDialog: () => void;
+}
+
+const CustomiserOtherPreviousEntriesDeletionDialog: React.FC<CustomiserOtherPreviousEntriesDeletionDialogProps> = ({ entry, handleDeletion, handleCloseDeletionDialog }) => {
     return (
         <div id="deletionConfirmationDialog">
             <dialog
@@ -32,16 +38,6 @@ const CustomiserOtherPreviousEntriesDeletionDialog = ({ entry, handleDeletion, h
             <div id="overlay" className="fixed top-0 left-0 w-full h-full bg-white/90 z-[1] pointer-events-none"></div>
         </div>
     );
-};
-
-CustomiserOtherPreviousEntriesDeletionDialog.propTypes = {
-    entry: PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-        link: PropTypes.string,
-    }).isRequired,
-    handleDeletion: PropTypes.func.isRequired,
-    handleCloseDeletionDialog: PropTypes.func.isRequired,
 };
 
 export default CustomiserOtherPreviousEntriesDeletionDialog;
