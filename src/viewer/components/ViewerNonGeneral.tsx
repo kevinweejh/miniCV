@@ -1,14 +1,15 @@
 import ViewerNonGeneralItem from './ViewerNonGeneralItem';
+import dayjs from 'dayjs';
 
 interface ViewerNonGeneralProps {
     nonGeneralSection: {
-        id: number;
+        id: number | null;
         orgName: string;
         position: string;
-        yearFrom: string;
-        yearTo: string;
+        yearFrom: string | dayjs.Dayjs;
+        yearTo: string | dayjs.Dayjs;
         currentStatus: boolean;
-        achievementsList: { id: number; text: string; }[];
+        achievementsList: { id: number; text: string }[];
         formType: string;
     }[];
 }

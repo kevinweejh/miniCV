@@ -3,8 +3,8 @@ interface ViewerGeneralProps {
         firstName: string;
         lastName: string;
         email: string;
-        countryCode: string;
-        mobile: string;
+        countryCode: string | undefined | null;
+        mobile: string | null;
         state: string;
         city: string;
         stateInputVis: boolean;

@@ -2,10 +2,10 @@ import ViewerOtherItem from './ViewerOtherItem';
 
 interface ViewerOthersProps {
     otherSection: {
-        id: number;
+        id: number | null;
         title: string;
         link: string;
-        detailsList: { id: number; text: string; }[];
+        detailsList: { id: number; text: string }[]; 
         formType: string;
     }[];
 }

@@ -3,16 +3,13 @@ import dayjs from 'dayjs';
 
 interface ViewerNonGeneralItemProps {
     nonGeneralSectionItem: {
-        id: number;
+        id: number | null;
         orgName: string;
         position: string;
-        yearFrom: string;
-        yearTo: string;
+        yearFrom: string | dayjs.Dayjs;
+        yearTo: string | dayjs.Dayjs;
         currentStatus: boolean;
-        achievementsList:{
-            id: number;
-            text: string;
-        }[];
+        achievementsList: { id: number; text: string }[];
         formType: string;
     }
 }
@@ -21,6 +18,9 @@ const ViewerNonGeneralItem: React.FC<ViewerNonGeneralItemProps> = ({ nonGeneralS
     const formType: string = nonGeneralSectionItem.formType;
     const educationDateToObject = dayjs(nonGeneralSectionItem.yearTo);
     const graduated: boolean = educationDateToObject.isBefore(dayjs());
+
+    const yearFromString = (typeof nonGeneralSectionItem.yearFrom === 'string') ? nonGeneralSectionItem.yearFrom : nonGeneralSectionItem.yearFrom.format('MMM YYYY'); 
+    const yearToString = (typeof nonGeneralSectionItem.yearTo === 'string') ? nonGeneralSectionItem.yearTo : nonGeneralSectionItem.yearTo.format('MMM YYYY'); 
     return (
         <>
             {formType === 'education' ? (
@@ -35,7 +35,7 @@ const ViewerNonGeneralItem: React.FC<ViewerNonGeneralItemProps> = ({ nonGeneralS
                             </div>
 
                             <p className="text-right">
-                                {graduated ? nonGeneralSectionItem.yearTo : `Expected ${nonGeneralSectionItem.yearTo}`}
+                                {graduated ? yearToString : `Expected ${yearToString}`}
                             </p>
                         </div>
                         <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />
@@ -50,8 +50,8 @@ const ViewerNonGeneralItem: React.FC<ViewerNonGeneralItemProps> = ({ nonGeneralS
                                 <span className="font-normal">{nonGeneralSectionItem.orgName}</span>
                             </p>
                             <p className="text-right">
-                                {nonGeneralSectionItem.yearFrom} &#8211;{' '}
-                                {nonGeneralSectionItem.currentStatus ? 'Present' : nonGeneralSectionItem.yearTo}
+                                {yearFromString} &#8211;{' '}
+                                {nonGeneralSectionItem.currentStatus ? 'Present' : yearToString}
                             </p>
                         </div>
                         <ViewerItemAchievementsList achievementsList={nonGeneralSectionItem.achievementsList} />

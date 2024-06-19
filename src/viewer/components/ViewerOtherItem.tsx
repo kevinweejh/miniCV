@@ -2,10 +2,10 @@ import ViewerItemAchievementsList from './ViewerItemAchievementsList';
 
 interface ViewerOtherItemProps {
     otherSectionItem: {
-        id: number;
+        id: number | null;
         title: string;
         link: string;
-        detailsList: { id: number; text: string; }[];
+        detailsList: { id: number; text: string }[]; 
         formType: string;
     }
 }
